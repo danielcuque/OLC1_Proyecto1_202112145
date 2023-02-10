@@ -1,0 +1,18 @@
+package com.daniel;
+
+import java_cup.runtime.*;
+
+class Parser;
+
+terminal PLUS, TIMES, LPAREN, RPAREN;
+
+terminal Integer NUMBER;
+
+non terminal Integer expr;
+
+precedence left PLUS;
+precedence left TIMES;
+
+start with expr;
+
+expr ::= expr:e1 PLUS expr:e2 {: RESULT = e1 + e2; :};
