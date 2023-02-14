@@ -6,6 +6,8 @@ class ExreganParser;
 
 terminal PLUS, TIMES, LPAREN, RPAREN;
 
+terminal LBRACE, RBRACE, COLON, ARROW, PERCENT, DOT, STAR, PLUS, QUERY, PIPE, TILDE, COMMA, AMPERSAND;
+
 terminal Integer NUMBER;
 
 non terminal Integer expr;
