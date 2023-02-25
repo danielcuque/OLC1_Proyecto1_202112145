@@ -985,7 +985,7 @@ StringBuffer stringBuffer = new StringBuffer();
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
-            { throw new Error("Caracter inesperado: " + yytext()) + " en la linea " + yyline + " y columna " + yycolumn;
+            { throw new Error("Caracter inesperado: " + yytext() + " en la linea " + yyline + " y columna " + yycolumn);
             }
             // fall through
           case 50: break;
@@ -1109,7 +1109,7 @@ StringBuffer stringBuffer = new StringBuffer();
             // fall through
           case 73: break;
           case 25:
-            { string.append( yytext() );
+            { stringBuffer.append( yytext() );
             }
             // fall through
           case 74: break;
@@ -1119,7 +1119,7 @@ StringBuffer stringBuffer = new StringBuffer();
             // fall through
           case 75: break;
           case 27:
-            { string.append('\\');
+            { stringBuffer.append('\\');
             }
             // fall through
           case 76: break;
@@ -1214,22 +1214,22 @@ StringBuffer stringBuffer = new StringBuffer();
             // fall through
           case 92: break;
           case 44:
-            { string.append('\"');
+            { stringBuffer.append('\"');
             }
             // fall through
           case 93: break;
           case 45:
-            { string.append('\n');
+            { stringBuffer.append('\n');
             }
             // fall through
           case 94: break;
           case 46:
-            { string.append('\r');
+            { stringBuffer.append('\r');
             }
             // fall through
           case 95: break;
           case 47:
-            { string.append('\t');
+            { stringBuffer.append('\t');
             }
             // fall through
           case 96: break;

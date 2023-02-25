@@ -2,19 +2,18 @@ package com.daniel;
 
 import java_cup.runtime.*;
 
-class ExreganParser;
 
-terminal PLUS, TIMES, LPAREN, RPAREN;
+// Change sym class name to match your grammar
 
-terminal LBRACE, RBRACE, COLON, ARROW, PERCENT, DOT, STAR, PLUS, QUERY, PIPE, TILDE, COMMA, AMPERSAND;
+
+terminal LBRACE, RBRACE, COLON, ARROW, PERCENT, DOT, STAR, PLUS, QUERY, PIPE, TILDE, COMMA, AMPERSAND, CONJ, STRING_LITERAL, SEMICOLON, LOWERCASE , UPPERCASE , DIGIT , IDENTIFIER , ASCII, CHAR_LITERAL, NEWLINE;
 
 terminal Integer NUMBER;
 
 non terminal Integer expr;
 
-precedence left PLUS;
-precedence left TIMES;
-
 start with expr;
 
-expr ::= expr:e1 PLUS expr:e2 {: RESULT = e1 + e2; :};
+expr ::= LBRACE | RBRACE | COLON | ARROW | PERCENT | DOT | STAR | PLUS | QUERY | PIPE | TILDE | COMMA | AMPERSAND | NUMBER | CONJ | STRING_LITERAL | SEMICOLON;
+
+

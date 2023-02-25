@@ -191,24 +191,24 @@ Arrow = "->"
       }
       <STRING_REGEX> {
              \" { yybegin(REGEX); return symbol(sym.STRING_LITERAL, stringBuffer.toString()); }
-            [^\n\r\"\\]+                   { string.append( yytext() ); }
-                  \\t                            { string.append('\t'); }
-                  \\n                            { string.append('\n'); }
+            [^\n\r\"\\]+                   { stringBuffer.append( yytext() ); }
+                  \\t                            { stringBuffer.append('\t'); }
+                  \\n                            { stringBuffer.append('\n'); }
 
-                  \\r                            { string.append('\r'); }
-                  \\\"                           { string.append('\"'); }
-                  \\                             { string.append('\\'); }
+                  \\r                            { stringBuffer.append('\r'); }
+                  \\\"                           { stringBuffer.append('\"'); }
+                  \\                             { stringBuffer.append('\\'); }
             }
 
      <CHARLITERAL_REGEX> {
         \' { yybegin(REGEX); return symbol(sym.CHAR_LITERAL, stringBuffer.toString()); }
-     [^\n\r\'\\]+                   { string.append( yytext() ); }
-            \\t                            { string.append('\t'); }
-            \\n                            { string.append('\n'); }
+     [^\n\r\'\\]+                   { stringBuffer.append( yytext() ); }
+            \\t                            { stringBuffer.append('\t'); }
+            \\n                            { stringBuffer.append('\n'); }
 
-            \\r                            { string.append('\r'); }
-            \\\"                           { string.append('\"'); }
-            \\                             { string.append('\\'); }
+            \\r                            { stringBuffer.append('\r'); }
+            \\\"                           { stringBuffer.append('\"'); }
+            \\                             { stringBuffer.append('\\'); }
       }
 
 
@@ -236,47 +236,47 @@ Arrow = "->"
 
     <STRING_REGEX_STATEMENT> {
            \" { yybegin(REGEX_STATEMENT); return symbol(sym.STRING_LITERAL, stringBuffer.toString()); }
-          [^\n\r\"\\]+                   { string.append( yytext() ); }
-                \\t                            { string.append('\t'); }
-                \\n                            { string.append('\n'); }
+          [^\n\r\"\\]+                   { stringBuffer.append( yytext() ); }
+                \\t                            { stringBuffer.append('\t'); }
+                \\n                            { stringBuffer.append('\n'); }
 
-                \\r                            { string.append('\r'); }
-                \\\"                           { string.append('\"'); }
-                \\                             { string.append('\\'); }
+                \\r                            { stringBuffer.append('\r'); }
+                \\\"                           { stringBuffer.append('\"'); }
+                \\                             { stringBuffer.append('\\'); }
           }
 
     <CHARLITERAL_REGEX_STATEMENT> {
         \' { yybegin(REGEX_STATEMENT); return symbol(sym.CHAR_LITERAL, stringBuffer.toString()); }
-        [^\n\r\'\\]+                   { string.append( yytext() ); }
-                \\t                            { string.append('\t'); }
-                \\n                            { string.append('\n'); }
+        [^\n\r\'\\]+                   { stringBuffer.append( yytext() ); }
+                \\t                            { stringBuffer.append('\t'); }
+                \\n                            { stringBuffer.append('\n'); }
 
-                \\r                            { string.append('\r'); }
-                \\\"                           { string.append('\"'); }
-                \\                             { string.append('\\'); }
+                \\r                            { stringBuffer.append('\r'); }
+                \\\"                           { stringBuffer.append('\"'); }
+                \\                             { stringBuffer.append('\\'); }
     }
 
 
       <STRING> {
        \" { yybegin(YYINITIAL); return symbol(sym.STRING_LITERAL, stringBuffer.toString()); }
-      [^\n\r\"\\]+                   { string.append( yytext() ); }
-            \\t                            { string.append('\t'); }
-            \\n                            { string.append('\n'); }
+      [^\n\r\"\\]+                   { stringBuffer.append( yytext() ); }
+            \\t                            { stringBuffer.append('\t'); }
+            \\n                            { stringBuffer.append('\n'); }
 
-            \\r                            { string.append('\r'); }
-            \\\"                           { string.append('\"'); }
-            \\                             { string.append('\\'); }
+            \\r                            { stringBuffer.append('\r'); }
+            \\\"                           { stringBuffer.append('\"'); }
+            \\                             { stringBuffer.append('\\'); }
       }
 
       <CHARLITERAL> {
         \' { yybegin(YYINITIAL); return symbol(sym.CHAR_LITERAL, stringBuffer.toString()); }
-      [^\n\r\'\\]+                   { string.append( yytext() ); }
-            \\t                            { string.append('\t'); }
-            \\n                            { string.append('\n'); }
+      [^\n\r\'\\]+                   { stringBuffer.append( yytext() ); }
+            \\t                            { stringBuffer.append('\t'); }
+            \\n                            { stringBuffer.append('\n'); }
 
-            \\r                            { string.append('\r'); }
-            \\\"                           { string.append('\"'); }
-            \\                             { string.append('\\'); }
+            \\r                            { stringBuffer.append('\r'); }
+            \\\"                           { stringBuffer.append('\"'); }
+            \\                             { stringBuffer.append('\\'); }
       }
 
 // Set states for line and column to display errors
@@ -303,6 +303,4 @@ Arrow = "->"
 
 
 
-[^] { throw new Error("Caracter inesperado: " + yytext()) + " en la linea " + yyline + " y columna " + yycolumn; }
-
-
+        [^] { throw new Error("Caracter inesperado: " + yytext() + " en la linea " + yyline + " y columna " + yycolumn); }
