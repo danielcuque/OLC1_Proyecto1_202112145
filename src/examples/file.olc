@@ -8,7 +8,7 @@ CONJ: digito -> 0~9;
 ////// EXPRESIONES REGULARES
 
 ExpReg1 -> .{letra} * | "_" | {letra}{digito};
-ExpresionesReg2 -> .{digito}."."+{digito}
+ExpresionesReg2 -> .{digito}."."+{digito};
 RegEx3 -> .{digito}*|"_"| {letra}{digito};
 
 %%

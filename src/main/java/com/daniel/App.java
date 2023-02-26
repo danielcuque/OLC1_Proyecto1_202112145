@@ -8,7 +8,7 @@ import java.io.StringReader;
 
 public class App {
     public static void main(String[] args) {
-        String path = "src/examples/Archivo_de_prueba.olc";
+        String path = "src/examples/test.olc";
 
         try {
             String lines = ManageFile.ReadFiles(path);
