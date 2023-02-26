@@ -101,7 +101,7 @@ Arrow = "->"
     // Keywords
      <YYINITIAL> "CONJ" {
           yybegin(CONJUNTO);
-          return symbol(sym.CONJ);
+          return symbol(sym.CONJ, yytext());
       }
 
       <YYINITIAL> {
@@ -122,6 +122,18 @@ Arrow = "->"
           yybegin(CHARLITERAL);
           return symbol(sym.CHAR_LITERAL, stringBuffer.toString());
         }
+
+                  // Separators
+                  "{" { return symbol(sym.LBRACE, yytext()); }
+                  "}" { return symbol(sym.RBRACE, yytext()); }
+                  ":" { return symbol(sym.COLON, yytext()); }
+                  "%%" { return symbol(sym.PERCENT, yytext()); }
+                  "."  {  return symbol(sym.DOT, yytext()); }
+                  "*" {  return symbol(sym.STAR, yytext()); }
+                  "+" {  return symbol(sym.PLUS, yytext()); }
+                  "?" {  return symbol(sym.QUERY, yytext()); }
+                  "|" {  return symbol(sym.PIPE, yytext()); }
+                  "&" {  return symbol(sym.AMPERSAND, yytext()); }
       }
 
       <CONJUNTO> {
@@ -131,8 +143,10 @@ Arrow = "->"
       {Identifier} { return symbol(sym.IDENTIFIER, yytext()); }
       {Arrow} {
           yybegin(NOTATION);
-          return symbol(sym.ARROW);
+          return symbol(sym.ARROW, yytext());
         }
+
+
       }
 
       <NOTATION> {
@@ -143,7 +157,7 @@ Arrow = "->"
         "," { return symbol(sym.COMMA, yytext()); }
       ";" {
                 yybegin(YYINITIAL);
-                return symbol(sym.SEMICOLON);
+                return symbol(sym.SEMICOLON, yytext());
             }
         {ASCII} { return symbol(sym.ASCII, yytext()); }
       }
@@ -161,11 +175,12 @@ Arrow = "->"
       }
 
       <REGEX> {
-      "." { return symbol(sym.DOT); }
-      "*" { return symbol(sym.STAR); }
-      "+" { return symbol(sym.PLUS); }
-        "?" { return symbol(sym.QUERY); }
-        "|" { return symbol(sym.PIPE); }
+      "." { return symbol(sym.DOT, yytext()); }
+      "*" { return symbol(sym.STAR, yytext()); }
+      "+" { return symbol(sym.PLUS, yytext()); }
+        "?" { return symbol(sym.QUERY, yytext()); }
+        "|" { return symbol(sym.PIPE, yytext()); }
+
       \" {
           stringBuffer.setLength(0);
           yybegin(STRING_REGEX);}
@@ -175,11 +190,11 @@ Arrow = "->"
 
       "{" {
           yybegin(REGEX_REPRESENTATION);
-          return symbol(sym.LBRACE); }
+          return symbol(sym.LBRACE, yytext()); }
 
           ";" {
                 yybegin(YYINITIAL);
-                return symbol(sym.SEMICOLON);
+                return symbol(sym.SEMICOLON, yytext());
             }
       }
 
@@ -187,7 +202,7 @@ Arrow = "->"
       {Identifier} { return symbol(sym.IDENTIFIER, yytext()); }
       "}" {
           yybegin(REGEX);
-          return symbol(sym.RBRACE); }
+          return symbol(sym.RBRACE, yytext()); }
       }
       <STRING_REGEX> {
              \" { yybegin(REGEX); return symbol(sym.STRING_LITERAL, stringBuffer.toString()); }
@@ -217,7 +232,7 @@ Arrow = "->"
     {Identifier} { return symbol(sym.IDENTIFIER, yytext()); }
     ":" {
       yybegin(YYINITIAL);
-        return symbol(sym.COLON);
+        return symbol(sym.COLON, yytext());
 
     }
     \" {
@@ -231,7 +246,7 @@ Arrow = "->"
 
     ";" {
         yybegin(YYINITIAL);
-          return symbol(sym.SEMICOLON);}
+          return symbol(sym.SEMICOLON, yytext());}
     }
 
     <STRING_REGEX_STATEMENT> {
@@ -279,28 +294,10 @@ Arrow = "->"
             \\                             { stringBuffer.append('\\'); }
       }
 
-// Set states for line and column to display errors
-\n { yyline++; yycolumn = 1; yychar = 1; return symbol(sym.NEWLINE); }
+                        // Comments
+           {Comment} { /* ignore */ }
 
-          // Separators
-          "{" { return symbol(sym.LBRACE); }
-          "}" { return symbol(sym.RBRACE); }
-          ":" { return symbol(sym.COLON); }
-          "%%" { return symbol(sym.PERCENT); }
-          "."  {  return symbol(sym.DOT); }
-          "*" {  return symbol(sym.STAR); }
-          "+" {  return symbol(sym.PLUS); }
-          "?" {  return symbol(sym.QUERY); }
-          "|" {  return symbol(sym.PIPE); }
-          "&" {  return symbol(sym.AMPERSAND); }
-
-      // Comments
-      {Comment} { /* ignore */ }
-
-      // White space
-      {WhiteSpace} { /* ignore */ }
-
-
-
+           // White space
+            {WhiteSpace} { /* ignore */ }
 
         [^] { throw new Error("Caracter inesperado: " + yytext() + " en la linea " + yyline + " y columna " + yycolumn); }
