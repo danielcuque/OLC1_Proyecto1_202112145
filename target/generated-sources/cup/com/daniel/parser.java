@@ -170,10 +170,6 @@ public class parser extends java_cup.runtime.lr_parser {
   public int error_sym() {return 1;}
 
 
-
-
-
-
 /** Cup generated class to encapsulate user supplied action code.*/
 @SuppressWarnings({"rawtypes", "unchecked", "unused"})
 class CUP$parser$actions {
@@ -216,7 +212,7 @@ class CUP$parser$actions {
           case 1: // Begin ::= LBRACE BodyEntry RBRACE 
             {
               Object RESULT =null;
-
+		 System.out.println("Inicio"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("Begin",0, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -405,6 +401,11 @@ class CUP$parser$actions {
           case 22: // ExpLine ::= IDENTIFIER ARROW RegExp SEMICOLON 
             {
               Object RESULT =null;
+		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).right;
+		String id = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-3)).value;
+		
+System.out.println("Expresi??n regular: " + id);
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ExpLine",15, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }

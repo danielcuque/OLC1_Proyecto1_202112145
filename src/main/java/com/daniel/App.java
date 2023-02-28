@@ -13,14 +13,8 @@ public class App {
         try {
             String lines = ManageFile.ReadFiles(path);
             ExreganLexer lexer = new ExreganLexer(new StringReader(lines));
-
-            while (true){
-                Symbol token = lexer.next_token();
-                if (token.sym == 0){
-                    break;
-                }
-                System.out.println(token.value + " " + token.sym);
-            }
+            parser p = new parser(lexer);
+            Symbol s = p.parse();
         }catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }

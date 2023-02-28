@@ -2,33 +2,9 @@ package com.daniel;
 
 import java_cup.runtime.*;
 
-parser code
-{:
-
-:}
-
-terminal String
-CONJ,
-LBRACE,
-RBRACE,
-COLON,
-ARROW,
-PERCENT,
-DOT,
-STAR,
-PLUS,
-QUERY,
-PIPE,
-AMPERSAND,
-TILDE,
-COMMA,
-SEMICOLON,
-LOWERCASE,
-UPPERCASE,
-IDENTIFIER,
-DIGIT,
-STRING_LITERAL,
-ASCII;
+terminal String CONJ, LBRACE, RBRACE, COLON, ARROW, PERCENT, DOT, STAR, PLUS;
+terminal String QUERY, PIPE, AMPERSAND, TILDE, COMMA, SEMICOLON;
+terminal String LOWERCASE, UPPERCASE, IDENTIFIER, DIGIT, STRING_LITERAL,ASCII;
 
 non terminal Begin, BodyEntry;
 non terminal ConjBody, ConjDef, ConjNotation, ConjMark;
@@ -41,7 +17,7 @@ non terminal ExpBody, ExpLine, RegExp;
 start with Begin;
 
 // Definimos la sección para la declaración de la gramática
-Begin ::=LBRACE BodyEntry RBRACE;
+Begin ::=LBRACE BodyEntry RBRACE {: System.out.println("Inicio"); :};
 
 BodyEntry ::= ConjBody ExpBody PERCENT CheckBody;
 
@@ -63,7 +39,9 @@ UnitSymbol ::= LOWERCASE | UPPERCASE | DIGIT | ASCII;
 // Definimos la sección para la asignación de expresiones regulares a conjuntos
 ExpBody ::= ExpLine ExpBody | ExpLine;
 
-ExpLine ::= IDENTIFIER ARROW RegExp SEMICOLON;
+ExpLine ::= IDENTIFIER:id ARROW RegExp SEMICOLON {:
+System.out.println("Expresión regular: " + id);
+:};
 
 RegExp ::= PIPE RegExp RegExp
 | DOT RegExp RegExp
