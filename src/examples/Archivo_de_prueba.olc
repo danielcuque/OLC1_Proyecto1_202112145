@@ -1,5 +1,9 @@
-{
+{ //LRACE
 
+// BODY
+
+// CONJUNTOS
+// CONJ COLON IDENTIFIER RANGE
 CONJ: nuevo -> a~z;
 
 CONJ: separados -> 2,a,e,R,d,0,9;

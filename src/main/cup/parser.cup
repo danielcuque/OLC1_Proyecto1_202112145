@@ -2,18 +2,48 @@ package com.daniel;
 
 import java_cup.runtime.*;
 
+parser code
+{:
 
-// Change sym class name to match your grammar
+:}
+
+terminal ASCII IDENTIFIER, LOWERCASE, UPPERCASE, DIGIT, DOUBLEQUOTE, SINGLEQUOTE, CONJ, LBRACE, RBRACE, COLON, ARROW, PERCENT, DOT, STAR, PLUS, QUERY, PIPE, AMPERSAND, TILDE, COMMA, SEMICOLON;
+
+non terminal Begin, BodyEntry;
+non terminal ConjBody, ConjDef, ConjNotation, ConjMark;
+non terminal RangeExp, IndExp, MoreIndExp;
+non terminal UnitSymbol;
+non terminal CheckBody, CheckLine, CheckNotation, CheckMark;
+
+non terminal ExpBody, ExpDouble, ExpSingle, ExpText, ExpOrDot;
+non terminal Node, ExpLine, RegexExp;
+
+start with Begin;
 
 
-terminal LBRACE, RBRACE, COLON, ARROW, PERCENT, DOT, STAR, PLUS, QUERY, PIPE, TILDE, COMMA, AMPERSAND, CONJ, STRING_LITERAL, SEMICOLON, LOWERCASE , UPPERCASE , DIGIT , IDENTIFIER , ASCII, CHAR_LITERAL, NEWLINE;
+Begin ::=LBRACE BodyEntry RBRACE;
 
-terminal Integer NUMBER;
+BodyEntry ::= ConjBody ExpBody PERCENT CheckBody;
 
-non terminal Integer expr;
+// Definimos la sección para los conjuntos de regex
+ConjBody ::= ConjDef ConjBody | ConjDef;
 
-start with expr;
+ConjDef ::= CONJ COLON IDENTIFIER ARROW ConjNotation SEMICOLON;
 
-expr ::= LBRACE | RBRACE | COLON | ARROW | PERCENT | DOT | STAR | PLUS | QUERY | PIPE | TILDE | COMMA | AMPERSAND | NUMBER | CONJ | STRING_LITERAL | SEMICOLON;
+ConjNotation ::= RangeExp | IndExp;
+
+RangeExp ::= LOWERCASE TILDE LOWERCASE | UPPERCASE TILDE UPPERCASE | DIGIT TILDE DIGIT | ASCII TILDE ASCII;
+
+IndExp ::=  UnitSymbol MoreIndExp | UnitSymbol;
+
+MoreIndExp ::= COMMA UnitSymbol MoreIndExp | COMMA UnitSymbol;
+
+UnitSymbol ::= LOWERCASE | UPPERCASE | DIGIT | ASCII;
+
+// Definimos la sección para la asignación de expresiones regulares a conjuntos
+
+ExpBody ::= ExpLine ExpBody | ExpLine;
+
+
 
 
