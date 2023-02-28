@@ -7,7 +7,28 @@ parser code
 
 :}
 
-terminal ASCII IDENTIFIER, LOWERCASE, UPPERCASE, DIGIT, DOUBLEQUOTE, SINGLEQUOTE, CONJ, LBRACE, RBRACE, COLON, ARROW, PERCENT, DOT, STAR, PLUS, QUERY, PIPE, AMPERSAND, TILDE, COMMA, SEMICOLON;
+terminal String
+CONJ,
+LBRACE,
+RBRACE,
+COLON,
+ARROW,
+PERCENT,
+DOT,
+STAR,
+PLUS,
+QUERY,
+PIPE,
+AMPERSAND,
+TILDE,
+COMMA,
+SEMICOLON,
+LOWERCASE,
+UPPERCASE,
+IDENTIFIER,
+DIGIT,
+STRING_LITERAL,
+ASCII;
 
 non terminal Begin, BodyEntry;
 non terminal ConjBody, ConjDef, ConjNotation, ConjMark;
@@ -15,12 +36,11 @@ non terminal RangeExp, IndExp, MoreIndExp;
 non terminal UnitSymbol;
 non terminal CheckBody, CheckLine, CheckNotation, CheckMark;
 
-non terminal ExpBody, ExpDouble, ExpSingle, ExpText, ExpOrDot;
-non terminal Node, ExpLine, RegexExp;
+non terminal ExpBody, ExpLine, RegExp;
 
 start with Begin;
 
-
+// Definimos la sección para la declaración de la gramática
 Begin ::=LBRACE BodyEntry RBRACE;
 
 BodyEntry ::= ConjBody ExpBody PERCENT CheckBody;
@@ -41,9 +61,22 @@ MoreIndExp ::= COMMA UnitSymbol MoreIndExp | COMMA UnitSymbol;
 UnitSymbol ::= LOWERCASE | UPPERCASE | DIGIT | ASCII;
 
 // Definimos la sección para la asignación de expresiones regulares a conjuntos
-
 ExpBody ::= ExpLine ExpBody | ExpLine;
 
+ExpLine ::= IDENTIFIER ARROW RegExp SEMICOLON;
+
+RegExp ::= PIPE RegExp RegExp
+| DOT RegExp RegExp
+| PLUS RegExp
+| STAR RegExp
+| QUERY RegExp
+| LBRACE IDENTIFIER RBRACE | STRING_LITERAL;
+
+
+// Definimos la sección para las cadenas a evaluar
+CheckBody ::= CheckLine CheckBody | CheckLine;
+
+CheckLine ::= IDENTIFIER COLON STRING_LITERAL SEMICOLON;
 
 
 

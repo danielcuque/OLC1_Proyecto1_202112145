@@ -8,35 +8,33 @@ package com.daniel;
 /** CUP generated interface containing symbol constants. */
 public interface sym {
   /* terminals */
-  public static final int PIPE = 11;
-  public static final int SEMICOLON = 17;
-  public static final int PERCENT = 6;
-  public static final int PLUS = 9;
-  public static final int RBRACE = 3;
+  public static final int PIPE = 12;
+  public static final int SEMICOLON = 16;
+  public static final int PERCENT = 7;
+  public static final int PLUS = 10;
+  public static final int RBRACE = 4;
   public static final int DIGIT = 20;
-  public static final int STAR = 8;
-  public static final int IDENTIFIER = 21;
-  public static final int COLON = 4;
-  public static final int LBRACE = 2;
-  public static final int TILDE = 12;
-  public static final int LOWERCASE = 18;
-  public static final int STRING_LITERAL = 16;
-  public static final int COMMA = 13;
-  public static final int NUMBER = 25;
+  public static final int STAR = 9;
+  public static final int IDENTIFIER = 19;
+  public static final int COLON = 5;
+  public static final int LBRACE = 3;
+  public static final int TILDE = 14;
+  public static final int STRING_LITERAL = 21;
+  public static final int LOWERCASE = 17;
+  public static final int COMMA = 15;
   public static final int EOF = 0;
-  public static final int CONJ = 15;
-  public static final int CHAR_LITERAL = 23;
-  public static final int NEWLINE = 24;
+  public static final int CONJ = 2;
   public static final int error = 1;
-  public static final int DOT = 7;
-  public static final int ARROW = 5;
-  public static final int UPPERCASE = 19;
+  public static final int DOT = 8;
+  public static final int ARROW = 6;
+  public static final int UPPERCASE = 18;
   public static final int ASCII = 22;
-  public static final int QUERY = 10;
-  public static final int AMPERSAND = 14;
+  public static final int QUERY = 11;
+  public static final int AMPERSAND = 13;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
+  "CONJ",
   "LBRACE",
   "RBRACE",
   "COLON",
@@ -47,20 +45,16 @@ public interface sym {
   "PLUS",
   "QUERY",
   "PIPE",
+  "AMPERSAND",
   "TILDE",
   "COMMA",
-  "AMPERSAND",
-  "CONJ",
-  "STRING_LITERAL",
   "SEMICOLON",
   "LOWERCASE",
   "UPPERCASE",
-  "DIGIT",
   "IDENTIFIER",
-  "ASCII",
-  "CHAR_LITERAL",
-  "NEWLINE",
-  "NUMBER"
+  "DIGIT",
+  "STRING_LITERAL",
+  "ASCII"
   };
 }
 
