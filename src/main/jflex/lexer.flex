@@ -1,6 +1,8 @@
 package com.daniel;
 
+import com.daniel.controller.ExceptionReport;
 import java_cup.runtime.*;
+import java.util.ArrayList;
 
 %%
 
@@ -23,6 +25,9 @@ StringBuffer stringBuffer = new StringBuffer();
   private Symbol symbol(int sym, Object value) {
         return new Symbol(sym, yyline, yycolumn, value);
   }
+
+   public ArrayList<ExceptionReport> errors = new ArrayList();
+
 %}
 
 // Init line and column
@@ -120,4 +125,9 @@ Semicolon = ";"
 
 
 
-[^] { throw new Error("Caracter inesperado: " + yytext() + " en la linea " + yyline + " y columna " + yycolumn); }
+[^] {
+          errors.add(new ExceptionReport(
+                  "Léxico",
+                  "Caracter inesperado:" + yytext() + " en la linea " + yyline + " y columna " + yycolumn,
+                  yyline+"", yycolumn+""));
+      }

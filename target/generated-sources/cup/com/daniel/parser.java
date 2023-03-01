@@ -6,6 +6,13 @@
 package com.daniel;
 
 import java_cup.runtime.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import com.daniel.controller.ExceptionReport;
+import com.daniel.controller.Node;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -168,6 +175,43 @@ public class parser extends java_cup.runtime.lr_parser {
 
   /** <code>error</code> Symbol index. */
   public int error_sym() {return 1;}
+
+
+
+
+    // Lista de errores
+    public ArrayList<ExceptionReport> Errors = new ArrayList<ExceptionReport>();
+
+    public void syntax_error(Symbol s){
+        Errors.add(new ExceptionReport("Sint??ctico", "Error de sintaxis detectado. Se detect??: " + s.value, s.left + "", s.right + ""));
+        }
+
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
+            System.out.println("Error sintactico irrecuperable en la L??nea " + (s.left)+ " Columna "+s.right+". Componente " + s.value + " no reconocido.");
+            }
+
+            public ArrayList<ExceptionReport> getErrores(){
+                return Errors;
+            }
+
+public static int contId = 1;
+public static int IDS = 1;
+public static Node Root; // Declaramos la ra??z del ??rbol
+
+
+// Graficamos el ??rbol
+public static void generateGraph(Node current, String name){
+FileWriter fileWriter = null;
+PrintWriter printWriter = null;
+
+try {
+fileWriter = new FileWriter("src/reports/ARBOLES_202112145"+name+".dot");
+}
+catch (IOException e) {
+}
+}
+
+
 
 
 /** Cup generated class to encapsulate user supplied action code.*/

@@ -4,7 +4,9 @@
 
 package com.daniel;
 
+import com.daniel.controller.ExceptionReport;
 import java_cup.runtime.*;
+import java.util.ArrayList;
 
 
 // See https://github.com/jflex-de/jflex/issues/222
@@ -317,6 +319,9 @@ StringBuffer stringBuffer = new StringBuffer();
   private Symbol symbol(int sym, Object value) {
         return new Symbol(sym, yyline, yycolumn, value);
   }
+
+   public ArrayList<ExceptionReport> errors = new ArrayList();
+
 
 
   /**
@@ -729,7 +734,10 @@ StringBuffer stringBuffer = new StringBuffer();
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
-            { throw new Error("Caracter inesperado: " + yytext() + " en la linea " + yyline + " y columna " + yycolumn);
+            { errors.add(new ExceptionReport(
+                  "L??xico",
+                  "Caracter inesperado:" + yytext() + " en la linea " + yyline + " y columna " + yycolumn,
+                  yyline+"", yycolumn+""));
             }
             // fall through
           case 31: break;
