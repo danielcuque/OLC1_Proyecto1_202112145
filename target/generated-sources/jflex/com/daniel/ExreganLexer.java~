@@ -737,7 +737,7 @@ StringBuffer stringBuffer = new StringBuffer();
             { errors.add(new ExceptionReport(
                   "L??xico",
                   "Caracter inesperado:" + yytext() + " en la linea " + yyline + " y columna " + yycolumn,
-                  yyline, yycolumn));
+                  yyline+"", yycolumn+""));
             }
             // fall through
           case 31: break;

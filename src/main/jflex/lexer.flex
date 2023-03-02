@@ -78,7 +78,6 @@ Star = "*"
 Plus = "+"
 Query = "?"
 Pipe = "|"
-Ampersand = "&"
 Tilde = "~"
 Comma = ","
 Semicolon = ";"
@@ -99,7 +98,6 @@ Semicolon = ";"
       <YYINITIAL> {Plus} { return symbol(sym.PLUS, yytext()); }
       <YYINITIAL> {Query} { return symbol(sym.QUERY, yytext()); }
       <YYINITIAL> {Pipe} { return symbol(sym.PIPE, yytext()); }
-      <YYINITIAL> {Ampersand} { return symbol(sym.AMPERSAND, yytext()); }
       <YYINITIAL> {Tilde} { return symbol(sym.TILDE, yytext()); }
       <YYINITIAL> {Comma} { return symbol(sym.COMMA, yytext()); }
       <YYINITIAL> {Semicolon} { return symbol(sym.SEMICOLON, yytext()); }
@@ -127,7 +125,7 @@ Semicolon = ";"
 
 [^] {
           errors.add(new ExceptionReport(
-                  "Léxico",
+                  "Lexico",
                   "Caracter inesperado:" + yytext() + " en la linea " + yyline + " y columna " + yycolumn,
                   yyline+"", yycolumn+""));
       }

@@ -21,14 +21,14 @@ public class App {
             parser p = new parser(lexer);
             Symbol s = p.parse();
 
-            errors.addAll(lexer.errors);
-            errors.addAll(p.getErrores());
+            //errors.addAll(lexer.errors);
+            //errors.addAll(p.getErrores());
 
-            if (errors.size() > 0) {
-                report.htmlReport(errors, "src/reports/ERRORES_202112145/Reporte-de-ejecucion.html");
+            //if (errors.size() > 0) {
+            /*    report.htmlReport(errors, "src/reports/ERRORES_202112145/Reporte-de-ejecucion.html");
             } else {
                 System.out.println("No errors found");
-            }
+            }*/
         }catch (java.lang.Exception e) {
             System.out.println("Error: " + e.getMessage());
         }

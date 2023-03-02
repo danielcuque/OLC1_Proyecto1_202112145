@@ -6,63 +6,51 @@ import java.util.List;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import com.daniel.controller.ExceptionReport;
-import com.daniel.controller.Node;
+import com.daniel.controller.*;
 
 parser code {:
+
+    public int operatorNodeCounter = 1;
+    public int nodeCounter = 1;
+
+    public ArrayList<Conjunto> Conjuntos = new ArrayList<Conjunto>();
+    public ArrayList<Tree> Trees = new ArrayList<Tree>();
+    public ArrayList<String> CheckStrings = new ArrayList<String>();
+
 
     // Lista de errores
     public ArrayList<ExceptionReport> Errors = new ArrayList<ExceptionReport>();
 
     public void syntax_error(Symbol s){
-        Errors.add(new ExceptionReport("Sintáctico", "Error de sintaxis detectado. Se detectó: " + s.value, s.left + "", s.right + ""));
+        Errors.add(new ExceptionReport("Sintactico", "Error de sintaxis detectado. Se detectó: " + s.value, s.left + "", s.right + ""));
         }
 
     public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
             System.out.println("Error sintactico irrecuperable en la Línea " + (s.left)+ " Columna "+s.right+". Componente " + s.value + " no reconocido.");
             }
-
             public ArrayList<ExceptionReport> getErrores(){
                 return Errors;
             }
-
-public static int contId = 1;
-public static int IDS = 1;
-public static Node Root; // Declaramos la raíz del árbol
-
-
-// Graficamos el árbol
-public static void generateGraph(Node current, String name){
-FileWriter fileWriter = null;
-PrintWriter printWriter = null;
-
-try {
-fileWriter = new FileWriter("src/reports/ARBOLES_202112145"+name+".dot");
-}
-catch (IOException e) {
-}
-}
-
-
 :}
 
 
 terminal String CONJ, LBRACE, RBRACE, COLON, ARROW, PERCENT, DOT, STAR, PLUS;
-terminal String QUERY, PIPE, AMPERSAND, TILDE, COMMA, SEMICOLON;
+terminal String QUERY, PIPE, TILDE, COMMA, SEMICOLON;
 terminal String LOWERCASE, UPPERCASE, IDENTIFIER, DIGIT, STRING_LITERAL,ASCII;
 
 non terminal Begin, BodyEntry;
-non terminal ConjBody, ConjDef, ConjNotation, ConjMark;
+non terminal ConjBody, ConjDef, ConjNotation;
 non terminal RangeExp, IndExp, MoreIndExp;
 non terminal UnitSymbol;
-non terminal CheckBody, CheckLine, CheckNotation, CheckMark;
+non terminal CheckBody, CheckLine;
 
-non terminal ExpBody, ExpLine, RegExp;
+non terminal ExpBody, ExpLine;
+non terminal Node RegExp;
 
 start with Begin;
 
 // Definimos la sección para la declaración de la gramática
-Begin ::=LBRACE BodyEntry RBRACE {: System.out.println("Inicio"); :};
+Begin ::=LBRACE BodyEntry RBRACE;
 
 BodyEntry ::= ConjBody ExpBody PERCENT CheckBody;
 
@@ -84,18 +72,48 @@ UnitSymbol ::= LOWERCASE | UPPERCASE | DIGIT | ASCII;
 // Definimos la sección para la asignación de expresiones regulares a conjuntos
 ExpBody ::= ExpLine ExpBody | ExpLine;
 
-ExpLine ::= IDENTIFIER:id ARROW RegExp SEMICOLON {:
-System.out.println("Expresión regular: " + id);
+ExpLine ::= IDENTIFIER:id ARROW RegExp:val SEMICOLON {:
+    Trees.add(new Tree(val, id));
 :};
 
-RegExp ::= PIPE RegExp RegExp
-| DOT RegExp RegExp
-| PLUS RegExp
-| STAR RegExp
-| QUERY RegExp
-| LBRACE IDENTIFIER RBRACE | STRING_LITERAL;
+RegExp ::= PIPE RegExp:pipe1 RegExp:pipe2 {:
+    Node node = new Node("|",NodeType.OR, operatorNodeCounter,pipe1, pipe2);
+    operatorNodeCounter++;
+    RESULT = node;
 
+:}
+| DOT RegExp:dot1 RegExp:dot2 {:
+Node node = new Node(".",NodeType.AND, operatorNodeCounter,dot1, dot2);
+operatorNodeCounter++;
+RESULT = node;
+:}
+| PLUS RegExp:plus {:
+Node node = new Node("+",NodeType.PLUS, operatorNodeCounter,plus);
+operatorNodeCounter++;
+RESULT = node;
 
+:}
+| STAR RegExp:star {:
+Node node = new Node("*",NodeType.STAR, operatorNodeCounter,star);
+operatorNodeCounter++;
+RESULT = node;
+:}
+| QUERY RegExp:query {:
+Node node = new Node("?",NodeType.QUERY, operatorNodeCounter,query);
+operatorNodeCounter++;
+RESULT = node;
+
+:}
+| LBRACE IDENTIFIER:id RBRACE {:
+Node node = new Node(id, NodeType.LEAVE, nodeCounter);
+nodeCounter++;
+RESULT = node;
+:} | STRING_LITERAL:val {:
+Node node = new Node(val, NodeType.LEAVE, nodeCounter);
+nodeCounter++;
+RESULT = node;
+:}
+;
 // Definimos la sección para las cadenas a evaluar
 CheckBody ::= CheckLine CheckBody | CheckLine;
 

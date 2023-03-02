@@ -68,12 +68,12 @@ class ExreganLexer implements java_cup.runtime.Scanner {
 
   private static final String ZZ_CMAP_BLOCKS_PACKED_0 =
     "\11\0\1\1\1\2\1\0\1\1\1\3\22\0\1\1"+
-    "\1\4\1\5\2\6\1\7\1\10\3\6\1\11\1\12"+
-    "\1\13\1\14\1\15\1\16\12\17\1\20\1\21\1\22"+
-    "\1\6\1\23\1\24\1\6\2\25\1\26\6\25\1\27"+
-    "\3\25\1\30\1\31\13\25\1\6\1\32\2\6\1\33"+
-    "\1\6\15\34\1\35\3\34\1\36\1\34\1\37\6\34"+
-    "\1\40\1\41\1\42\1\43\u0181\0";
+    "\1\4\1\5\2\6\1\7\4\6\1\10\1\11\1\12"+
+    "\1\13\1\14\1\15\12\16\1\17\1\20\1\21\1\6"+
+    "\1\22\1\23\1\6\2\24\1\25\6\24\1\26\3\24"+
+    "\1\27\1\30\13\24\1\6\1\31\2\6\1\32\1\6"+
+    "\15\33\1\34\3\33\1\35\1\33\1\36\6\33\1\37"+
+    "\1\40\1\41\1\42\u0181\0";
 
   private static int [] zzUnpackcmap_blocks() {
     int [] result = new int[512];
@@ -101,14 +101,14 @@ class ExreganLexer implements java_cup.runtime.Scanner {
 
   private static final String ZZ_ACTION_PACKED_0 =
     "\2\0\1\1\2\2\1\3\1\4\1\3\1\5\1\6"+
-    "\1\7\1\10\1\3\1\11\1\3\1\12\1\13\1\14"+
-    "\1\3\1\15\2\16\1\17\1\20\1\21\1\22\1\23"+
-    "\1\24\1\25\1\26\1\27\1\30\1\31\1\2\1\0"+
-    "\1\17\1\32\1\33\1\34\1\35\2\0\1\17\1\0"+
-    "\1\2\1\36";
+    "\1\7\1\3\1\10\1\3\1\11\1\12\1\13\1\3"+
+    "\1\14\2\15\1\16\1\17\1\20\1\21\1\22\1\23"+
+    "\1\24\1\25\1\26\1\27\1\30\1\2\1\0\1\16"+
+    "\1\31\1\32\1\33\1\34\2\0\1\16\1\0\1\2"+
+    "\1\35";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[46];
+    int [] result = new int[45];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -133,15 +133,15 @@ class ExreganLexer implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\44\0\110\0\110\0\154\0\110\0\110\0\220"+
-    "\0\110\0\110\0\110\0\110\0\264\0\110\0\330\0\374"+
-    "\0\110\0\110\0\u0120\0\110\0\u0144\0\u0168\0\u0144\0\u0144"+
-    "\0\110\0\110\0\110\0\110\0\u018c\0\110\0\u01b0\0\110"+
-    "\0\110\0\u01d4\0\u01f8\0\u021c\0\110\0\110\0\110\0\110"+
-    "\0\u0240\0\u0264\0\u0288\0\u02ac\0\u0240\0\u0144";
+    "\0\0\0\43\0\106\0\106\0\151\0\106\0\106\0\214"+
+    "\0\106\0\106\0\106\0\257\0\106\0\322\0\365\0\106"+
+    "\0\106\0\u0118\0\106\0\u013b\0\u015e\0\u013b\0\u013b\0\106"+
+    "\0\106\0\106\0\106\0\u0181\0\106\0\u01a4\0\106\0\106"+
+    "\0\u01c7\0\u01ea\0\u020d\0\106\0\106\0\106\0\106\0\u0230"+
+    "\0\u0253\0\u0276\0\u0299\0\u0230\0\u013b";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[46];
+    int [] result = new int[45];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -166,22 +166,22 @@ class ExreganLexer implements java_cup.runtime.Scanner {
   private static final String ZZ_TRANS_PACKED_0 =
     "\1\3\2\4\1\5\1\6\1\7\1\6\1\10\1\11"+
     "\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21"+
-    "\1\22\1\23\1\6\1\24\1\25\1\26\3\25\1\6"+
-    "\1\27\4\30\1\31\1\32\1\33\1\34\2\35\2\3"+
-    "\1\35\1\36\24\35\1\37\11\35\46\0\1\4\50\0"+
-    "\1\40\57\0\1\41\36\0\1\42\44\0\1\20\30\0"+
-    "\1\43\56\0\1\27\5\0\5\27\1\0\5\27\23\0"+
-    "\1\27\5\0\4\27\1\44\1\0\5\27\4\0\2\35"+
-    "\2\0\1\35\1\0\24\35\1\0\11\35\5\0\1\45"+
-    "\27\0\1\46\1\47\1\50\4\0\2\42\1\4\1\5"+
-    "\40\42\4\51\1\52\4\51\1\0\32\51\17\0\1\27"+
-    "\5\0\3\27\1\53\1\27\1\0\5\27\4\0\4\51"+
-    "\1\54\43\51\1\54\16\51\1\55\20\51\17\0\1\27"+
-    "\5\0\2\27\1\56\2\27\1\0\5\27\4\0\4\51"+
-    "\1\54\16\51\1\4\20\51";
+    "\1\22\1\6\1\23\1\24\1\25\3\24\1\6\1\26"+
+    "\4\27\1\30\1\31\1\32\1\33\2\34\2\3\1\34"+
+    "\1\35\23\34\1\36\11\34\45\0\1\4\47\0\1\37"+
+    "\55\0\1\40\35\0\1\41\43\0\1\17\30\0\1\42"+
+    "\54\0\1\26\5\0\5\26\1\0\5\26\22\0\1\26"+
+    "\5\0\4\26\1\43\1\0\5\26\4\0\2\34\2\0"+
+    "\1\34\1\0\23\34\1\0\11\34\5\0\1\44\26\0"+
+    "\1\45\1\46\1\47\4\0\2\41\1\4\1\5\37\41"+
+    "\4\50\1\51\3\50\1\0\32\50\16\0\1\26\5\0"+
+    "\3\26\1\52\1\26\1\0\5\26\4\0\4\50\1\53"+
+    "\42\50\1\53\15\50\1\54\20\50\16\0\1\26\5\0"+
+    "\2\26\1\55\2\26\1\0\5\26\4\0\4\50\1\53"+
+    "\15\50\1\4\20\50";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[720];
+    int [] result = new int[700];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -224,13 +224,13 @@ class ExreganLexer implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\2\0\2\11\1\1\2\11\1\1\4\11\1\1\1\11"+
+    "\2\0\2\11\1\1\2\11\1\1\3\11\1\1\1\11"+
     "\2\1\2\11\1\1\1\11\4\1\4\11\1\1\1\11"+
     "\1\1\2\11\1\1\1\0\1\1\4\11\2\0\1\1"+
     "\1\0\2\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[46];
+    int [] result = new int[45];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -735,159 +735,154 @@ StringBuffer stringBuffer = new StringBuffer();
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
             { errors.add(new ExceptionReport(
-                  "L??xico",
+                  "Lexico",
                   "Caracter inesperado:" + yytext() + " en la linea " + yyline + " y columna " + yycolumn,
                   yyline+"", yycolumn+""));
             }
             // fall through
-          case 31: break;
+          case 30: break;
           case 2:
             { /* Ignore */
             }
             // fall through
-          case 32: break;
+          case 31: break;
           case 3:
             { return symbol(sym.ASCII, yytext());
             }
             // fall through
-          case 33: break;
+          case 32: break;
           case 4:
             { stringBuffer.setLength(0); yybegin(STRING);
             }
             // fall through
-          case 34: break;
+          case 33: break;
           case 5:
-            { return symbol(sym.AMPERSAND, yytext());
-            }
-            // fall through
-          case 35: break;
-          case 6:
             { return symbol(sym.STAR, yytext());
             }
             // fall through
-          case 36: break;
-          case 7:
+          case 34: break;
+          case 6:
             { return symbol(sym.PLUS, yytext());
             }
             // fall through
-          case 37: break;
-          case 8:
+          case 35: break;
+          case 7:
             { return symbol(sym.COMMA, yytext());
             }
             // fall through
-          case 38: break;
-          case 9:
+          case 36: break;
+          case 8:
             { return symbol(sym.DOT, yytext());
             }
             // fall through
-          case 39: break;
-          case 10:
+          case 37: break;
+          case 9:
             { return symbol(sym.DIGIT, yytext());
             }
             // fall through
-          case 40: break;
-          case 11:
+          case 38: break;
+          case 10:
             { return symbol(sym.COLON, yytext());
             }
             // fall through
-          case 41: break;
-          case 12:
+          case 39: break;
+          case 11:
             { return symbol(sym.SEMICOLON, yytext());
             }
             // fall through
-          case 42: break;
-          case 13:
+          case 40: break;
+          case 12:
             { return symbol(sym.QUERY, yytext());
             }
             // fall through
-          case 43: break;
-          case 14:
+          case 41: break;
+          case 13:
             { return symbol(sym.UPPERCASE, yytext());
             }
             // fall through
-          case 44: break;
-          case 15:
+          case 42: break;
+          case 14:
             { return symbol(sym.IDENTIFIER, yytext());
             }
             // fall through
-          case 45: break;
-          case 16:
+          case 43: break;
+          case 15:
             { return symbol(sym.LOWERCASE, yytext());
             }
             // fall through
-          case 46: break;
-          case 17:
+          case 44: break;
+          case 16:
             { return symbol(sym.LBRACE, yytext());
             }
             // fall through
-          case 47: break;
-          case 18:
+          case 45: break;
+          case 17:
             { return symbol(sym.PIPE, yytext());
             }
             // fall through
-          case 48: break;
-          case 19:
+          case 46: break;
+          case 18:
             { return symbol(sym.RBRACE, yytext());
             }
             // fall through
-          case 49: break;
-          case 20:
+          case 47: break;
+          case 19:
             { return symbol(sym.TILDE, yytext());
             }
             // fall through
-          case 50: break;
-          case 21:
+          case 48: break;
+          case 20:
             { stringBuffer.append( yytext() );
             }
             // fall through
-          case 51: break;
-          case 22:
+          case 49: break;
+          case 21:
             { yybegin(YYINITIAL);
                                              return symbol(sym.STRING_LITERAL,
                                              stringBuffer.toString());
             }
             // fall through
-          case 52: break;
-          case 23:
+          case 50: break;
+          case 22:
             { stringBuffer.append('\\');
             }
             // fall through
-          case 53: break;
-          case 24:
+          case 51: break;
+          case 23:
             { return symbol(sym.PERCENT, yytext());
             }
             // fall through
-          case 54: break;
-          case 25:
+          case 52: break;
+          case 24:
             { return symbol(sym.ARROW, yytext());
             }
             // fall through
-          case 55: break;
-          case 26:
+          case 53: break;
+          case 25:
             { stringBuffer.append('\"');
             }
             // fall through
-          case 56: break;
-          case 27:
+          case 54: break;
+          case 26:
             { stringBuffer.append('\n');
             }
             // fall through
-          case 57: break;
-          case 28:
+          case 55: break;
+          case 27:
             { stringBuffer.append('\r');
             }
             // fall through
-          case 58: break;
-          case 29:
+          case 56: break;
+          case 28:
             { stringBuffer.append('\t');
             }
             // fall through
-          case 59: break;
-          case 30:
+          case 57: break;
+          case 29:
             { return symbol(sym.CONJ, yytext());
             }
             // fall through
-          case 60: break;
+          case 58: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }

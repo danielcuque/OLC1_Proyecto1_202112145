@@ -1,54 +1,38 @@
 package com.daniel.controller;
 
+import java.util.Set;
+
 public class Node {
-    private String name;
-    private String value;
-    private Node left;
-    private Node right;
+    Set<Integer> first;
+    Set<Integer> last;
 
-    public Node(String name, String value) {
-        this.name = name;
-        this.value = value;
-        this.left = null;
-        this.right = null;
+    boolean nullable;
+
+    Object lexeme;
+    NodeType type;
+    int number;
+
+    Node left;
+    Node right;
+
+    public Node(Object lexeme, NodeType type, int number){
+        this.lexeme = lexeme;
+        this.type = type;
+        this.number = number;
     }
 
-    public Node(String name, String value, Node left, Node right) {
-        this.name = name;
-        this.value = value;
+    public Node(Object lexeme, NodeType type, int number, Node left, Node right){
+        this.lexeme = lexeme;
+        this.type = type;
+        this.number = number;
         this.left = left;
         this.right = right;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public Node getLeft() {
-        return left;
-    }
-
-    public Node getRight() {
-        return right;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public void setLeft(Node left) {
+    public Node(Object lexeme, NodeType type, int number, Node left){
+        this.lexeme = lexeme;
+        this.type = type;
+        this.number = number;
         this.left = left;
-    }
-
-    public void setRight(Node right) {
-        this.right = right;
     }
 }
