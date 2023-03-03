@@ -65,8 +65,10 @@ Identifier = [a-zA-Z_]+[a-zA-Z0-9_]*
 Lowercase = [a-z]{1}
 Uppercase = [A-Z]{1}
 Digit = [0-9]+
+Backslash = "\\"
 DoubleQuote = "\""
 SingleQuote = "'"
+EscapeSequence = {Backslash} {SingleQuote} | {Backslash} {DoubleQuote} | {Backslash} {Backslash}
 Conj = "CONJ"
 Lbrace = "{"
 Rbrace = "}"
@@ -101,7 +103,8 @@ Semicolon = ";"
       <YYINITIAL> {Tilde} { return symbol(sym.TILDE, yytext()); }
       <YYINITIAL> {Comma} { return symbol(sym.COMMA, yytext()); }
       <YYINITIAL> {Semicolon} { return symbol(sym.SEMICOLON, yytext()); }
-      <YYINITIAL> {DoubleQuote} { stringBuffer.setLength(0); yybegin(STRING);}
+      <YYINITIAL> {EscapeSequence} { return symbol(sym.ESCAPE_SEQUENCE, yytext()); }
+      <YYINITIAL> \" { stringBuffer.setLength(0); yybegin(STRING);}
       <YYINITIAL> {Lowercase} { return symbol(sym.LOWERCASE, yytext()); }
       <YYINITIAL> {Uppercase} { return symbol(sym.UPPERCASE, yytext()); }
       <YYINITIAL> {Identifier} { return symbol(sym.IDENTIFIER, yytext()); }

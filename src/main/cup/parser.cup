@@ -37,14 +37,16 @@ parser code {:
 
 
 terminal String CONJ, LBRACE, RBRACE, COLON, ARROW, PERCENT, DOT, STAR, PLUS;
-terminal String QUERY, PIPE, TILDE, COMMA, SEMICOLON;
+terminal String QUERY, PIPE, TILDE;
+terminal String COMMA, SEMICOLON, ESCAPE_SEQUENCE;
 terminal String LOWERCASE, UPPERCASE, IDENTIFIER, DIGIT, STRING_LITERAL,ASCII;
 
 non terminal Begin, BodyEntry;
 non terminal ConjBody, ConjDef;
 non terminal String ConjNotation;
-non terminal String RangeExp, IndExp, MoreIndExp;
-non terminal UnitSymbol;
+non terminal String RangeExp;
+non terminal String IndExp, MoreIndExp;
+non terminal String UnitSymbol;
 non terminal CheckBody, CheckLine;
 
 non terminal ExpBody, ExpLine;
@@ -86,11 +88,21 @@ RESULT = d1 + "~" + d2;
 RESULT = a1 + "~" + a2;
 :};
 
-IndExp ::=  UnitSymbol MoreIndExp | UnitSymbol;
+IndExp ::=  UnitSymbol:u MoreIndExp:m {:
+RESULT = u + m;
+:} | UnitSymbol:u {:
+RESULT = u;
+:};
 
-MoreIndExp ::= COMMA UnitSymbol MoreIndExp | COMMA UnitSymbol;
+MoreIndExp ::= COMMA:c UnitSymbol:u MoreIndExp:m {:
+RESULT = c + u + m;
+:} | COMMA:c UnitSymbol:u {:
+RESULT = c + u;
+:};
 
-UnitSymbol ::= LOWERCASE | UPPERCASE | DIGIT | ASCII;
+UnitSymbol ::= LOWERCASE:l {:
+RESULT = l;
+:} | UPPERCASE:u {: RESULT = u; :}  | DIGIT:d {: RESULT = d; :} | ASCII:a {: RESULT = a; :};
 
 // Definimos la sección para la asignación de expresiones regulares a conjuntos
 ExpBody ::= ExpLine ExpBody | ExpLine;
@@ -135,8 +147,12 @@ RESULT = node;
 Node node = new Node(val, NodeType.LEAVE, nodeCounter);
 nodeCounter++;
 RESULT = node;
-:}
-;
+:} | ESCAPE_SEQUENCE:val {:
+Node node = new Node(val, NodeType.LEAVE, nodeCounter);
+nodeCounter++;
+RESULT = node;
+:};
+
 // Definimos la sección para las cadenas a evaluar
 CheckBody ::= CheckLine CheckBody | CheckLine;
 

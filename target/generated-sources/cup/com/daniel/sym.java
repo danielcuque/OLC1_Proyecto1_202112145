@@ -13,22 +13,23 @@ public interface sym {
   public static final int PERCENT = 7;
   public static final int PLUS = 10;
   public static final int RBRACE = 4;
-  public static final int DIGIT = 19;
+  public static final int DIGIT = 20;
   public static final int STAR = 9;
-  public static final int IDENTIFIER = 18;
+  public static final int IDENTIFIER = 19;
   public static final int COLON = 5;
   public static final int LBRACE = 3;
   public static final int TILDE = 13;
-  public static final int STRING_LITERAL = 20;
-  public static final int LOWERCASE = 16;
+  public static final int STRING_LITERAL = 21;
+  public static final int LOWERCASE = 17;
+  public static final int ESCAPE_SEQUENCE = 16;
   public static final int COMMA = 14;
   public static final int EOF = 0;
   public static final int CONJ = 2;
   public static final int error = 1;
   public static final int DOT = 8;
   public static final int ARROW = 6;
-  public static final int UPPERCASE = 17;
-  public static final int ASCII = 21;
+  public static final int UPPERCASE = 18;
+  public static final int ASCII = 22;
   public static final int QUERY = 11;
   public static final String[] terminalNames = new String[] {
   "EOF",
@@ -47,6 +48,7 @@ public interface sym {
   "TILDE",
   "COMMA",
   "SEMICOLON",
+  "ESCAPE_SEQUENCE",
   "LOWERCASE",
   "UPPERCASE",
   "IDENTIFIER",

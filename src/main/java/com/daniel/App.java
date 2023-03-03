@@ -19,7 +19,20 @@ public class App {
             String lines = ManageFile.ReadFiles(path);
             ExreganLexer lexer = new ExreganLexer(new StringReader(lines));
             parser p = new parser(lexer);
-            Symbol s = p.parse();
+            p.parse();
+
+
+            /*
+            while (true){
+                Symbol token = lexer.next_token();
+                if (token.sym == 0){
+                    break;
+                }
+                System.out.println(token.value + " " + token.sym);
+            }
+
+            //Symbol s = p.parse();
+
 
             //errors.addAll(lexer.errors);
             //errors.addAll(p.getErrores());
