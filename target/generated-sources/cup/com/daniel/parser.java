@@ -11,6 +11,8 @@ import java.util.List;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import com.daniel.controller.Tree.*;
+import com.daniel.controller.Conjunto.*;
 import com.daniel.controller.*;
 import java_cup.runtime.XMLElement;
 
@@ -279,6 +281,14 @@ class CUP$parser$actions {
           case 5: // ConjDef ::= CONJ COLON IDENTIFIER ARROW ConjNotation SEMICOLON 
             {
               Object RESULT =null;
+		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).right;
+		String id = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-3)).value;
+		int notationleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
+		int notationright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
+		String notation = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
+		
+    System.out.println("Conjunto: " + id + " Notacion: " + notation);
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ConjDef",3, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -287,7 +297,12 @@ class CUP$parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 6: // ConjNotation ::= RangeExp 
             {
-              Object RESULT =null;
+              String RESULT =null;
+		int rangeleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int rangeright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		String range = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+RESULT = range;
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ConjNotation",4, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -296,7 +311,12 @@ class CUP$parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 7: // ConjNotation ::= IndExp 
             {
-              Object RESULT =null;
+              String RESULT =null;
+		int indleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int indright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		String ind = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+RESULT = ind;
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ConjNotation",4, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -305,7 +325,16 @@ class CUP$parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 8: // RangeExp ::= LOWERCASE TILDE LOWERCASE 
             {
-              Object RESULT =null;
+              String RESULT =null;
+		int l1left = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
+		int l1right = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
+		String l1 = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
+		int l2left = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int l2right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		String l2 = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+RESULT = l1 + "~" + l2;
+
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("RangeExp",5, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -314,7 +343,15 @@ class CUP$parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 9: // RangeExp ::= UPPERCASE TILDE UPPERCASE 
             {
-              Object RESULT =null;
+              String RESULT =null;
+		int u1left = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
+		int u1right = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
+		String u1 = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
+		int u2left = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int u2right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		String u2 = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+RESULT = u1 + "~" + u2;
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("RangeExp",5, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -323,7 +360,16 @@ class CUP$parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 10: // RangeExp ::= DIGIT TILDE DIGIT 
             {
-              Object RESULT =null;
+              String RESULT =null;
+		int d1left = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
+		int d1right = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
+		String d1 = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
+		int d2left = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int d2right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		String d2 = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+
+RESULT = d1 + "~" + d2;
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("RangeExp",5, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -332,7 +378,15 @@ class CUP$parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 11: // RangeExp ::= ASCII TILDE ASCII 
             {
-              Object RESULT =null;
+              String RESULT =null;
+		int a1left = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
+		int a1right = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
+		String a1 = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
+		int a2left = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int a2right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		String a2 = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+RESULT = a1 + "~" + a2;
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("RangeExp",5, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -341,7 +395,7 @@ class CUP$parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 12: // IndExp ::= UnitSymbol MoreIndExp 
             {
-              Object RESULT =null;
+              String RESULT =null;
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("IndExp",6, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -350,7 +404,7 @@ class CUP$parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 13: // IndExp ::= UnitSymbol 
             {
-              Object RESULT =null;
+              String RESULT =null;
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("IndExp",6, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -359,7 +413,7 @@ class CUP$parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 14: // MoreIndExp ::= COMMA UnitSymbol MoreIndExp 
             {
-              Object RESULT =null;
+              String RESULT =null;
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("MoreIndExp",7, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -368,7 +422,7 @@ class CUP$parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 15: // MoreIndExp ::= COMMA UnitSymbol 
             {
-              Object RESULT =null;
+              String RESULT =null;
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("MoreIndExp",7, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }

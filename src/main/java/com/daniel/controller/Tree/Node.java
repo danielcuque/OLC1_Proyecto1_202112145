@@ -1,4 +1,4 @@
-package com.daniel.controller;
+package com.daniel.controller.Tree;
 
 import java.util.Set;
 

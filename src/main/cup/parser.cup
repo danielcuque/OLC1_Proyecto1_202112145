@@ -6,6 +6,8 @@ import java.util.List;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import com.daniel.controller.Tree.*;
+import com.daniel.controller.Conjunto.*;
 import com.daniel.controller.*;
 
 parser code {:
@@ -39,8 +41,9 @@ terminal String QUERY, PIPE, TILDE, COMMA, SEMICOLON;
 terminal String LOWERCASE, UPPERCASE, IDENTIFIER, DIGIT, STRING_LITERAL,ASCII;
 
 non terminal Begin, BodyEntry;
-non terminal ConjBody, ConjDef, ConjNotation;
-non terminal RangeExp, IndExp, MoreIndExp;
+non terminal ConjBody, ConjDef;
+non terminal String ConjNotation;
+non terminal String RangeExp, IndExp, MoreIndExp;
 non terminal UnitSymbol;
 non terminal CheckBody, CheckLine;
 
@@ -57,11 +60,31 @@ BodyEntry ::= ConjBody ExpBody PERCENT CheckBody;
 // Definimos la sección para los conjuntos de regex
 ConjBody ::= ConjDef ConjBody | ConjDef;
 
-ConjDef ::= CONJ COLON IDENTIFIER ARROW ConjNotation SEMICOLON;
+ConjDef ::= CONJ COLON IDENTIFIER:id ARROW ConjNotation:notation SEMICOLON {:
+    System.out.println("Conjunto: " + id + " Notacion: " + notation);
+:};
 
-ConjNotation ::= RangeExp | IndExp;
+ConjNotation ::= RangeExp:range {:
+RESULT = range;
+:}
+|IndExp:ind {:
+RESULT = ind;
+:};
 
-RangeExp ::= LOWERCASE TILDE LOWERCASE | UPPERCASE TILDE UPPERCASE | DIGIT TILDE DIGIT | ASCII TILDE ASCII;
+RangeExp ::= LOWERCASE:l1 TILDE LOWERCASE:l2 {:
+RESULT = l1 + "~" + l2;
+
+:}
+| UPPERCASE:u1 TILDE UPPERCASE:u2 {:
+RESULT = u1 + "~" + u2;
+:}
+| DIGIT:d1 TILDE DIGIT:d2 {:
+
+RESULT = d1 + "~" + d2;
+:}
+| ASCII:a1 TILDE ASCII:a2 {:
+RESULT = a1 + "~" + a2;
+:};
 
 IndExp ::=  UnitSymbol MoreIndExp | UnitSymbol;
 
