@@ -3,7 +3,6 @@ package com.daniel;
 import com.daniel.controller.ExceptionReport;
 import com.daniel.model.ManageFile;
 import com.daniel.model.ReportHTML;
-import java_cup.runtime.Symbol;
 
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -11,16 +10,21 @@ import java.util.ArrayList;
 
 public class App {
     public static void main(String[] args) {
-        String path = "src/examples/test.olc";
-        ArrayList<ExceptionReport> errors = new ArrayList();
+        String path = "src/examples/test1.olc";
+        //ArrayList<ExceptionReport> errors = new ArrayList();
 
         try {
-            ReportHTML report = new ReportHTML();
+            //ReportHTML report = new ReportHTML();
             String lines = ManageFile.ReadFiles(path);
             ExreganLexer lexer = new ExreganLexer(new StringReader(lines));
             parser p = new parser(lexer);
             p.parse();
 
+            // Print trees
+            for (int i = 0; i < p.Trees.size(); i++) {
+                System.out.println("*****Tree *******" + i);
+                p.Trees.get(i).traverseLeft(p.Trees.get(i).Root);
+            }
 
             /*
             while (true){
@@ -30,7 +34,6 @@ public class App {
                 }
                 System.out.println(token.value + " " + token.sym);
             }
-
             //Symbol s = p.parse();
 
 
@@ -38,7 +41,7 @@ public class App {
             //errors.addAll(p.getErrores());
 
             //if (errors.size() > 0) {
-            /*    report.htmlReport(errors, "src/reports/ERRORES_202112145/Reporte-de-ejecucion.html");
+            report.htmlReport(errors, "src/reports/ERRORES_202112145/Reporte-de-ejecucion.html");
             } else {
                 System.out.println("No errors found");
             }*/

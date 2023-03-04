@@ -1,8 +1,6 @@
 package com.daniel.model;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 
 public class ManageFile {
@@ -22,6 +20,16 @@ public class ManageFile {
             System.out.println("Error: " + e.getMessage());
         }
         return text;
+
+    }
+
+    public static void WriteFiles(String path, String content) {
+
+        File f;
+        FileWriter w;
+        BufferedWriter bw;
+        PrintWriter pw;
+
 
     }
 }

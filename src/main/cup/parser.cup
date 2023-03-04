@@ -12,8 +12,8 @@ import com.daniel.controller.*;
 
 parser code {:
 
-    public int operatorNodeCounter = 1;
-    public int nodeCounter = 1;
+    public int operatorNodeCounter;
+    public int nodeCounter;
 
     public ArrayList<Conjunto> Conjuntos = new ArrayList<Conjunto>();
     public ArrayList<Tree> Trees = new ArrayList<Tree>();
@@ -105,52 +105,43 @@ RESULT = l;
 :} | UPPERCASE:u {: RESULT = u; :}  | DIGIT:d {: RESULT = d; :} | ASCII:a {: RESULT = a; :};
 
 // Definimos la sección para la asignación de expresiones regulares a conjuntos
-ExpBody ::= ExpLine ExpBody | ExpLine;
+ExpBody ::= ExpLine ExpBody | ExpLine ;
 
 ExpLine ::= IDENTIFIER:id ARROW RegExp:val SEMICOLON {:
-    Trees.add(new Tree(val, id));
+    Trees.add(new Tree(val, id, operatorNodeCounter, nodeCounter));
+    operatorNodeCounter = 0;
+    nodeCounter = 0;
 :};
 
 RegExp ::= PIPE RegExp:pipe1 RegExp:pipe2 {:
-    Node node = new Node("|",NodeType.OR, operatorNodeCounter,pipe1, pipe2);
     operatorNodeCounter++;
-    RESULT = node;
-
+    RESULT = new Node("|",NodeType.OR, operatorNodeCounter,pipe1, pipe2);
 :}
 | DOT RegExp:dot1 RegExp:dot2 {:
-Node node = new Node(".",NodeType.AND, operatorNodeCounter,dot1, dot2);
 operatorNodeCounter++;
-RESULT = node;
+RESULT = new Node(".",NodeType.AND, operatorNodeCounter,dot1, dot2);
 :}
 | PLUS RegExp:plus {:
-Node node = new Node("+",NodeType.PLUS, operatorNodeCounter,plus);
 operatorNodeCounter++;
-RESULT = node;
-
+RESULT = new Node("+",NodeType.PLUS, operatorNodeCounter,plus);
 :}
 | STAR RegExp:star {:
-Node node = new Node("*",NodeType.STAR, operatorNodeCounter,star);
 operatorNodeCounter++;
-RESULT = node;
+RESULT = new Node("*",NodeType.STAR, operatorNodeCounter,star);
 :}
 | QUERY RegExp:query {:
-Node node = new Node("?",NodeType.QUERY, operatorNodeCounter,query);
 operatorNodeCounter++;
-RESULT = node;
-
+RESULT = new Node("?",NodeType.QUERY, operatorNodeCounter,query);
 :}
 | LBRACE IDENTIFIER:id RBRACE {:
-Node node = new Node(id, NodeType.LEAVE, nodeCounter);
 nodeCounter++;
-RESULT = node;
+RESULT = new Node(id, NodeType.LEAVE, nodeCounter);
 :} | STRING_LITERAL:val {:
-Node node = new Node(val, NodeType.LEAVE, nodeCounter);
 nodeCounter++;
-RESULT = node;
+RESULT = new Node(val, NodeType.LEAVE, nodeCounter);
 :} | ESCAPE_SEQUENCE:val {:
-Node node = new Node(val, NodeType.LEAVE, nodeCounter);
 nodeCounter++;
-RESULT = node;
+RESULT = new Node(val, NodeType.LEAVE, nodeCounter);
 :};
 
 // Definimos la sección para las cadenas a evaluar

@@ -185,8 +185,8 @@ public class parser extends java_cup.runtime.lr_parser {
 
 
 
-    public int operatorNodeCounter = 1;
-    public int nodeCounter = 1;
+    public int operatorNodeCounter;
+    public int nodeCounter;
 
     public ArrayList<Conjunto> Conjuntos = new ArrayList<Conjunto>();
     public ArrayList<Tree> Trees = new ArrayList<Tree>();
@@ -544,7 +544,9 @@ RESULT = l;
 		int valright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		Node val = (Node)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 		
-    Trees.add(new Tree(val, id));
+    Trees.add(new Tree(val, id, operatorNodeCounter, nodeCounter));
+    operatorNodeCounter = 0;
+    nodeCounter = 0;
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ExpLine",12, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -561,10 +563,8 @@ RESULT = l;
 		int pipe2right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Node pipe2 = (Node)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-    Node node = new Node("|",NodeType.OR, operatorNodeCounter,pipe1, pipe2);
     operatorNodeCounter++;
-    RESULT = node;
-
+    RESULT = new Node("|",NodeType.OR, operatorNodeCounter,pipe1, pipe2);
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("RegExp",13, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -581,9 +581,8 @@ RESULT = l;
 		int dot2right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Node dot2 = (Node)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-Node node = new Node(".",NodeType.AND, operatorNodeCounter,dot1, dot2);
 operatorNodeCounter++;
-RESULT = node;
+RESULT = new Node(".",NodeType.AND, operatorNodeCounter,dot1, dot2);
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("RegExp",13, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -597,10 +596,8 @@ RESULT = node;
 		int plusright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Node plus = (Node)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-Node node = new Node("+",NodeType.PLUS, operatorNodeCounter,plus);
 operatorNodeCounter++;
-RESULT = node;
-
+RESULT = new Node("+",NodeType.PLUS, operatorNodeCounter,plus);
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("RegExp",13, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -614,9 +611,8 @@ RESULT = node;
 		int starright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Node star = (Node)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-Node node = new Node("*",NodeType.STAR, operatorNodeCounter,star);
 operatorNodeCounter++;
-RESULT = node;
+RESULT = new Node("*",NodeType.STAR, operatorNodeCounter,star);
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("RegExp",13, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -630,10 +626,8 @@ RESULT = node;
 		int queryright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Node query = (Node)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-Node node = new Node("?",NodeType.QUERY, operatorNodeCounter,query);
 operatorNodeCounter++;
-RESULT = node;
-
+RESULT = new Node("?",NodeType.QUERY, operatorNodeCounter,query);
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("RegExp",13, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -647,9 +641,8 @@ RESULT = node;
 		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		String id = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 		
-Node node = new Node(id, NodeType.LEAVE, nodeCounter);
 nodeCounter++;
-RESULT = node;
+RESULT = new Node(id, NodeType.LEAVE, nodeCounter);
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("RegExp",13, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -663,9 +656,8 @@ RESULT = node;
 		int valright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String val = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-Node node = new Node(val, NodeType.LEAVE, nodeCounter);
 nodeCounter++;
-RESULT = node;
+RESULT = new Node(val, NodeType.LEAVE, nodeCounter);
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("RegExp",13, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -679,9 +671,8 @@ RESULT = node;
 		int valright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String val = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-Node node = new Node(val, NodeType.LEAVE, nodeCounter);
 nodeCounter++;
-RESULT = node;
+RESULT = new Node(val, NodeType.LEAVE, nodeCounter);
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("RegExp",13, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }

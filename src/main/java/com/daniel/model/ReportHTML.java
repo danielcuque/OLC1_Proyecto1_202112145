@@ -170,25 +170,10 @@ public class ReportHTML {
 
     }
 
-    public void htmlReport(ArrayList<ExceptionReport> exceptions, String path) throws IOException {
-        File f;
-        FileWriter w;
-        BufferedWriter bw;
-        PrintWriter pw;
-
-        try {
-            f = new File(path);
-            w = new FileWriter(f);
-            bw = new BufferedWriter(w);
-            pw = new PrintWriter(bw);
-            pw.write(htmlHeader());
-            pw.write(cssStyles());
-            pw.write(htmlBody(exceptions));
-            bw.close();
-            pw.close();
-
-        } catch (java.lang.Exception e) {
-        }
+    public void htmlReport(ArrayList<ExceptionReport> exceptions, String path) {
+        ManageFile manageFile = new ManageFile();
+        String content = htmlHeader() + cssStyles() + htmlBody(exceptions);
+        manageFile.WriteFiles(path, content);
 
     }
 }

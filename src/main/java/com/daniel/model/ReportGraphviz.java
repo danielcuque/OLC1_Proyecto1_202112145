@@ -1,5 +1,7 @@
 package com.daniel.model;
 
+import java.io.*;
+
 public class ReportGraphviz {
 
     /*
@@ -10,5 +12,11 @@ public class ReportGraphviz {
      - Implement method to save graphviz report as pdf
      - Implement method to execute dot command
     */
+
+    public void generateGraphvizReport(String path, String content) {
+        ManageFile mf = new ManageFile();
+        mf.WriteFiles(path, content);
+    }
+
 
 }
