@@ -860,7 +860,7 @@ StringBuffer stringBuffer = new StringBuffer();
             // fall through
           case 54: break;
           case 25:
-            { return symbol(sym.ESCAPED_SEQUENCE, yytext());
+            { return symbol(sym.ESCAPE_SEQUENCE, yytext());
             }
             // fall through
           case 55: break;

@@ -2,6 +2,7 @@ package com.daniel;
 
 import com.daniel.controller.ExceptionReport;
 import com.daniel.model.ManageFile;
+import com.daniel.model.ReportGraphviz;
 import com.daniel.model.ReportHTML;
 
 import java.io.StringReader;
@@ -21,9 +22,12 @@ public class App {
             p.parse();
 
             // Print trees
+            ReportGraphviz report = new ReportGraphviz();
             for (int i = 0; i < p.Trees.size(); i++) {
                 System.out.println("*****Tree *******" + i);
-                p.Trees.get(i).traverseLeft(p.Trees.get(i).Root);
+                //p.Trees.get(i).traverseLeft(p.Trees.get(i).Root);
+                String graph = report.generateTreeGraph(p.Trees.get(i).Root, p.Trees.get(i).NameRegex);
+                System.out.println(graph);
             }
 
             /*

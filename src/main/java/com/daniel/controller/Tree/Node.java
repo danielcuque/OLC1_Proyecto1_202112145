@@ -6,14 +6,14 @@ public class Node {
     Set<Integer> first;
     Set<Integer> last;
 
-    boolean nullable;
+    public boolean nullable;
 
-    Object lexeme;
-    NodeType type;
-    int number;
+    public Object lexeme;
+    public NodeType type;
+    public int number;
 
-    Node left;
-    Node right;
+    public Node left;
+    public Node right;
 
     public Node(Object lexeme, NodeType type, int number){
         this.lexeme = lexeme;

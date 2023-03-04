@@ -104,11 +104,11 @@ class ExreganLexer implements java_cup.runtime.Scanner {
     "\1\7\1\3\1\10\1\3\1\11\1\12\1\13\1\3"+
     "\1\14\2\15\1\3\1\16\1\17\1\20\1\21\1\22"+
     "\1\23\1\24\1\25\1\26\1\27\1\30\1\2\1\0"+
-    "\1\16\1\31\1\32\1\33\1\34\1\35\2\0\1\16"+
-    "\1\0\1\2\1\36";
+    "\1\16\2\31\1\32\1\33\1\34\1\35\2\0\1\16"+
+    "\2\0\1\2\1\36";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[47];
+    int [] result = new int[49];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -137,11 +137,12 @@ class ExreganLexer implements java_cup.runtime.Scanner {
     "\0\110\0\110\0\110\0\264\0\110\0\330\0\374\0\110"+
     "\0\110\0\u0120\0\110\0\u0144\0\u0168\0\u018c\0\u0144\0\u0144"+
     "\0\110\0\110\0\110\0\110\0\u01b0\0\110\0\u01d4\0\110"+
-    "\0\110\0\u01f8\0\u021c\0\u0240\0\110\0\110\0\110\0\110"+
-    "\0\110\0\u0264\0\u0288\0\u02ac\0\u02d0\0\u0264\0\u0144";
+    "\0\110\0\u01f8\0\u021c\0\u0240\0\110\0\u0264\0\110\0\110"+
+    "\0\110\0\110\0\u0288\0\u02ac\0\u02d0\0\u02f4\0\u0318\0\u0288"+
+    "\0\u0144";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[47];
+    int [] result = new int[49];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -172,17 +173,17 @@ class ExreganLexer implements java_cup.runtime.Scanner {
     "\1\40\57\0\1\41\36\0\1\42\44\0\1\17\30\0"+
     "\1\43\56\0\1\27\5\0\5\27\1\0\5\27\23\0"+
     "\1\27\5\0\4\27\1\44\1\0\5\27\11\0\1\45"+
-    "\2\0\1\45\21\0\1\45\11\0\2\35\2\0\1\35"+
-    "\1\0\24\35\1\0\11\35\5\0\1\46\27\0\1\47"+
-    "\1\50\1\51\4\0\2\42\1\4\1\5\40\42\4\52"+
-    "\1\53\4\52\1\0\32\52\17\0\1\27\5\0\3\27"+
-    "\1\54\1\27\1\0\5\27\4\0\4\52\1\55\43\52"+
-    "\1\55\16\52\1\56\20\52\17\0\1\27\5\0\2\27"+
-    "\1\57\2\27\1\0\5\27\4\0\4\52\1\55\16\52"+
-    "\1\4\20\52";
+    "\2\0\1\46\21\0\1\45\11\0\2\35\2\0\1\35"+
+    "\1\0\24\35\1\0\11\35\5\0\1\47\27\0\1\50"+
+    "\1\51\1\52\4\0\2\42\1\4\1\5\40\42\4\53"+
+    "\1\54\4\53\1\0\32\53\17\0\1\27\5\0\3\27"+
+    "\1\55\1\27\1\0\5\27\41\0\1\56\6\0\4\53"+
+    "\1\57\43\53\1\57\16\53\1\60\20\53\17\0\1\27"+
+    "\5\0\2\27\1\61\2\27\1\0\5\27\14\0\1\45"+
+    "\33\0\4\53\1\57\16\53\1\4\20\53";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[756];
+    int [] result = new int[828];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -227,11 +228,11 @@ class ExreganLexer implements java_cup.runtime.Scanner {
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
     "\2\0\2\11\1\1\2\11\1\1\3\11\1\1\1\11"+
     "\2\1\2\11\1\1\1\11\5\1\4\11\1\1\1\11"+
-    "\1\1\2\11\1\1\1\0\1\1\5\11\2\0\1\1"+
-    "\1\0\2\1";
+    "\1\1\2\11\1\1\1\0\1\1\1\11\1\1\4\11"+
+    "\2\0\1\1\2\0\2\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[47];
+    int [] result = new int[49];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
