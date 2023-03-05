@@ -30,6 +30,18 @@ public class ManageFile {
         BufferedWriter bw;
         PrintWriter pw;
 
+        try {
+            f = new File(path);
+            w = new FileWriter(f);
+            bw = new BufferedWriter(w);
+            pw = new PrintWriter(bw);
+            pw.write(content);
+            pw.close();
+            bw.close();
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
 
     }
 }

@@ -1,7 +1,6 @@
 package com.daniel.model;
 
 import com.daniel.controller.Tree.Node;
-import com.daniel.controller.Tree.NodeType;
 
 public class ReportGraphviz {
 
@@ -27,7 +26,7 @@ public class ReportGraphviz {
         StringBuilder sb = new StringBuilder();
         if (root.number == 0) {
             sb.append(String.format("digraph %s {\n", nameRegex));
-            sb.append(String.format("root%d [label=\"%s\"];\n", root.number, root.lexeme));
+            sb.append(String.format("root%d [label=\"%s%s\"];\n", root.number, root.lexeme, root.nullable ? "V" : "F"));
             sb.append(String.format("root%d ->%s%d;\n", root.number, root.left.type, root.left.number));
             sb.append(String.format("root%d ->%s%d;\n", root.number, root.right.type, root.right.number));
 
@@ -38,13 +37,14 @@ public class ReportGraphviz {
         }
 
         String label = root.lexeme.toString();
+        String nullLabel = root.nullable ? "V" : "F";
         String typeLabel = switch (root.type) {
-            case LEAVE, ACCEPT -> String.format("%s%d [label=\"%s\"];\n", root.type, root.number, label);
-            case AND, OR -> String.format("%s%d [label=\"%s\"];\n%s%d ->%s%d;\n%s%d ->%s%d;\n",
-                    root.type, root.number, label, root.type, root.number, root.left.type, root.left.number,
+            case LEAVE, ACCEPT -> String.format("%s%d [label=\"%s%s\"];\n", root.type, root.number, label, nullLabel);
+            case AND, OR -> String.format("%s%d [label=\"%s%s\"];\n%s%d ->%s%d;\n%s%d ->%s%d;\n",
+                    root.type, root.number, label, nullLabel ,root.type, root.number, root.left.type, root.left.number,
                     root.type, root.number, root.right.type, root.right.number);
-            case STAR -> String.format("%s%d [label=\"%s\"];\n%s%d ->%s%d;\n",
-                    root.type, root.number, label, root.type, root.number, root.left.type, root.left.number);
+            case STAR, PLUS -> String.format("%s%d [label=\"%s%s\"];\n%s%d ->%s%d;\n",
+                    root.type, root.number, label,nullLabel, root.type, root.number, root.left.type, root.left.number);
             default -> "";
         };
         sb.append(typeLabel);

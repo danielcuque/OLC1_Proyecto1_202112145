@@ -1,18 +1,24 @@
 {
-///// CONJUNTOS
 
-CONJ: letra -> a~z;
-CONJ: digito -> 0~9;
+<!
+	Este es un comentario multilinea
+	Si no da error, ya salio el proyecto
+!>
+
+CONJ: letra -> a~z; // declarando conjunto de letras desde a hasta z en minusculas
+CONJ: digito -> 0~3; // creamos el conjunto de digitos solo para 0, 1, 2 y 3
 
 
-////// EXPRESIONES REGULARES
 
-ExpReg1 -> .{letra} * | "_" | {letra}{digito};
-ExpresionesReg2 -> .{digito}."."+{digito};
-RegEx3 -> .{digito}*|"_"| {letra}{digito};
+//Agregamos Expresiones regulares
+identificador -> . {letra} * | "_" | {letra} {digito};
+decimales -> . +{digito} . "." + {digito};
 
 %%
 
-ExpReg1 : "primerLexemaCokoa";
-ExpresionesReg2 : "34.44";
+identificador :  "hola_soy_id_1"; //correcto
+identificador :  "HoLA"; //incorrecto
+decimales: "1200.31";//correcto
+decimales : "301.59"; //incorrecto
+
 }

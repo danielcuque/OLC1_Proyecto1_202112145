@@ -174,6 +174,5 @@ public class ReportHTML {
         ManageFile manageFile = new ManageFile();
         String content = htmlHeader() + cssStyles() + htmlBody(exceptions);
         manageFile.WriteFiles(path, content);
-
     }
 }

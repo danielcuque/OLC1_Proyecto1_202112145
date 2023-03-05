@@ -3,7 +3,6 @@ package com.daniel;
 import com.daniel.controller.ExceptionReport;
 import com.daniel.model.ManageFile;
 import com.daniel.model.ReportGraphviz;
-import com.daniel.model.ReportHTML;
 
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 public class App {
     public static void main(String[] args) {
         String path = "src/examples/test1.olc";
-        //ArrayList<ExceptionReport> errors = new ArrayList();
+        ArrayList<ExceptionReport> errors = new ArrayList();
 
         try {
             //ReportHTML report = new ReportHTML();
@@ -21,34 +20,46 @@ public class App {
             parser p = new parser(lexer);
             p.parse();
 
-            // Print trees
             ReportGraphviz report = new ReportGraphviz();
+
             for (int i = 0; i < p.Trees.size(); i++) {
                 System.out.println("*****Tree *******" + i);
-                //p.Trees.get(i).traverseLeft(p.Trees.get(i).Root);
+                p.Trees.get(i).calculateNullableAndPositions(p.Trees.get(i).Root);
                 String graph = report.generateTreeGraph(p.Trees.get(i).Root, p.Trees.get(i).NameRegex);
                 System.out.println(graph);
             }
 
+
+            // Print trees
+
             /*
-            while (true){
+                        while (true){
                 Symbol token = lexer.next_token();
                 if (token.sym == 0){
                     break;
                 }
                 System.out.println(token.value + " " + token.sym);
             }
+
+            */
+
+
+
             //Symbol s = p.parse();
 
 
-            //errors.addAll(lexer.errors);
-            //errors.addAll(p.getErrores());
 
-            //if (errors.size() > 0) {
-            report.htmlReport(errors, "src/reports/ERRORES_202112145/Reporte-de-ejecucion.html");
+
+            /*
+            errors.addAll(lexer.errors);
+            errors.addAll(p.getErrores());
+            if (errors.size() > 0) {
+                report.htmlReport(errors, "src/reports/ERRORES_202112145/Reporte-de-ejecucion1.html");
+                System.out.println("Errors found");
             } else {
                 System.out.println("No errors found");
-            }*/
+            }
+            */
         }catch (java.lang.Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
