@@ -24,9 +24,17 @@ public class ReportGraphviz {
         }
 
         StringBuilder sb = new StringBuilder();
+        String label = root.lexeme.toString();
+        String nullLabel = root.nullable ? "V" : "F";
+        String lastPos = root.getLastPosString();
+        String firstPos = root.getFirstPosString();
+        String tag = String.format("root%d [label=\"%s\\nAnulable:%s\\nFirstPos:%s\\nLastPos:%s\"];\n", root.number, label, nullLabel, firstPos, lastPos);
         if (root.number == 0) {
             sb.append(String.format("digraph %s {\n", nameRegex));
-            sb.append(String.format("root%d [label=\"%s%s\"];\n", root.number, root.lexeme, root.nullable ? "V" : "F"));
+            sb.append("node [color=\"#FFEDBB\" shape=circle style=filled]\n");
+            sb.append("edge [dir=none]\n");
+            sb.append(String.format("label = \"%s\";\n", nameRegex));
+            sb.append(tag);
             sb.append(String.format("root%d ->%s%d;\n", root.number, root.left.type, root.left.number));
             sb.append(String.format("root%d ->%s%d;\n", root.number, root.right.type, root.right.number));
 
@@ -36,15 +44,13 @@ public class ReportGraphviz {
             return sb.toString();
         }
 
-        String label = root.lexeme.toString();
-        String nullLabel = root.nullable ? "V" : "F";
         String typeLabel = switch (root.type) {
-            case LEAVE, ACCEPT -> String.format("%s%d [label=\"%s%s\"];\n", root.type, root.number, label, nullLabel);
-            case AND, OR -> String.format("%s%d [label=\"%s%s\"];\n%s%d ->%s%d;\n%s%d ->%s%d;\n",
-                    root.type, root.number, label, nullLabel ,root.type, root.number, root.left.type, root.left.number,
+            case LEAVE, ACCEPT -> String.format("%s%d [label=\"%s\\nAnulable:%s\\nFirstPos:%s\\nLastPos:%s\"];\n", root.type, root.number, label, nullLabel, firstPos, lastPos);
+            case AND, OR -> String.format("%s%d [label=\"%s\\nAnulable:%s\\nFirstPos:%s\\nLastPos:%s\"];\n%s%d ->%s%d;\n%s%d ->%s%d;\n",
+                    root.type, root.number, label, nullLabel, firstPos, lastPos, root.type, root.number, root.left.type, root.left.number,
                     root.type, root.number, root.right.type, root.right.number);
-            case STAR, PLUS -> String.format("%s%d [label=\"%s%s\"];\n%s%d ->%s%d;\n",
-                    root.type, root.number, label,nullLabel, root.type, root.number, root.left.type, root.left.number);
+            case STAR, PLUS -> String.format("%s%d [label=\"%s\\nAnulable:%s\\nFirstPos:%s\\nLastPos:%s\"];\n%s%d ->%s%d;\n",
+                    root.type, root.number, label,nullLabel, firstPos, lastPos, root.type, root.number, root.left.type, root.left.number);
             default -> "";
         };
         sb.append(typeLabel);

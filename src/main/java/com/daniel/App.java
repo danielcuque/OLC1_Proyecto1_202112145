@@ -24,7 +24,7 @@ public class App {
 
             for (int i = 0; i < p.Trees.size(); i++) {
                 System.out.println("*****Tree *******" + i);
-                p.Trees.get(i).calculateNullableAndPositions(p.Trees.get(i).Root);
+                p.Trees.get(i).calculateTreeAttr(p.Trees.get(i).Root);
                 String graph = report.generateTreeGraph(p.Trees.get(i).Root, p.Trees.get(i).NameRegex);
                 System.out.println(graph);
             }

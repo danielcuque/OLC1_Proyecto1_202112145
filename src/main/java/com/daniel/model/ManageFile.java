@@ -1,5 +1,6 @@
 package com.daniel.model;
 
+import java.awt.*;
 import java.io.*;
 
 
@@ -41,7 +42,5 @@ public class ManageFile {
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
-
-
     }
 }

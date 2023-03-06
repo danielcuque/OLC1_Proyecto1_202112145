@@ -3,8 +3,9 @@ package com.daniel.controller.Tree;
 import java.util.Set;
 
 public class Node {
-    Set<Integer> first;
-    Set<Integer> last;
+    public Set<Integer> first;
+    public Set<Integer> last;
+
 
     public boolean nullable;
 
@@ -34,5 +35,13 @@ public class Node {
         this.type = type;
         this.number = number;
         this.left = left;
+    }
+
+    public String getFirstPosString() {
+        return this.first.toString();
+    }
+
+    public String getLastPosString() {
+        return this.last.toString();
     }
 }
