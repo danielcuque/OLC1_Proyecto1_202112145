@@ -27,37 +27,15 @@ public class App {
             for (int i = 0; i < p.Trees.size(); i++) {
                 System.out.println("*****Tree *******" + i);
                 Tree tree = p.Trees.get(i);
-                Node root = tree.Root;
+                //Node root = tree.Root;
                 //tree.printFollowTable();
-                String treeGraph = report.generateTreeGraph(root, tree.NameRegex);
-                System.out.println(treeGraph);
-
-                //String treeGraph = report.generateFollowTable(p.Trees.get(i).Root, p.Trees.get(i).NameRegex);
+                //String treeGraph = report.generateTreeGraph(root, tree.NameRegex);
                 //System.out.println(treeGraph);
 
-            }
+                String followTableGraph = report.generateFollowTable(tree.followTable, p.Trees.get(i).NameRegex);
+                System.out.println(followTableGraph);
 
-
-            // Print trees
-            /*
-            while (true){
-                Symbol token = lexer.next_token();
-                if (token.sym == 0){
-                    break;
-                }
-                System.out.println(token.value + " " + token.sym);
             }
-            Symbol s = p.parse();
-
-            errors.addAll(lexer.errors);
-            errors.addAll(p.getErrores());
-            if (errors.size() > 0) {
-                report.htmlReport(errors, "src/reports/ERRORES_202112145/Reporte-de-ejecucion1.html");
-                System.out.println("Errors found");
-            } else {
-                System.out.println("No errors found");
-            }
-            */
         }catch (java.lang.Exception e) {
             System.out.println("Error: " + e.getMessage());
         }

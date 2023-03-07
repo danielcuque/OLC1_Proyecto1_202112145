@@ -52,19 +52,15 @@ public class Node {
     }
 
     public String getFollowPosString() {
+        if (this.follow.isEmpty()) {
+            return "-";
+        }
         return this.follow.toString();
-    }
-
-    public String getLexeme() {
-        return this.lexeme.toString();
     }
 
     public int getNumber() {
         return this.number;
     }
 
-    public boolean isNullable() {
-        return this.nullable;
-    }
 
 }

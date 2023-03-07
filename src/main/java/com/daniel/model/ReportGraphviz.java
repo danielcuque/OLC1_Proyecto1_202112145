@@ -1,9 +1,7 @@
 package com.daniel.model;
 
+import com.daniel.controller.FollowTable.FollowTable;
 import com.daniel.controller.Tree.Node;
-import com.daniel.controller.Tree.NodeType;
-
-import java.util.stream.Collectors;
 
 public class ReportGraphviz {
 
@@ -62,40 +60,29 @@ public class ReportGraphviz {
         return sb.toString();
     }
 
-    public String generateFollowTable(Node root, String nameRegex) {
+    public String generateFollowTable(FollowTable followTable, String nameRegex){
         StringBuilder sb = new StringBuilder();
         sb.append("digraph ").append(nameRegex).append(" {\n");
         sb.append("    node [shape=plaintext]\n");
         sb.append("    rankdir=TB\n");
         sb.append("    label = \"").append(nameRegex).append("\";\n");
         sb.append("    A [label=<\n");
-        sb.append(generateBodyTable(root));
-        sb.append("    >];\n");
+        sb.append("        <TABLE BORDER=\"0\" CELLBORDER=\"1\" CELLSPACING=\"0\">\n");
+        sb.append("            <TR>\n");
+        sb.append("                <TD>Lexema</TD>\n");
+        sb.append("                <TD>No. Nodo</TD>\n");
+        sb.append("                <TD>Siguientes</TD>\n");
+        sb.append("            </TR>\n");
+        for (Node node : followTable.getTableRows()) {
+            sb.append("            <TR>\n");
+            sb.append("                <TD>").append(node.lexeme).append("</TD>\n");
+            sb.append("                <TD>").append(node.number).append("</TD>\n");
+            sb.append("                <TD>").append(node.getFollowPosString()).append("</TD>\n");
+            sb.append("            </TR>\n");
+        }
+        sb.append("        </TABLE>\n");
+        sb.append("    >]\n");
         sb.append("}");
-        return sb.toString();
-    }
-
-    public String generateBodyTable(Node root) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("<table border=\"1\" cellborder=\"1\" cellspacing=\"0\">\n");
-        sb.append("<tr><td>Lexema</td><td>Número de Id</td><td>Siguientes</td></tr>\n");
-        sb.append(generateRowTable(root));
-        sb.append("</table>\n");
-        return sb.toString();
-    }
-
-    public String generateRowTable(Node root) {
-        if (root == null) {
-            return "";
-        }
-        StringBuilder sb = new StringBuilder();
-        sb.append(generateRowTable(root.left));
-        if (root.type == NodeType.LEAVE || root.type == NodeType.ACCEPT) {
-            // Lexema | Id | FollowPos
-            String followPos = root.type == NodeType.LEAVE ? root.getFollowPosString() : "-";
-            sb.append(String.format("<tr><td>%s</td><td>%d</td><td>%s</td></tr>\n", root.lexeme, root.number, followPos));
-        }
-        sb.append(generateRowTable(root.right));
         return sb.toString();
     }
 
