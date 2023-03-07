@@ -7,7 +7,7 @@ public class Tree {
     public Node Root;
     public String NameRegex;
     public FollowTable followTable = new FollowTable();
-    //public TransitionTable transitionTable;
+    public TransitionTable transitionTable;
 
 
     public Tree(Node body, String nameRegex, int operatorNodeCounter, int nodeCounter) {
@@ -16,7 +16,7 @@ public class Tree {
         this.Root.left = body;
         this.Root.right = new Node("#", NodeType.ACCEPT, nodeCounter + 1);
         calculateTreeAttr(this.Root);
-        calculateFollow(this.Root);
+        //calculateFollow(this.Root);
     }
 
     public void calculateTreeAttr(Node root) {
@@ -26,14 +26,13 @@ public class Tree {
         // Recursive call
         switch (root.type) {
             // Calculate * ?
-            case STAR -> {
-
+            case STAR, QUERY -> {
                 root.nullable = true;
                 calculateTreeAttr(root.left);
                 root.first = new HashSet<>(root.left.first);
                 root.last = new HashSet<>(root.left.last);
             }
-            case PLUS, QUERY -> {
+            case PLUS-> {
                 calculateTreeAttr(root.left);
                 root.nullable = root.left.nullable;
                 root.first = new HashSet<>(root.left.first);
@@ -47,7 +46,6 @@ public class Tree {
                 root.first.addAll(root.right.first);
                 root.last = new HashSet<>(root.left.last);
                 root.last.addAll(root.right.last);
-
             }
             case AND -> {
                 calculateTreeAttr(root.left);

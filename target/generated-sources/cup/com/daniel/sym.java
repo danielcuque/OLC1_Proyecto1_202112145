@@ -8,29 +8,30 @@ package com.daniel;
 /** CUP generated interface containing symbol constants. */
 public interface sym {
   /* terminals */
-  public static final int PIPE = 12;
-  public static final int SEMICOLON = 15;
-  public static final int PERCENT = 7;
-  public static final int PLUS = 10;
+  public static final int HEAD_ARROW = 7;
+  public static final int PIPE = 13;
+  public static final int SEMICOLON = 16;
+  public static final int PERCENT = 8;
+  public static final int PLUS = 11;
   public static final int RBRACE = 4;
-  public static final int DIGIT = 20;
-  public static final int STAR = 9;
-  public static final int IDENTIFIER = 19;
+  public static final int DIGIT = 21;
+  public static final int STAR = 10;
+  public static final int IDENTIFIER = 20;
   public static final int COLON = 5;
   public static final int LBRACE = 3;
-  public static final int TILDE = 13;
-  public static final int STRING_LITERAL = 21;
-  public static final int LOWERCASE = 17;
-  public static final int ESCAPE_SEQUENCE = 16;
-  public static final int COMMA = 14;
+  public static final int TILDE = 14;
+  public static final int STRING_LITERAL = 22;
+  public static final int LOWERCASE = 18;
+  public static final int ESCAPE_SEQUENCE = 17;
+  public static final int BODY_ARROW = 6;
+  public static final int COMMA = 15;
   public static final int EOF = 0;
   public static final int CONJ = 2;
   public static final int error = 1;
-  public static final int DOT = 8;
-  public static final int ARROW = 6;
-  public static final int UPPERCASE = 18;
-  public static final int ASCII = 22;
-  public static final int QUERY = 11;
+  public static final int DOT = 9;
+  public static final int UPPERCASE = 19;
+  public static final int ASCII = 23;
+  public static final int QUERY = 12;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -38,7 +39,8 @@ public interface sym {
   "LBRACE",
   "RBRACE",
   "COLON",
-  "ARROW",
+  "BODY_ARROW",
+  "HEAD_ARROW",
   "PERCENT",
   "DOT",
   "STAR",

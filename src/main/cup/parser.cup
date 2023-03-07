@@ -36,7 +36,7 @@ parser code {:
 :}
 
 
-terminal String CONJ, LBRACE, RBRACE, COLON, ARROW, PERCENT, DOT, STAR, PLUS;
+terminal String CONJ, LBRACE, RBRACE, COLON, BODY_ARROW, HEAD_ARROW, PERCENT, DOT, STAR, PLUS;
 terminal String QUERY, PIPE, TILDE;
 terminal String COMMA, SEMICOLON, ESCAPE_SEQUENCE;
 terminal String LOWERCASE, UPPERCASE, IDENTIFIER, DIGIT, STRING_LITERAL,ASCII;
@@ -62,7 +62,7 @@ BodyEntry ::= ConjBody ExpBody PERCENT CheckBody;
 // Definimos la sección para los conjuntos de regex
 ConjBody ::= ConjDef ConjBody | ConjDef;
 
-ConjDef ::= CONJ COLON IDENTIFIER:id ARROW ConjNotation:notation SEMICOLON {:
+ConjDef ::= CONJ COLON IDENTIFIER:id BODY_ARROW HEAD_ARROW ConjNotation:notation SEMICOLON {:
     System.out.println("Conjunto: " + id + " Notacion: " + notation);
 :};
 
@@ -107,7 +107,7 @@ RESULT = l;
 // Definimos la sección para la asignación de expresiones regulares a conjuntos
 ExpBody ::= ExpLine ExpBody | ExpLine ;
 
-ExpLine ::= IDENTIFIER:id ARROW RegExp:val SEMICOLON {:
+ExpLine ::= IDENTIFIER:id BODY_ARROW HEAD_ARROW RegExp:val SEMICOLON {:
     Trees.add(new Tree(val, id, operatorNodeCounter, nodeCounter));
     operatorNodeCounter = 0;
     nodeCounter = 0;

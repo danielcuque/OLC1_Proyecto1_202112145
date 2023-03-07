@@ -1,6 +1,7 @@
 package com.daniel;
 
 import com.daniel.controller.ExceptionReport;
+import com.daniel.controller.Tree.Node;
 import com.daniel.controller.Tree.Tree;
 import com.daniel.model.ManageFile;
 import com.daniel.model.ReportGraphviz;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 
 public class App {
     public static void main(String[] args) {
-        String path = "src/examples/test1.olc";
+        String path = "src/examples/medio.olc";
         ArrayList<ExceptionReport> errors = new ArrayList();
 
         try {
@@ -26,11 +27,13 @@ public class App {
             for (int i = 0; i < p.Trees.size(); i++) {
                 System.out.println("*****Tree *******" + i);
                 Tree tree = p.Trees.get(i);
-                tree.printFollowTable();
+                Node root = tree.Root;
+                //tree.printFollowTable();
+                String treeGraph = report.generateTreeGraph(root, tree.NameRegex);
+                System.out.println(treeGraph);
+
                 //String treeGraph = report.generateFollowTable(p.Trees.get(i).Root, p.Trees.get(i).NameRegex);
                 //System.out.println(treeGraph);
-                //String followTable = report.generateFollowTable(p.Trees.get(i).Root);
-                //System.out.println(followTable);
 
             }
 

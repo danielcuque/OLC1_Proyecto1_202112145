@@ -70,7 +70,8 @@ Conj = "CONJ"
 Lbrace = "{"
 Rbrace = "}"
 Colon = ":"
-Arrow = "->"
+BodyArrow = "-"
+HeadArrow = ">"
 Percent = "%%"
 Dot = "."
 Star = "*"
@@ -90,7 +91,8 @@ Semicolon = ";"
       <YYINITIAL> {Lbrace} { return symbol(sym.LBRACE, yytext()); }
       <YYINITIAL> {Rbrace} { return symbol(sym.RBRACE, yytext()); }
       <YYINITIAL> {Colon} { return symbol(sym.COLON, yytext()); }
-      <YYINITIAL> {Arrow} { return symbol(sym.ARROW, yytext()); }
+        <YYINITIAL> {BodyArrow} { return symbol(sym.BODY_ARROW, yytext()); }
+        <YYINITIAL> {HeadArrow} { return symbol(sym.HEAD_ARROW, yytext()); }
       <YYINITIAL> {Percent} { return symbol(sym.PERCENT, yytext()); }
       <YYINITIAL> {Dot} { return symbol(sym.DOT, yytext()); }
       <YYINITIAL> {Star} { return symbol(sym.STAR, yytext()); }
