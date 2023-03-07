@@ -1,12 +1,13 @@
 package com.daniel.controller.Tree;
 
-
 import java.util.HashSet;
 
 public class Tree {
 
     public Node Root;
     public String NameRegex;
+    public FollowTable followTable = new FollowTable();
+    //public TransitionTable transitionTable;
 
 
     public Tree(Node body, String nameRegex, int operatorNodeCounter, int nodeCounter) {
@@ -86,6 +87,7 @@ public class Tree {
                 for (Integer i: root.last){
                     Node node = findNode(root, i);
                     node.follow.addAll(root.first);
+                    this.followTable.addTableRow(node);
                     calculateFollow(root.left);
                 }
 
@@ -94,6 +96,7 @@ public class Tree {
                 for (Integer i: root.left.last){
                     Node node = findNode(root, i);
                     node.follow.addAll(root.right.first);
+                    this.followTable.addTableRow(node);
                     calculateFollow(root.left);
                     calculateFollow(root.right);
                 }
@@ -102,6 +105,10 @@ public class Tree {
                 calculateFollow(root.right);
             }
         }
+    }
+
+    public void printFollowTable(){
+        this.followTable.printFollowTable();
     }
 
     private Node findNode(Node root, int number) {
@@ -118,13 +125,14 @@ public class Tree {
         return findNode(root.right, number);
     }
 
+
     public void printFollow(Node root) {
         if (root == null) {
             return;
         }
         printFollow(root.left);
         if (root.type == NodeType.LEAVE) {
-            System.out.println(root.lexeme + " " + root.getFollowPosString());
+            System.out.println(root.lexeme + " "+ root.number + " " + root.getFollowPosString());
         }
         printFollow(root.right);
     }

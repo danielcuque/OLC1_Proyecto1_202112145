@@ -1,12 +1,12 @@
 package com.daniel;
 
 import com.daniel.controller.ExceptionReport;
+import com.daniel.controller.Tree.Tree;
 import com.daniel.model.ManageFile;
 import com.daniel.model.ReportGraphviz;
 
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.Set;
 
 
 public class App {
@@ -25,9 +25,10 @@ public class App {
 
             for (int i = 0; i < p.Trees.size(); i++) {
                 System.out.println("*****Tree *******" + i);
-                String treeGraph = report.generateTreeGraph(p.Trees.get(i).Root, p.Trees.get(i).NameRegex);
-                System.out.println(treeGraph);
-                p.Trees.get(i).printFollow(p.Trees.get(i).Root);
+                Tree tree = p.Trees.get(i);
+                tree.printFollowTable();
+                //String treeGraph = report.generateFollowTable(p.Trees.get(i).Root, p.Trees.get(i).NameRegex);
+                //System.out.println(treeGraph);
                 //String followTable = report.generateFollowTable(p.Trees.get(i).Root);
                 //System.out.println(followTable);
 
@@ -35,26 +36,16 @@ public class App {
 
 
             // Print trees
-
             /*
-                        while (true){
+            while (true){
                 Symbol token = lexer.next_token();
                 if (token.sym == 0){
                     break;
                 }
                 System.out.println(token.value + " " + token.sym);
             }
+            Symbol s = p.parse();
 
-            */
-
-
-
-            //Symbol s = p.parse();
-
-
-
-
-            /*
             errors.addAll(lexer.errors);
             errors.addAll(p.getErrores());
             if (errors.size() > 0) {

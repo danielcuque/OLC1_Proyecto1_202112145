@@ -48,7 +48,7 @@ public class ReportGraphviz {
         }
 
         String typeLabel = switch (root.type) {
-            case LEAVE, ACCEPT -> String.format("%s%d [label=\"%s\\nAnulable:%s\\nFirstPos:%s\\nLastPos:%s\"];\n", root.type, root.number, label, nullLabel, firstPos, lastPos);
+            case LEAVE, ACCEPT -> String.format("%s%d [label=\"Lexema:%s\\nAnulable:%s\\nFirstPos:%s\\nLastPos:%s\\nId:%d\"];\n", root.type, root.number, label, nullLabel, firstPos, lastPos, root.number);
             case AND, OR -> String.format("%s%d [label=\"%s\\nAnulable:%s\\nFirstPos:%s\\nLastPos:%s\"];\n%s%d ->%s%d;\n%s%d ->%s%d;\n",
                     root.type, root.number, label, nullLabel, firstPos, lastPos, root.type, root.number, root.left.type, root.left.number,
                     root.type, root.number, root.right.type, root.right.number);
@@ -62,38 +62,41 @@ public class ReportGraphviz {
         return sb.toString();
     }
 
-    public String generateFollowTable(Node root) {
-        StringBuilder graph = new StringBuilder("digraph G {\n");
-        generateBodyTable(root, graph);
-        graph.append("}");
-        String dotFormat = graph.toString();
-        return dotFormat;
+    public String generateFollowTable(Node root, String nameRegex) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("digraph ").append(nameRegex).append(" {\n");
+        sb.append("    node [shape=plaintext]\n");
+        sb.append("    rankdir=TB\n");
+        sb.append("    label = \"").append(nameRegex).append("\";\n");
+        sb.append("    A [label=<\n");
+        sb.append(generateBodyTable(root));
+        sb.append("    >];\n");
+        sb.append("}");
+        return sb.toString();
     }
 
-    public void generateBodyTable(Node root, StringBuilder graph) {
+    public String generateBodyTable(Node root) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<table border=\"1\" cellborder=\"1\" cellspacing=\"0\">\n");
+        sb.append("<tr><td>Lexema</td><td>Número de Id</td><td>Siguientes</td></tr>\n");
+        sb.append(generateRowTable(root));
+        sb.append("</table>\n");
+        return sb.toString();
+    }
+
+    public String generateRowTable(Node root) {
         if (root == null) {
-            return;
+            return "";
         }
-
-        // Agregar nodo actual al grafo
-        graph.append(root.number).append(" [label=\"").append(root.lexeme).append("\"];\n");
-
-        // Agregar aristas a los hijos y llamar recursivamente para cada hijo
-        if (root.left != null) {
-            graph.append(root.number).append(" -> ").append(root.left.number).append(";\n");
-            generateBodyTable(root.left, graph);
+        StringBuilder sb = new StringBuilder();
+        sb.append(generateRowTable(root.left));
+        if (root.type == NodeType.LEAVE || root.type == NodeType.ACCEPT) {
+            // Lexema | Id | FollowPos
+            String followPos = root.type == NodeType.LEAVE ? root.getFollowPosString() : "-";
+            sb.append(String.format("<tr><td>%s</td><td>%d</td><td>%s</td></tr>\n", root.lexeme, root.number, followPos));
         }
-        if (root.right != null) {
-            graph.append(root.number).append(" -> ").append(root.right.number).append(";\n");
-            generateBodyTable(root.right, graph);
-        }
-
-        // Agregar información de follow si es una hoja
-        if (root.type == NodeType.LEAVE) {
-            graph.append(root.number).append(" [label=\"").append(root.lexeme).append(" | ").append(root.number).append(" | ");
-            //graph.append(root.getFollowPosString());
-
-            graph.append("\"];\n");
-        }
+        sb.append(generateRowTable(root.right));
+        return sb.toString();
     }
+
 }
