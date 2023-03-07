@@ -1,6 +1,9 @@
 package com.daniel.model;
 
 import com.daniel.controller.Tree.Node;
+import com.daniel.controller.Tree.NodeType;
+
+import java.util.stream.Collectors;
 
 public class ReportGraphviz {
 
@@ -57,5 +60,40 @@ public class ReportGraphviz {
         sb.append(generateTreeGraph(root.left, nameRegex));
         sb.append(generateTreeGraph(root.right, nameRegex));
         return sb.toString();
+    }
+
+    public String generateFollowTable(Node root) {
+        StringBuilder graph = new StringBuilder("digraph G {\n");
+        generateBodyTable(root, graph);
+        graph.append("}");
+        String dotFormat = graph.toString();
+        return dotFormat;
+    }
+
+    public void generateBodyTable(Node root, StringBuilder graph) {
+        if (root == null) {
+            return;
+        }
+
+        // Agregar nodo actual al grafo
+        graph.append(root.number).append(" [label=\"").append(root.lexeme).append("\"];\n");
+
+        // Agregar aristas a los hijos y llamar recursivamente para cada hijo
+        if (root.left != null) {
+            graph.append(root.number).append(" -> ").append(root.left.number).append(";\n");
+            generateBodyTable(root.left, graph);
+        }
+        if (root.right != null) {
+            graph.append(root.number).append(" -> ").append(root.right.number).append(";\n");
+            generateBodyTable(root.right, graph);
+        }
+
+        // Agregar información de follow si es una hoja
+        if (root.type == NodeType.LEAVE) {
+            graph.append(root.number).append(" [label=\"").append(root.lexeme).append(" | ").append(root.number).append(" | ");
+            //graph.append(root.getFollowPosString());
+
+            graph.append("\"];\n");
+        }
     }
 }

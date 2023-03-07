@@ -197,7 +197,7 @@ public class parser extends java_cup.runtime.lr_parser {
     public ArrayList<ExceptionReport> Errors = new ArrayList<ExceptionReport>();
 
     public void syntax_error(Symbol s){
-        Errors.add(new ExceptionReport("Sintactico", "Error de sintaxis detectado. Se detect??: " + s.value, s.left + "", s.right + ""));
+        Errors.add(new ExceptionReport("Sintactico", "Error de sintaxis detectado. Se detecto: " + s.value, s.left + "", s.right + ""));
         }
 
     public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{

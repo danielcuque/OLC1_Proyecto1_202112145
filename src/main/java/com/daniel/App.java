@@ -6,6 +6,7 @@ import com.daniel.model.ReportGraphviz;
 
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Set;
 
 
 public class App {
@@ -24,9 +25,12 @@ public class App {
 
             for (int i = 0; i < p.Trees.size(); i++) {
                 System.out.println("*****Tree *******" + i);
-                p.Trees.get(i).calculateTreeAttr(p.Trees.get(i).Root);
-                String graph = report.generateTreeGraph(p.Trees.get(i).Root, p.Trees.get(i).NameRegex);
-                System.out.println(graph);
+                String treeGraph = report.generateTreeGraph(p.Trees.get(i).Root, p.Trees.get(i).NameRegex);
+                System.out.println(treeGraph);
+                p.Trees.get(i).printFollow(p.Trees.get(i).Root);
+                //String followTable = report.generateFollowTable(p.Trees.get(i).Root);
+                //System.out.println(followTable);
+
             }
 
 
