@@ -5,6 +5,7 @@ import com.daniel.controller.Tree.Node;
 import com.daniel.controller.Tree.Tree;
 import com.daniel.model.ManageFile;
 import com.daniel.model.ReportGraphviz;
+import com.daniel.view.MainMenu;
 
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -12,6 +13,10 @@ import java.util.ArrayList;
 
 public class App {
     public static void main(String[] args) {
+        
+        MainMenu mainMenu = new MainMenu();
+        mainMenu.setVisible(true);
+        /*
         String path = "src/examples/test1.olc";
         //ArrayList<ExceptionReport> errors = new ArrayList();
 
@@ -43,6 +48,7 @@ public class App {
         }catch (java.lang.Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
+        */
 
 
 

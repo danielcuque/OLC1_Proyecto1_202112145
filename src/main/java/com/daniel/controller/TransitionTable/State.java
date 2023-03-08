@@ -8,9 +8,8 @@ import java.util.Set;
 public class State {
 
     private final int number;
-
-    // El estado va a guardar follows
     public Set<Integer> follows;
+    public boolean isAccepting = false;
 
     public State(int number) {
         this.number = number;

@@ -1,6 +1,7 @@
 package com.daniel.controller.TransitionTable;
 
 import com.daniel.controller.FollowTable.FollowTable;
+import com.daniel.controller.Tree.NodeType;
 
 import java.util.Comparator;
 import java.util.HashSet;
@@ -23,7 +24,7 @@ public class TransitionTable {
         this.states = new TreeSet<>(comparator);
         this.states.add(initialState);
         calculateTransitions(initialState);
-
+        verifyIfStateIsAccepting();
     }
 
     public void calculateTransitions(State state){
@@ -39,15 +40,27 @@ public class TransitionTable {
                 states.add(newState);
                 Transition transition = new Transition(state,lexeme, newState);
                 // Verificar que la transicion no exista
-                if (!verifyIfTransitionExist(transition))
+                if (verifyIfTransitionExist(transition))
                     transitions.add(transition);
                 calculateTransitions(newState);
             } else {
                 State newState = getStateByFollows(follows);
                 Transition transition = new Transition(state,lexeme, newState);
                 // Verificar que la transicion no exista
-                if (!verifyIfTransitionExist(transition))
+                if (verifyIfTransitionExist(transition))
                     transitions.add(transition);
+            }
+        }
+    }
+
+    // Metodo para saber si es un estado de aceptación
+    public void verifyIfStateIsAccepting(){
+        for (State state: states){
+            for (Integer i: state.follows){
+                if (this.followTable.getNode(i).type == NodeType.ACCEPT){
+                    state.isAccepting = true;
+                    break;
+                }
             }
         }
     }
@@ -57,10 +70,10 @@ public class TransitionTable {
             if (transition1.getCurrentState() == transition.getCurrentState() &&
                     transition1.getCharacter().equals(transition.getCharacter()) &&
                     transition1.getNextState() == transition.getNextState()){
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     public State getStateByFollows(Set<Integer> follows){
