@@ -27,7 +27,7 @@ public class MainMenu extends javax.swing.JFrame {
      */
     
     private File currentFile;
-    private boolean isSaved;
+    private boolean isSaved = false;
     
     public MainMenu() {
         initComponents();
@@ -114,6 +114,11 @@ public class MainMenu extends javax.swing.JFrame {
         FileOptions.add(SaveAs);
 
         GenerateDFA.setText("Generar Autómata");
+        GenerateDFA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GenerateDFAActionPerformed(evt);
+            }
+        });
         FileOptions.add(GenerateDFA);
 
         MainMenuBar.add(FileOptions);
@@ -129,7 +134,7 @@ public class MainMenu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
                     .addComponent(jScrollPane2))
-                .addContainerGap(185, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,27 +234,28 @@ public class MainMenu extends javax.swing.JFrame {
     }
     }
     
+    public void newFile() {
+    if (!isSaved && this.currentFile != null) {
+        int option = JOptionPane.showConfirmDialog(null, "¿Desea guardar el archivo actual?", "Nuevo archivo", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (option == JOptionPane.YES_OPTION) {
+            saveFile();
+        } else if (option == JOptionPane.CANCEL_OPTION) {
+            return;
+        }
+    }
+    this.TextEditor.setText("");
+    currentFile = null;
+    isSaved = false;
+    this.setTitle("Nuevo archivo");
+    }
     
+    private void generateDFA(){
+        
+    }
     
     private void NewFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewFileActionPerformed
         // TODO add your handling code here:
-        if (this.currentFile != null){
-            int confirm = JOptionPane.showConfirmDialog(this, "¿Desea guardar los cambios antes de crear un nuevo archivo?",
-                    "Guardar cambios", JOptionPane.YES_NO_CANCEL_OPTION);
-            if (confirm == JOptionPane.YES_OPTION) { // si el usuario elige guardar los cambios
-                if (currentFile != null) { // si hay un archivo actualmente abierto
-                    saveFile(); // llama a la función guardarArchivo()
-                } else { // si no hay un archivo actualmente abierto
-                    saveFile(); // llama a la función guardarArchivo() sin argumentos para mostrar el JFileChooser
-                }
-                this.TextEditor.setText(""); // establece el JTextArea en blanco
-                currentFile = null; // no hay archivo actualmente abierto
-            } else if (confirm == JOptionPane.NO_OPTION) { // si el usuario elige no guardar los cambios
-                this.TextEditor.setText(""); // establece el JTextArea en blanco
-                currentFile = null; // no hay archivo actualmente abierto
-            } // si el usuario ca
-
-        }
+       newFile();
     }//GEN-LAST:event_NewFileActionPerformed
 
     private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
@@ -260,6 +266,9 @@ public class MainMenu extends javax.swing.JFrame {
     private void TextEditorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextEditorKeyReleased
         // TODO add your handling code here:
         this.isSaved = false;
+        if (this.currentFile != null){
+            this.setTitle(this.currentFile.getName() + " (sin guardar)");
+        }
     }//GEN-LAST:event_TextEditorKeyReleased
 
     private void SaveAsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveAsActionPerformed
@@ -271,6 +280,11 @@ public class MainMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         saveFile();
     }//GEN-LAST:event_SaveActionPerformed
+
+    private void GenerateDFAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerateDFAActionPerformed
+        // TODO add your handling code here:
+        generateDFA();
+    }//GEN-LAST:event_GenerateDFAActionPerformed
 
    
     /**
