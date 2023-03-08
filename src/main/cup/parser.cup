@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import com.daniel.controller.Tree.*;
 import com.daniel.controller.Conjunto.*;
-import com.daniel.controller.*;
+import com.daniel.controller.Errors.*;
 
 parser code {:
 
@@ -51,6 +51,7 @@ non terminal CheckBody, CheckLine;
 
 non terminal ExpBody, ExpLine;
 non terminal Node RegExp;
+non terminal String AsciiGroup;
 
 start with Begin;
 
@@ -84,9 +85,43 @@ RESULT = u1 + "~" + u2;
 
 RESULT = d1 + "~" + d2;
 :}
-| ASCII:a1 TILDE ASCII:a2 {:
+| AsciiGroup:a1 TILDE AsciiGroup:a2 {:
 RESULT = a1 + "~" + a2;
-:};
+:}
+;
+
+AsciiGroup ::= ASCII:a {:
+RESULT = a;
+:}
+|DOT:dot {:
+RESULT = dot;
+:}
+|STAR:star {:
+RESULT = star;
+:}
+|PLUS:plus {:
+RESULT = plus;
+:}
+|QUERY:query {:
+RESULT = query;
+:}
+|LBRACE:lbrace {:
+RESULT = lbrace;
+:}
+|RBRACE:rbrace {:
+RESULT = rbrace;
+:}
+|COLON:colon {:
+RESULT = colon;
+:}
+|COMMA:comma {:
+RESULT = comma;
+:}
+|SEMICOLON:semi {:
+RESULT = semi;
+:}
+;
+
 
 IndExp ::=  UnitSymbol:u MoreIndExp:m {:
 RESULT = u + m;
@@ -100,9 +135,23 @@ RESULT = c + u + m;
 RESULT = c + u;
 :};
 
-UnitSymbol ::= LOWERCASE:l {:
-RESULT = l;
-:} | UPPERCASE:u {: RESULT = u; :}  | DIGIT:d {: RESULT = d; :} | ASCII:a {: RESULT = a; :};
+UnitSymbol ::=
+LOWERCASE:l {:RESULT = l; :}
+| UPPERCASE:u {: RESULT = u; :}
+| DIGIT:d {: RESULT = d; :}
+| ASCII:a {: RESULT = a; :}
+| BODY_ARROW:ba {: RESULT = ba; :}
+| HEAD_ARROW:ha {: RESULT = ha; :}
+| PIPE:pipe {: RESULT = pipe; :}
+| DOT:dot {: RESULT = dot; :}
+| STAR:star {: RESULT = star; :}
+| PLUS:plus {: RESULT = plus; :}
+| QUERY:query {: RESULT = query; :}
+| LBRACE:lbrace {: RESULT = lbrace; :}
+| RBRACE:rbrace {: RESULT = rbrace; :}
+| COLON:colon {: RESULT = colon; :}
+| COMMA:comma {: RESULT = comma; :}
+| SEMICOLON:semi {: RESULT = semi; :};
 
 // Definimos la sección para la asignación de expresiones regulares a conjuntos
 ExpBody ::= ExpLine ExpBody | ExpLine ;

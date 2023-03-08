@@ -18,7 +18,7 @@ public class State {
 
     @Override
     public String toString() {
-        return "Q" + number;
+        return "q" + number;
     }
 
     // Getters

@@ -127,4 +127,29 @@ public class ReportGraphviz {
         return sb.toString();
     }
 
+    public String generateAFD(TransitionTable transitionTable){
+        StringBuilder sb = new StringBuilder();
+        sb.append("digraph ").append(transitionTable.getNameRegex()).append(" {\n");
+        sb.append("\tnode [fontname=\"Helvetica,Arial,sans-serif\"]\n" +
+                "\tedge [fontname=\"Helvetica,Arial,sans-serif\"]\n" +
+                "\trankdir=LR;\n");
+        sb.append("\tnode [shape = doublecircle]; ");
+        for (State state: transitionTable.states){
+            if (state.isAccepting){
+                sb.append(state.toString()).append(" ");
+            }
+        }
+        sb.append(";\n");
+        sb.append("\tnode [shape = circle];\n");
+
+        for (State state: transitionTable.states){
+            Set<Transition> transitions = transitionTable.getTransitionsFromState(state);
+            for (Transition transition: transitions){
+                sb.append("\t").append(state.toString()).append(" -> ").append(transition.getNextState().toString()).append(" [label=\"").append(transition.getCharacter()).append("\"];\n");
+            }
+        }
+        sb.append("}");
+        return sb.toString();
+    }
+
 }

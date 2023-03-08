@@ -14,12 +14,9 @@ import java.util.ArrayList;
 public class App {
     public static void main(String[] args) {
         
-        MainMenu mainMenu = new MainMenu();
-        mainMenu.setVisible(true);
-        /*
-        String path = "src/examples/test1.olc";
-        //ArrayList<ExceptionReport> errors = new ArrayList();
-
+        //MainMenu mainMenu = new MainMenu();
+        //mainMenu.setVisible(true);
+        String path = "src/examples/facil.olc";
         try {
             //ReportHTML report = new ReportHTML();
             String lines = ManageFile.ReadFiles(path);
@@ -32,10 +29,10 @@ public class App {
             for (int i = 0; i < p.Trees.size(); i++) {
                 //System.out.println("*****Tree *******" + i);
                 Tree tree = p.Trees.get(i);
-                String transitionTableGraph = report.generateTransitionTable(tree.transitionTable);
+                String transitionTableGraph = report.generateAFD(tree.transitionTable);
                 System.out.println(transitionTableGraph);
                 // System.out.println(tree.transitionTable.toString());
-                Node root = tree.Root;
+                //Node root = tree.Root;
                 //tree.printFollowTable();
                 //String treeGraph = report.generateTreeGraph(root, tree.NameRegex);
                 //System.out.println(treeGraph);
@@ -48,6 +45,10 @@ public class App {
         }catch (java.lang.Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
+        /*
+        //ArrayList<ExceptionReport> errors = new ArrayList();
+
+
         */
 
 
