@@ -1,7 +1,6 @@
 package com.daniel.controller.TransitionTable;
 
 import com.daniel.controller.FollowTable.FollowTable;
-import com.daniel.controller.Tree.Node;
 
 import java.util.Comparator;
 import java.util.HashSet;
@@ -12,7 +11,7 @@ public class TransitionTable {
 
     private final State initialState;
     private Set<Transition> transitions;
-    private Set<State> states;
+    public Set<State> states;
     public String name;
     public FollowTable followTable;
 
@@ -39,14 +38,29 @@ public class TransitionTable {
                 newState.follows = follows;
                 states.add(newState);
                 Transition transition = new Transition(state,lexeme, newState);
-                transitions.add(transition);
+                // Verificar que la transicion no exista
+                if (!verifyIfTransitionExist(transition))
+                    transitions.add(transition);
                 calculateTransitions(newState);
             } else {
                 State newState = getStateByFollows(follows);
                 Transition transition = new Transition(state,lexeme, newState);
-                transitions.add(transition);
+                // Verificar que la transicion no exista
+                if (!verifyIfTransitionExist(transition))
+                    transitions.add(transition);
             }
         }
+    }
+
+    public boolean verifyIfTransitionExist(Transition transition){
+        for (Transition transition1: transitions){
+            if (transition1.getCurrentState() == transition.getCurrentState() &&
+                    transition1.getCharacter().equals(transition.getCharacter()) &&
+                    transition1.getNextState() == transition.getNextState()){
+                return true;
+            }
+        }
+        return false;
     }
 
     public State getStateByFollows(Set<Integer> follows){
@@ -58,12 +72,27 @@ public class TransitionTable {
         return null;
     }
 
-    public Set<Transition> getTransitions() {
-        return transitions;
+    // Metodo para saber las transiciones que van desde el estado x, con que lexema, hacia el estado y
+    public Set<Transition> getTransitionsFromState(State state){
+        Set<Transition> transitionsFromState = new HashSet<>();
+        for (Transition transition: transitions){
+            if (transition.getCurrentState().equals(state)){
+                transitionsFromState.add(transition);
+            }
+        }
+        return transitionsFromState;
     }
 
     public String getNameRegex() {
         return name;
+    }
+
+    public Set<String> getLexemes(){
+        Set<String> lexemes = new HashSet<>();
+        for (Transition transition: transitions){
+            lexemes.add(transition.getCharacter());
+        }
+        return lexemes;
     }
 
     public boolean verifyIfStateExist(Set<Integer> follows){

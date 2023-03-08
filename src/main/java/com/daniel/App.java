@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class App {
     public static void main(String[] args) {
-        String path = "src/examples/medio.olc";
+        String path = "src/examples/test1.olc";
         //ArrayList<ExceptionReport> errors = new ArrayList();
 
         try {
@@ -32,8 +32,8 @@ public class App {
                 // System.out.println(tree.transitionTable.toString());
                 Node root = tree.Root;
                 //tree.printFollowTable();
-                String treeGraph = report.generateTreeGraph(root, tree.NameRegex);
-                System.out.println(treeGraph);
+                //String treeGraph = report.generateTreeGraph(root, tree.NameRegex);
+                //System.out.println(treeGraph);
 
                 //String followTableGraph = report.generateFollowTable(tree.followTable, p.Trees.get(i).NameRegex);
                 //System.out.println(followTableGraph);
