@@ -1,8 +1,7 @@
 package com.daniel.model;
 
-import com.daniel.controller.ExceptionReport;
+import com.daniel.controller.Errors.ExceptionReport;
 
-import java.io.*;
 import java.util.ArrayList;
 
 public class ReportHTML {

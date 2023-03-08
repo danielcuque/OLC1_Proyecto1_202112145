@@ -1,6 +1,6 @@
 package com.daniel;
 
-import com.daniel.controller.ExceptionReport;
+import com.daniel.controller.Errors.ExceptionReport;
 import com.daniel.controller.Tree.Node;
 import com.daniel.controller.Tree.Tree;
 import com.daniel.model.ManageFile;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class App {
     public static void main(String[] args) {
         String path = "src/examples/medio.olc";
-        ArrayList<ExceptionReport> errors = new ArrayList();
+        //ArrayList<ExceptionReport> errors = new ArrayList();
 
         try {
             //ReportHTML report = new ReportHTML();
@@ -25,15 +25,19 @@ public class App {
             ReportGraphviz report = new ReportGraphviz();
 
             for (int i = 0; i < p.Trees.size(); i++) {
-                System.out.println("*****Tree *******" + i);
+                //System.out.println("*****Tree *******" + i);
                 Tree tree = p.Trees.get(i);
-                //Node root = tree.Root;
+                String transitionTableGraph = report.generateTransitionTable(tree.transitionTable);
+                System.out.println(transitionTableGraph);
+                // System.out.println(tree.transitionTable.toString());
+                Node root = tree.Root;
                 //tree.printFollowTable();
-                //String treeGraph = report.generateTreeGraph(root, tree.NameRegex);
-                //System.out.println(treeGraph);
+                String treeGraph = report.generateTreeGraph(root, tree.NameRegex);
+                System.out.println(treeGraph);
 
-                String followTableGraph = report.generateFollowTable(tree.followTable, p.Trees.get(i).NameRegex);
-                System.out.println(followTableGraph);
+                //String followTableGraph = report.generateFollowTable(tree.followTable, p.Trees.get(i).NameRegex);
+                //System.out.println(followTableGraph);
+
 
             }
         }catch (java.lang.Exception e) {

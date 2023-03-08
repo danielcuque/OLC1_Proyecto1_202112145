@@ -1,4 +1,4 @@
-package com.daniel.controller;
+package com.daniel.controller.Errors;
 
 public class ExceptionReport {
     public String type;

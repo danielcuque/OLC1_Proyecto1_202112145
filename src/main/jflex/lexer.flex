@@ -1,6 +1,6 @@
 package com.daniel;
 
-import com.daniel.controller.ExceptionReport;
+import com.daniel.controller.Errors.ExceptionReport;
 import java_cup.runtime.*;
 import java.util.ArrayList;
 

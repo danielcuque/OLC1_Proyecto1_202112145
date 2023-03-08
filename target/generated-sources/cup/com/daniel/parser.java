@@ -5,16 +5,12 @@
 
 package com.daniel;
 
+import com.daniel.controller.Errors.ExceptionReport;
 import java_cup.runtime.*;
 import java.util.ArrayList;
-import java.util.List;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+
 import com.daniel.controller.Tree.*;
 import com.daniel.controller.Conjunto.*;
-import com.daniel.controller.*;
-import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
   */

@@ -1,6 +1,8 @@
 package com.daniel.model;
 
 import com.daniel.controller.FollowTable.FollowTable;
+import com.daniel.controller.TransitionTable.Transition;
+import com.daniel.controller.TransitionTable.TransitionTable;
 import com.daniel.controller.Tree.Node;
 
 public class ReportGraphviz {
@@ -78,6 +80,32 @@ public class ReportGraphviz {
             sb.append("                <TD>").append(node.lexeme).append("</TD>\n");
             sb.append("                <TD>").append(node.number).append("</TD>\n");
             sb.append("                <TD>").append(node.getFollowPosString()).append("</TD>\n");
+            sb.append("            </TR>\n");
+        }
+        sb.append("        </TABLE>\n");
+        sb.append("    >]\n");
+        sb.append("}");
+        return sb.toString();
+    }
+
+    public String generateTransitionTable(TransitionTable transitionTable){
+        StringBuilder sb = new StringBuilder();
+        sb.append("digraph ").append(transitionTable.getNameRegex()).append(" {\n");
+        sb.append("    node [shape=plaintext]\n");
+        sb.append("    rankdir=TB\n");
+        sb.append("    label = \"").append(transitionTable.getNameRegex()).append("\";\n");
+        sb.append("    A [label=<\n");
+        sb.append("        <TABLE BORDER=\"0\" CELLBORDER=\"1\" CELLSPACING=\"0\">\n");
+        sb.append("            <TR>\n");
+        sb.append("                <TD>Estado</TD>\n");
+        sb.append("                <TD>Transición</TD>\n");
+        sb.append("                <TD>Estado Siguiente</TD>\n");
+        sb.append("            </TR>\n");
+        for (Transition transition : transitionTable.getTransitions()) {
+            sb.append("            <TR>\n");
+            sb.append("                <TD>").append(transition.getCurrentState()).append("</TD>\n");
+            sb.append("                <TD>").append(transition.getCharacter()).append("</TD>\n");
+            sb.append("                <TD>").append(transition.getNextState()).append("</TD>\n");
             sb.append("            </TR>\n");
         }
         sb.append("        </TABLE>\n");

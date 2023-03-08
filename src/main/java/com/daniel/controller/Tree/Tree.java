@@ -1,6 +1,7 @@
 package com.daniel.controller.Tree;
 
 import com.daniel.controller.FollowTable.FollowTable;
+import com.daniel.controller.TransitionTable.State;
 import com.daniel.controller.TransitionTable.TransitionTable;
 
 import java.util.HashSet;
@@ -21,6 +22,14 @@ public class Tree {
 
         calculateTreeAttr(this.Root);
         calculateFollow(this.Root);
+        initializeTransitionTable();
+    }
+
+    public void initializeTransitionTable() {
+        State initialState = new State(0);
+        initialState.follows.addAll(this.Root.first);
+        this.transitionTable = new TransitionTable(initialState, this.followTable);
+        this.transitionTable.name = this.NameRegex;
     }
 
     public void calculateFollow(Node root) {

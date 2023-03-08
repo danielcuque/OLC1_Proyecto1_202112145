@@ -1,29 +1,36 @@
 package com.daniel.controller.TransitionTable;
 
+
 public class Transition {
-    private final char value;
+    private State currentState;
+    private String character;
+    private State nextState;
 
-    public Transition(char value) {
-        this.value = value;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Transition transition = (Transition) o;
-
-        return value == transition.value;
-    }
-
-    @Override
-    public int hashCode() {
-        return (int) value;
+    public Transition(State currentState, String character, State nextState) {
+        this.currentState = currentState;
+        this.character = character;
+        this.nextState = nextState;
     }
 
     // Getters
-    public char getValue() {
-        return value;
+    public State getCurrentState() {
+        return currentState;
+    }
+
+    public String getCharacter() {
+        return character;
+    }
+
+    public State getNextState() {
+        return nextState;
+    }
+
+    @Override
+    public String toString() {
+        return "Transition{\n" +
+                "currentState=" + currentState + ",\n" +
+                ", character='" + character + '\'' + "\n" +
+                ", nextState=" + nextState + "\n" +
+                '}';
     }
 }

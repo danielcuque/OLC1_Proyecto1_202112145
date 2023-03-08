@@ -8,27 +8,22 @@ import java.util.Set;
 public class State {
 
     private final int number;
-    private final Set<Node> nodes;
+
+    // El estado va a guardar follows
+    public Set<Integer> follows;
 
     public State(int number) {
         this.number = number;
-        this.nodes = new HashSet<>();
+        this.follows = new HashSet<>();
     }
 
-    public boolean contains(Node node) {
-        return nodes.contains(node);
-    }
-
-    public void addNode(Node node) {
-        nodes.add(node);
+    @Override
+    public String toString() {
+        return "Q" + number;
     }
 
     // Getters
     public int getNumber() {
         return number;
-    }
-
-    public Set<Node> getNodes() {
-        return nodes;
     }
 }

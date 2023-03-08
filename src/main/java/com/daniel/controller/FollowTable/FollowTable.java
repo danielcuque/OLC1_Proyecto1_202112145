@@ -19,4 +19,14 @@ public class FollowTable {
     public Set<Node> getTableRows() {
         return tableRows;
     }
+
+
+    public Node getNode(int number) {
+        for (Node node : tableRows) {
+            if (node.getNumber() == number) {
+                return node;
+            }
+        }
+        return null;
+    }
 }
