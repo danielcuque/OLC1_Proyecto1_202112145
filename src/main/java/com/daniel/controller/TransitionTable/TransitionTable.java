@@ -10,8 +10,8 @@ import java.util.TreeSet;
 
 public class TransitionTable {
 
-    private final State initialState;
-    private Set<Transition> transitions;
+    public final State initialState;
+    public Set<Transition> transitions;
     public Set<State> states;
     public String name;
     public FollowTable followTable;

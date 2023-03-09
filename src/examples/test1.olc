@@ -3,7 +3,8 @@ CONJ: letra -> a~z;
 CONJ: separados -> 2,a,e,R,d,0,9;
 CONJ: mayus-> G~O;
 CONJ: nums-> 1~5;
-CONJ: ascii -> -~>;
+CONJ: grupo1 -> %,&,$,,,<,;;
+CONJ: ascii-> -~-;
 
 // EXPreg -> . |{letra} "2" * {nums};
 EXPreg2 -> .. |{letra} "2" * {nums} . | * |{separados} {mayus} "x" {separados};

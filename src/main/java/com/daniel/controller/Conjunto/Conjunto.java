@@ -1,15 +1,25 @@
 package com.daniel.controller.Conjunto;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Conjunto {
 
-
     private String identifier;
-    private String type;
-    public ArrayList<ConjElement> elements = new ArrayList<>();
+    public String type;
+    public Set<String> elements = new HashSet<>();
 
-    public Conjunto(){
+    public Conjunto(String identifier){
+        this.identifier = identifier;
+    }
+
+    @Override
+    public String toString() {
+        return "Conjunto{" +
+                "identifier='" + identifier + '\'' +
+                ", type='" + type + '\'' +
+                ", elements=" + elements +
+                '}';
     }
 
 }

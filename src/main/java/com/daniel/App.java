@@ -1,5 +1,6 @@
 package com.daniel;
 
+import com.daniel.controller.Conjunto.Conjunto;
 import com.daniel.controller.Errors.ExceptionReport;
 import com.daniel.controller.Tree.Node;
 import com.daniel.controller.Tree.Tree;
@@ -16,7 +17,7 @@ public class App {
         
         //MainMenu mainMenu = new MainMenu();
         //mainMenu.setVisible(true);
-        String path = "src/examples/facil.olc";
+        String path = "src/examples/test1.olc";
         try {
             //ReportHTML report = new ReportHTML();
             String lines = ManageFile.ReadFiles(path);
@@ -26,21 +27,8 @@ public class App {
 
             ReportGraphviz report = new ReportGraphviz();
 
-            for (int i = 0; i < p.Trees.size(); i++) {
-                //System.out.println("*****Tree *******" + i);
-                Tree tree = p.Trees.get(i);
-                String transitionTableGraph = report.generateAFD(tree.transitionTable);
-                System.out.println(transitionTableGraph);
-                // System.out.println(tree.transitionTable.toString());
-                //Node root = tree.Root;
-                //tree.printFollowTable();
-                //String treeGraph = report.generateTreeGraph(root, tree.NameRegex);
-                //System.out.println(treeGraph);
-
-                //String followTableGraph = report.generateFollowTable(tree.followTable, p.Trees.get(i).NameRegex);
-                //System.out.println(followTableGraph);
-
-
+            for(Conjunto conjunto : p.Conjuntos){
+                System.out.println(conjunto.toString());
             }
         }catch (java.lang.Exception e) {
             System.out.println("Error: " + e.getMessage());

@@ -6,6 +6,8 @@ import java.util.List;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashSet;
+import java.util.Set;
 import com.daniel.controller.Tree.*;
 import com.daniel.controller.Conjunto.*;
 import com.daniel.controller.Errors.*;
@@ -18,6 +20,7 @@ parser code {:
     public ArrayList<Conjunto> Conjuntos = new ArrayList<Conjunto>();
     public ArrayList<Tree> Trees = new ArrayList<Tree>();
     public ArrayList<String> CheckStrings = new ArrayList<String>();
+    public Set<String> elementos = new HashSet<String>();
 
 
     // Lista de errores
@@ -64,7 +67,16 @@ BodyEntry ::= ConjBody ExpBody PERCENT CheckBody;
 ConjBody ::= ConjDef ConjBody | ConjDef;
 
 ConjDef ::= CONJ COLON IDENTIFIER:id BODY_ARROW HEAD_ARROW ConjNotation:notation SEMICOLON {:
-    System.out.println("Conjunto: " + id + " Notacion: " + notation);
+Conjunto conjunto = new Conjunto(id);
+if(notation.contains("~")){
+    conjunto.type = "RANGE";
+}else{
+    conjunto.type = "IND";
+}
+conjunto.elements = elementos;
+elementos = new HashSet<String>();
+Conjuntos.add(conjunto);
+
 :};
 
 ConjNotation ::= RangeExp:range {:
@@ -75,17 +87,24 @@ RESULT = ind;
 :};
 
 RangeExp ::= LOWERCASE:l1 TILDE LOWERCASE:l2 {:
+elementos.add(l1);
+elementos.add(l2);
 RESULT = l1 + "~" + l2;
 
 :}
 | UPPERCASE:u1 TILDE UPPERCASE:u2 {:
+elementos.add(u1);
+elementos.add(u2);
 RESULT = u1 + "~" + u2;
 :}
 | DIGIT:d1 TILDE DIGIT:d2 {:
-
+elementos.add(d1);
+elementos.add(d2);
 RESULT = d1 + "~" + d2;
 :}
 | AsciiGroup:a1 TILDE AsciiGroup:a2 {:
+elementos.add(a1);
+elementos.add(a2);
 RESULT = a1 + "~" + a2;
 :}
 ;
@@ -120,6 +139,18 @@ RESULT = comma;
 |SEMICOLON:semi {:
 RESULT = semi;
 :}
+|PIPE:pipe {:
+RESULT = pipe;
+:}
+|BODY_ARROW:body {:
+RESULT = body;
+:}
+|HEAD_ARROW:head {:
+RESULT = head;
+:}
+|PERCENT:percent {:
+RESULT = percent;
+:}
 ;
 
 
@@ -136,22 +167,18 @@ RESULT = c + u;
 :};
 
 UnitSymbol ::=
-LOWERCASE:l {:RESULT = l; :}
-| UPPERCASE:u {: RESULT = u; :}
-| DIGIT:d {: RESULT = d; :}
-| ASCII:a {: RESULT = a; :}
-| BODY_ARROW:ba {: RESULT = ba; :}
-| HEAD_ARROW:ha {: RESULT = ha; :}
-| PIPE:pipe {: RESULT = pipe; :}
-| DOT:dot {: RESULT = dot; :}
-| STAR:star {: RESULT = star; :}
-| PLUS:plus {: RESULT = plus; :}
-| QUERY:query {: RESULT = query; :}
-| LBRACE:lbrace {: RESULT = lbrace; :}
-| RBRACE:rbrace {: RESULT = rbrace; :}
-| COLON:colon {: RESULT = colon; :}
-| COMMA:comma {: RESULT = comma; :}
-| SEMICOLON:semi {: RESULT = semi; :};
+LOWERCASE:l {:
+elementos.add(l);
+RESULT = l; :}
+| UPPERCASE:u {:
+elementos.add(u);
+ RESULT = u; :}
+| DIGIT:d {:
+elementos.add(d);
+ RESULT = d; :}
+| AsciiGroup:a {:
+elementos.add(a);
+RESULT = a; :};
 
 // Definimos la sección para la asignación de expresiones regulares a conjuntos
 ExpBody ::= ExpLine ExpBody | ExpLine ;
