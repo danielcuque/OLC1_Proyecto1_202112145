@@ -7,6 +7,7 @@ import com.daniel.controller.Errors.ExceptionReport;
 import com.daniel.controller.Tree.Tree;
 import com.daniel.model.ManageFile;
 import com.daniel.model.ReportGraphviz;
+import com.daniel.model.ReportJSON;
 import com.daniel.view.MainMenu;
 
 import java.io.StringReader;
@@ -29,20 +30,10 @@ public class App {
             parser p = new parser(lexer);
             p.parse();
 
-            ReportGraphviz report = new ReportGraphviz();
-            for (Tree tree : p.Trees){
-                System.out.println(report.generateAFD(tree.transitionTable));
-                dfa.add(new DFA(tree.transitionTable));
-            }
-
             //Evaluar cadenas del p.CheckStrings
-            for (CheckString checkString : p.CheckStrings){
-                for (DFA dfa1 : dfa){
-                    if(dfa1.getName().equals(checkString.name)){
-                        System.out.println(dfa1.accept(checkString.string));
-                    }
-                }
-            }
+            ReportJSON reportJSON = new ReportJSON();
+            String json =  reportJSON.generateStringsEvaluation(dfa, p.CheckStrings);
+            System.out.println(json);
 
         }catch (java.lang.Exception e) {
             System.out.println("Error: " + e.getMessage());
