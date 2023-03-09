@@ -17,5 +17,4 @@ public class Conjunto {
     public String toString() {
         return identifier;
     }
-
 }

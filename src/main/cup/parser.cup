@@ -11,6 +11,7 @@ import java.util.Set;
 import com.daniel.controller.Tree.*;
 import com.daniel.controller.Conjuntos.*;
 import com.daniel.controller.Errors.*;
+import com.daniel.controller.CheckStrings.*;
 
 parser code {:
 
@@ -19,7 +20,7 @@ parser code {:
 
     public ArrayList<Conjunto> Conjuntos = new ArrayList<Conjunto>();
     public ArrayList<Tree> Trees = new ArrayList<Tree>();
-    public ArrayList<String> CheckStrings = new ArrayList<String>();
+    public ArrayList<CheckString> CheckStrings = new ArrayList<CheckString>();
     public Set<String> elementos = new HashSet<String>();
 
 
@@ -212,14 +213,21 @@ RESULT = new Node("?",NodeType.QUERY, operatorNodeCounter,query);
 | LBRACE IDENTIFIER:id RBRACE {:
 nodeCounter++;
 Conjunto conjuntoEncontrado = null;
+
 for (Conjunto conjunto : Conjuntos) {
     if (conjunto.identifier.equals(id)) {
         conjuntoEncontrado = conjunto;
         break;
     }
 }
-if (conjuntoEncontrado == null) {
-    Errors.add(new ExceptionReport("Semantico", "El conjunto " + id + " no ha sido declarado", "", ""));
+
+try {
+    if (conjuntoEncontrado == null) {
+        throw new Exception("El conjunto " + id + " no ha sido declarado.");
+    }
+} catch (Exception e) {
+    Errors.add(new ExceptionReport("Semantico", e.getMessage(), "", ""));
+    return null;
 }
 
 RESULT = new Node(conjuntoEncontrado, NodeType.LEAVE, nodeCounter);
@@ -234,8 +242,8 @@ RESULT = new Node(val, NodeType.LEAVE, nodeCounter);
 // Definimos la sección para las cadenas a evaluar
 CheckBody ::= CheckLine CheckBody | CheckLine;
 
-CheckLine ::= IDENTIFIER COLON STRING_LITERAL:s {:
-CheckStrings.add(s);
+CheckLine ::= IDENTIFIER:id COLON STRING_LITERAL:s {:
+CheckStrings.add(new CheckString(id, s));
 :} SEMICOLON;
 
 

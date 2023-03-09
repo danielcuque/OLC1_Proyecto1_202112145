@@ -7,11 +7,17 @@ package com.daniel;
 
 import java_cup.runtime.*;
 import java.util.ArrayList;
+import java.util.List;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Set;
 import com.daniel.controller.Tree.*;
 import com.daniel.controller.Conjuntos.*;
 import com.daniel.controller.Errors.*;
+import com.daniel.controller.CheckStrings.*;
+import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
   */
@@ -217,7 +223,7 @@ public class parser extends java_cup.runtime.lr_parser {
 
     public ArrayList<Conjunto> Conjuntos = new ArrayList<Conjunto>();
     public ArrayList<Tree> Trees = new ArrayList<Tree>();
-    public ArrayList<String> CheckStrings = new ArrayList<String>();
+    public ArrayList<CheckString> CheckStrings = new ArrayList<CheckString>();
     public Set<String> elementos = new HashSet<String>();
 
 
@@ -889,14 +895,21 @@ RESULT = new Node("?",NodeType.QUERY, operatorNodeCounter,query);
 		
 nodeCounter++;
 Conjunto conjuntoEncontrado = null;
+
 for (Conjunto conjunto : Conjuntos) {
     if (conjunto.identifier.equals(id)) {
         conjuntoEncontrado = conjunto;
         break;
     }
 }
-if (conjuntoEncontrado == null) {
-    Errors.add(new ExceptionReport("Semantico", "El conjunto " + id + " no ha sido declarado", "", ""));
+
+try {
+    if (conjuntoEncontrado == null) {
+        throw new Exception("El conjunto " + id + " no ha sido declarado.");
+    }
+} catch (Exception e) {
+    Errors.add(new ExceptionReport("Semantico", e.getMessage(), "", ""));
+    return null;
 }
 
 RESULT = new Node(conjuntoEncontrado, NodeType.LEAVE, nodeCounter);
@@ -957,11 +970,14 @@ RESULT = new Node(val, NodeType.LEAVE, nodeCounter);
           case 47: // NT$0 ::= 
             {
               Object RESULT =null;
+		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
+		String id = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
 		int sleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int sright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String s = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 
-CheckStrings.add(s);
+CheckStrings.add(new CheckString(id, s));
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("NT$0",15, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -973,6 +989,9 @@ CheckStrings.add(s);
               Object RESULT =null;
               // propagate RESULT from NT$0
                 RESULT = (Object) ((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
+		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).right;
+		String id = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-4)).value;
 		int sleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
 		int sright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
 		String s = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;

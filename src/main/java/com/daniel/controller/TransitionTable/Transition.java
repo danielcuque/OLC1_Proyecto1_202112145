@@ -1,12 +1,14 @@
 package com.daniel.controller.TransitionTable;
 
 
+import com.daniel.controller.Conjuntos.Conjunto;
+
 public class Transition {
     private State currentState;
-    private String character;
+    private Object character;
     private State nextState;
 
-    public Transition(State currentState, String character, State nextState) {
+    public Transition(State currentState, Object character, State nextState) {
         this.currentState = currentState;
         this.character = character;
         this.nextState = nextState;
@@ -17,8 +19,15 @@ public class Transition {
         return currentState;
     }
 
-    public String getCharacter() {
+    public Object getCharacter() {
         return character;
+    }
+
+    public String getCharacterString() {
+        if (character instanceof Conjunto){
+            return ((Conjunto) character).identifier;
+        }
+        return (String) character;
     }
 
     public State getNextState() {

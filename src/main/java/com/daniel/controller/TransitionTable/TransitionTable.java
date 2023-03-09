@@ -29,7 +29,7 @@ public class TransitionTable {
 
     public void calculateTransitions(State state){
         for(Integer i: state.follows){
-            String lexeme = this.followTable.getNode(i).lexeme.toString();
+            Object lexeme = this.followTable.getNode(i).lexeme;
             Set<Integer> follows = getFollowsOfLexemeAvailable(i, state.follows);
             if (!verifyIfStateExist(follows)){
                 if (follows.isEmpty()){
@@ -45,7 +45,7 @@ public class TransitionTable {
                 calculateTransitions(newState);
             } else {
                 State newState = getStateByFollows(follows);
-                Transition transition = new Transition(state,lexeme, newState);
+                Transition transition = new Transition(state, lexeme, newState);
                 // Verificar que la transicion no exista
                 if (verifyIfTransitionExist(transition))
                     transitions.add(transition);
@@ -103,7 +103,7 @@ public class TransitionTable {
     public Set<String> getLexemes(){
         Set<String> lexemes = new HashSet<>();
         for (Transition transition: transitions){
-            lexemes.add(transition.getCharacter());
+            lexemes.add(transition.getCharacterString());
         }
         return lexemes;
     }

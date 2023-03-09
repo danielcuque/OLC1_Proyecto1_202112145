@@ -1,16 +1,18 @@
 package com.daniel.controller.DFA;
 
+import com.daniel.controller.Conjuntos.Conjunto;
 import com.daniel.controller.TransitionTable.State;
 import com.daniel.controller.TransitionTable.Transition;
 import com.daniel.controller.TransitionTable.TransitionTable;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 public class DFA {
     public State initialState;
     public Set<State> states;
-    public Set<State> finalStates;
+    public Set<State> finalStates = new HashSet<>();
     public TransitionTable transitionTable;
 
     public DFA(TransitionTable transitionTable) {
@@ -31,7 +33,9 @@ public class DFA {
             }
         }
     }
-
+    public String getName(){
+        return this.transitionTable.name;
+    }
     public boolean accept(String input) {
             State currentState = initialState;
 
@@ -39,10 +43,21 @@ public class DFA {
                 boolean transitionFound = false;
 
                 for (Transition t : transitionTable.transitions) {
-                    if (t.getCurrentState().equals(currentState) && Objects.equals(t.getCharacter(), c)) {
-                        currentState = t.getNextState();
-                        transitionFound = true;
-                        break;
+                    if(t.getCurrentState().equals(currentState)) {
+                        if (t.getCharacter() instanceof Conjunto conjunto) {
+                            if (conjunto.elements.contains(c)) {
+                                currentState = t.getNextState();
+                                transitionFound = true;
+                                break;
+                            }
+                        } else {
+                            if (t.getCharacter() instanceof String s && Objects.equals(s, c)) {
+                                currentState = t.getNextState();
+                                transitionFound = true;
+                                break;
+                            }
+                        }
+
                     }
                 }
 
