@@ -1,15 +1,10 @@
 package com.daniel;
 
-import com.daniel.controller.Conjunto.Conjunto;
-import com.daniel.controller.Errors.ExceptionReport;
-import com.daniel.controller.Tree.Node;
-import com.daniel.controller.Tree.Tree;
+import com.daniel.controller.Conjuntos.Conjunto;
 import com.daniel.model.ManageFile;
 import com.daniel.model.ReportGraphviz;
-import com.daniel.view.MainMenu;
 
 import java.io.StringReader;
-import java.util.ArrayList;
 
 
 public class App {

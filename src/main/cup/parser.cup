@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Set;
 import com.daniel.controller.Tree.*;
-import com.daniel.controller.Conjunto.*;
+import com.daniel.controller.Conjuntos.*;
 import com.daniel.controller.Errors.*;
 
 parser code {:
@@ -211,7 +211,18 @@ RESULT = new Node("?",NodeType.QUERY, operatorNodeCounter,query);
 :}
 | LBRACE IDENTIFIER:id RBRACE {:
 nodeCounter++;
-RESULT = new Node(id, NodeType.LEAVE, nodeCounter);
+Conjunto conjuntoEncontrado = null;
+for (Conjunto conjunto : Conjuntos) {
+    if (conjunto.identifier.equals(id)) {
+        conjuntoEncontrado = conjunto;
+        break;
+    }
+}
+if (conjuntoEncontrado == null) {
+    Errors.add(new ExceptionReport("Semantico", "El conjunto " + id + " no ha sido declarado", "", ""));
+}
+
+RESULT = new Node(conjuntoEncontrado, NodeType.LEAVE, nodeCounter);
 :} | STRING_LITERAL:val {:
 nodeCounter++;
 RESULT = new Node(val, NodeType.LEAVE, nodeCounter);
@@ -223,7 +234,9 @@ RESULT = new Node(val, NodeType.LEAVE, nodeCounter);
 // Definimos la sección para las cadenas a evaluar
 CheckBody ::= CheckLine CheckBody | CheckLine;
 
-CheckLine ::= IDENTIFIER COLON STRING_LITERAL SEMICOLON;
+CheckLine ::= IDENTIFIER COLON STRING_LITERAL:s {:
+CheckStrings.add(s);
+:} SEMICOLON;
 
 
 

@@ -29,7 +29,7 @@ public class TransitionTable {
 
     public void calculateTransitions(State state){
         for(Integer i: state.follows){
-            String lexeme = (String) this.followTable.getNode(i).lexeme;
+            String lexeme = this.followTable.getNode(i).lexeme.toString();
             Set<Integer> follows = getFollowsOfLexemeAvailable(i, state.follows);
             if (!verifyIfStateExist(follows)){
                 if (follows.isEmpty()){
@@ -126,9 +126,9 @@ public class TransitionTable {
     */
     public Set<Integer> getFollowsOfLexemeAvailable(int numberOfNode, Set<Integer> availableFollows){
         Set<Integer> follows = new HashSet<>();
-        String lexeme =(String)this.followTable.getNode(numberOfNode).lexeme;
+        String lexeme =this.followTable.getNode(numberOfNode).lexeme.toString();
         for (Integer i: availableFollows){
-            if (this.followTable.getNode(i).lexeme.equals(lexeme)){
+            if (this.followTable.getNode(i).lexeme.toString().equals(lexeme)){
                 follows.addAll(this.followTable.getNode(i).follow);
             }
         }

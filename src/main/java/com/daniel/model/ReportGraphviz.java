@@ -80,7 +80,7 @@ public class ReportGraphviz {
         sb.append("            </TR>\n");
         for (Node node : followTable.getTableRows()) {
             sb.append("            <TR>\n");
-            sb.append("                <TD>").append(node.lexeme).append("</TD>\n");
+            sb.append("                <TD>").append(node.lexeme.toString()).append("</TD>\n");
             sb.append("                <TD>").append(node.number).append("</TD>\n");
             sb.append("                <TD>").append(node.getFollowPosString()).append("</TD>\n");
             sb.append("            </TR>\n");
