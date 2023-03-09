@@ -7,6 +7,7 @@ import com.daniel.controller.Errors.ExceptionReport;
 import com.daniel.controller.Tree.Tree;
 import com.daniel.model.ManageFile;
 import com.daniel.model.ReportGraphviz;
+import com.daniel.view.MainMenu;
 
 import java.io.StringReader;
 import java.util.HashSet;
@@ -20,7 +21,7 @@ public class App {
         //mainMenu.setVisible(true);
 
         Set<DFA> dfa = new HashSet<>();
-        String path = "src/examples/facil.olc";
+        String path = "src/examples/medio.olc";
         try {
             //ReportHTML report = new ReportHTML();
             String lines = ManageFile.ReadFiles(path);
@@ -42,6 +43,7 @@ public class App {
                     }
                 }
             }
+
         }catch (java.lang.Exception e) {
             System.out.println("Error: " + e.getMessage());
         }

@@ -224,7 +224,7 @@ public class parser extends java_cup.runtime.lr_parser {
     public ArrayList<Conjunto> Conjuntos = new ArrayList<Conjunto>();
     public ArrayList<Tree> Trees = new ArrayList<Tree>();
     public ArrayList<CheckString> CheckStrings = new ArrayList<CheckString>();
-    public Set<String> elementos = new HashSet<String>();
+    public ArrayList<String> elementos = new ArrayList<String>();
 
 
     // Lista de errores
@@ -334,7 +334,7 @@ if(notation.contains("~")){
     conjunto.type = "IND";
 }
 conjunto.elements = elementos;
-elementos = new HashSet<String>();
+elementos = new ArrayList<String>();
 Conjuntos.add(conjunto);
 
 

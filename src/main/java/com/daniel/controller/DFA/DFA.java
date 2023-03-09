@@ -36,6 +36,7 @@ public class DFA {
     public String getName(){
         return this.transitionTable.name;
     }
+
     public boolean accept(String input) {
             State currentState = initialState;
 
@@ -43,9 +44,9 @@ public class DFA {
                 boolean transitionFound = false;
 
                 for (Transition t : transitionTable.transitions) {
-                    if(t.getCurrentState().equals(currentState)) {
+                    if(t.getCurrentState().getNumber() == currentState.getNumber()) {
                         if (t.getCharacter() instanceof Conjunto conjunto) {
-                            if (conjunto.elements.contains(c)) {
+                            if (conjunto.contains(c)) {
                                 currentState = t.getNextState();
                                 transitionFound = true;
                                 break;
@@ -57,7 +58,6 @@ public class DFA {
                                 break;
                             }
                         }
-
                     }
                 }
 
