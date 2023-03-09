@@ -14,6 +14,8 @@ public class ReportJSON {
         for (CheckString checkString : checkStrings){
             for (DFA dfa : dfas){
                 if(dfa.getName().equals(checkString.name)){
+                    if (checkString.string.contains("'"))
+                        checkString.string = checkString.string.replace("'", "\\'");
                     json.append("{ \"Valor\": \"").append(checkString.string).append("\", \"ExpresionRegular\": \"").append(checkString.name).append("\", \"Resultado\": \"").append(dfa.accept(checkString.string) ? "Cadena Válida" : "Cadena Inválida").append("\"},");
 
                 }

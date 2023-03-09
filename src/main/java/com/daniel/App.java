@@ -22,13 +22,17 @@ public class App {
         //mainMenu.setVisible(true);
 
         Set<DFA> dfa = new HashSet<>();
-        String path = "src/examples/medio.olc";
+        String path = "src/examples/facil.olc";
         try {
             //ReportHTML report = new ReportHTML();
             String lines = ManageFile.ReadFiles(path);
             ExreganLexer lexer = new ExreganLexer(new StringReader(lines));
             parser p = new parser(lexer);
             p.parse();
+
+            for (Tree tree : p.Trees){
+                dfa.add(new DFA(tree.transitionTable));
+            }
 
             //Evaluar cadenas del p.CheckStrings
             ReportJSON reportJSON = new ReportJSON();
