@@ -5,109 +5,109 @@ import com.daniel.controller.Errors.ExceptionReport;
 import java.util.ArrayList;
 
 public class ReportHTML {
-    // TODO: Implement style for HTML report
+
+    private String pathErrors = "src/reports/ERRORES_202112145/";
     private String cssStyles() {
 
-        String styles = "<style>\n" +
-                "html {\n" +
-                "  line-height: 1.15;\n" +
-                "  -webkit-text-size-adjust: 100%;\n" +
-                " font-family: 'Inter', sans-serif; "+
-                "}\n" +
-                ".flex {\n" +
-                "  display: flex;\n" +
-                "}\n" +
-                ".flex-col {\n" +
-                "  flex-direction: column;\n" +
-                "}\n" +
-                ".my-10 {\n" +
-                "  margin-top: 2.5rem;\n" +
-                "  margin-bottom: 2.5rem;\n" +
-                "}\n" +
-                ".mx-2 {\n" +
-                "  margin-left: 0.5rem;\n" +
-                "  margin-right: 0.5rem;\n" +
-                "}\n" +
-                ".text-4xl {\n" +
-                "  font-size: 2.25rem;\n" +
-                "}\n" +
-                ".mb-5 {\n" +
-                "  margin-bottom: 1.25rem;\n" +
-                "}\n" +
-                ".text-center {\n" +
-                "  text-align: center;\n" +
-                "}\n" +
-                ".font-medium {\n" +
-                "  font-weight: 500;\n" +
-                "}\n" +
-                ".relative {\n" +
-                "  position: relative;\n" +
-                "}\n" +
-                ".overflow-x-auto {\n" +
-                "  overflow-x: auto;\n" +
-                "}\n" +
-                ".w-full {\n" +
-                "  width: 100%;\n" +
-                "}\n" +
-                ".text-sm {\n" +
-                "  font-size: 0.875rem;\n" +
-                "}\n" +
-                ".text-left {\n" +
-                "  text-align: left;\n" +
-                "}\n" +
-                ".text-gray-400 {\n" +
-                "  color: #cbd5e0;\n" +
-                "}\n" +
-                ".bg-black {\n" +
-                "  background-color: #000000;\n" +
-                "}\n" +
-                ".rounded-xl {\n" +
-                "  border-radius: 0.75rem;\n" +
-                "}\n" +
-                ".text-xs {\n" +
-                "  font-size: 0.75rem;\n" +
-                "}\n" +
-                ".text-gray-900 {\n" +
-                "  color: #1a202c;\n" +
-                "}\n" +
-                ".uppercase {\n" +
-                "  text-transform: uppercase;\n" +
-                "}\n" +
-                ".px-6 {\n" +
-                "  padding-left: 1.5rem;\n" +
-                "  padding-right: 1.5rem;\n" +
-                "}\n" +
-                ".py-3 {\n" +
-                "  padding-top: 0.75rem;\n" +
-                "  padding-bottom: 0.75rem;\n" +
-                "}\n" +
-                ".bg-white {\n" +
-                "  background-color: #ffffff;\n" +
-                "}\n" +
-                ".font-medium {\n" +
-                "  font-weight: 500;\n" +
-                "}\n" +
-                ".text-white {\n" +
-                "  color: #ffffff;\n" +
-                "}\n" +
-                ".whitespace-nowrap {\n" +
-                "  white-space: nowrap;\n" +
-                "}\n" +
-                ".px-6 {\n" +
-                "  padding-left: 1.5rem;\n" +
-                "  padding-right: 1.5rem;\n" +
-                "}\n" +
-                ".py-4 {\n" +
-                "  padding-top: 1rem;\n" +
-                "  padding-bottom: 1rem;\n" +
-                "}\n" +
-                "</style>\n";
-
-        return styles;
+        return """
+                <style>
+                html {
+                  line-height: 1.15;
+                  -webkit-text-size-adjust: 100%;
+                 font-family: 'Inter', sans-serif; }
+                .flex {
+                  display: flex;
+                }
+                .flex-col {
+                  flex-direction: column;
+                }
+                .my-10 {
+                  margin-top: 2.5rem;
+                  margin-bottom: 2.5rem;
+                }
+                .mx-2 {
+                  margin-left: 0.5rem;
+                  margin-right: 0.5rem;
+                }
+                .text-4xl {
+                  font-size: 2.25rem;
+                }
+                .mb-5 {
+                  margin-bottom: 1.25rem;
+                }
+                .text-center {
+                  text-align: center;
+                }
+                .font-medium {
+                  font-weight: 500;
+                }
+                .relative {
+                  position: relative;
+                }
+                .overflow-x-auto {
+                  overflow-x: auto;
+                }
+                .w-full {
+                  width: 100%;
+                }
+                .text-sm {
+                  font-size: 0.875rem;
+                }
+                .text-left {
+                  text-align: left;
+                }
+                .text-gray-400 {
+                  color: #cbd5e0;
+                }
+                .bg-black {
+                  background-color: #000000;
+                }
+                .rounded-xl {
+                  border-radius: 0.75rem;
+                }
+                .text-xs {
+                  font-size: 0.75rem;
+                }
+                .text-gray-900 {
+                  color: #1a202c;
+                }
+                .uppercase {
+                  text-transform: uppercase;
+                }
+                .px-6 {
+                  padding-left: 1.5rem;
+                  padding-right: 1.5rem;
+                }
+                .py-3 {
+                  padding-top: 0.75rem;
+                  padding-bottom: 0.75rem;
+                }
+                .bg-white {
+                  background-color: #ffffff;
+                }
+                .font-medium {
+                  font-weight: 500;
+                }
+                .text-white {
+                  color: #ffffff;
+                }
+                .whitespace-nowrap {
+                  white-space: nowrap;
+                }
+                .px-6 {
+                  padding-left: 1.5rem;
+                  padding-right: 1.5rem;
+                }
+                .py-4 {
+                  padding-top: 1rem;
+                  padding-bottom: 1rem;
+                }
+                </style>
+                """;
     }
 
     private String htmlHeader() {
-        String header = """
+        return """
                 <!DOCTYPE html>
                 <html lang="en">
                   <head>
@@ -117,7 +117,6 @@ public class ReportHTML {
                     <title>Tabla de errores</title>
                   </head>
                 """;
-        return header;
     }
 
     private String htmlBody(ArrayList<ExceptionReport> exceptions) {
@@ -170,8 +169,9 @@ public class ReportHTML {
 
     }
 
-    public void htmlReport(ArrayList<ExceptionReport> exceptions, String path) {
+    public void generateHTMLReport(ArrayList<ExceptionReport> exceptions, String name) {
         String content = htmlHeader() + cssStyles() + htmlBody(exceptions);
-        ManageFile.WriteFiles(path, content);
+
+        ManageFile.WriteFiles(this.pathErrors + name + ".html", content);
     }
 }

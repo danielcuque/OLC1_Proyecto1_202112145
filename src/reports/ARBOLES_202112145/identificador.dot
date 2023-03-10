@@ -1,0 +1,24 @@
+digraph identificador {
+node [color="#FFEDBB" shape=circle style=filled]
+edge [dir=none]
+label = "identificador";
+root0 [label=".\nAnulable:F\nFirstPos:[1]\nLastPos:[5]"];
+root0 ->AND4;
+root0 ->ACCEPT5;
+AND4 [label=".\nAnulable:F\nFirstPos:[1]\nLastPos:[1, 2, 3, 4]"];
+AND4 ->LEAVE1;
+AND4 ->STAR3;
+LEAVE1 [label="Lexema:abecedarioMinus\nAnulable:F\nFirstPos:[1]\nLastPos:[1]\nId:1"];
+STAR3 [label="*\nAnulable:V\nFirstPos:[2, 3, 4]\nLastPos:[2, 3, 4]"];
+STAR3 ->OR2;
+OR2 [label="|\nAnulable:F\nFirstPos:[2, 3, 4]\nLastPos:[2, 3, 4]"];
+OR2 ->LEAVE2;
+OR2 ->OR1;
+LEAVE2 [label="Lexema:_\nAnulable:F\nFirstPos:[2]\nLastPos:[2]\nId:2"];
+OR1 [label="|\nAnulable:F\nFirstPos:[3, 4]\nLastPos:[3, 4]"];
+OR1 ->LEAVE3;
+OR1 ->LEAVE4;
+LEAVE3 [label="Lexema:abecedarioMinus\nAnulable:F\nFirstPos:[3]\nLastPos:[3]\nId:3"];
+LEAVE4 [label="Lexema:digito\nAnulable:F\nFirstPos:[4]\nLastPos:[4]\nId:4"];
+ACCEPT5 [label="Lexema:#\nAnulable:F\nFirstPos:[5]\nLastPos:[5]\nId:5"];
+}

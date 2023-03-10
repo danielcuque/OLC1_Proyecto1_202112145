@@ -3,17 +3,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.daniel.view;
-
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import com.daniel.analizadores.*;
+import com.daniel.controller.Errors.ExceptionReport;
+import com.daniel.controller.Tree.Tree;
+import com.daniel.model.ManageFile;
+import com.daniel.model.ReportGraphviz;
+import com.daniel.model.ReportHTML;
+import com.daniel.parser;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
+import java.io.StringReader;
+import java.util.ArrayList;
+import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -28,10 +33,23 @@ public class MainMenu extends javax.swing.JFrame {
     
     private File currentFile;
     private boolean isSaved = false;
-    
+    private ArrayList<ExceptionReport> errors = new ArrayList<>();
+    private Tree currentTree = null;
+
+    // Rutas de los reportes
+    private final String reportAFD = "src/reports/AFD_202112145/";
+    private final String reportAFND = "src/reports/AFND_202112145/";
+    private final String reportARBOLES = "src/reports/ARBOLES_202112145/";
+    private final String reportSIGUIENTES = "src/reports/SIGUIENTES_202112145/";
+    private final String reportTRANSICIONES = "src/reports/TRANSICIONES_202112145/";
+    private final String reportSALIDAS = "src/reports/SALIDAS_202112145/";
+
+
     public MainMenu() {
         initComponents();
-        
+        this.SelectRegex.setEnabled(false);
+        this.SelectShowAttr.setEnabled(false);
+        this.setAttrFromTree();
     }
 
     /**
@@ -47,6 +65,12 @@ public class MainMenu extends javax.swing.JFrame {
         TextEditor = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         Console = new javax.swing.JTextArea();
+        AnalyzeStrings = new javax.swing.JButton();
+        SelectRegex = new javax.swing.JComboBox<>();
+        SelectRegexLabel = new javax.swing.JLabel();
+        ShowAttrLabel = new javax.swing.JLabel();
+        SelectShowAttr = new javax.swing.JComboBox<>();
+        DisplayAttr = new javax.swing.JLabel();
         MainMenuBar = new javax.swing.JMenuBar();
         FileOptions = new javax.swing.JMenu();
         NewFile = new javax.swing.JMenuItem();
@@ -56,7 +80,7 @@ public class MainMenu extends javax.swing.JFrame {
         GenerateDFA = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 700));
+        setMinimumSize(new java.awt.Dimension(100, 600));
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 formKeyTyped(evt);
@@ -76,6 +100,31 @@ public class MainMenu extends javax.swing.JFrame {
         Console.setRows(5);
         Console.setEnabled(false);
         jScrollPane2.setViewportView(Console);
+
+        AnalyzeStrings.setText("Analizar cadenas");
+        AnalyzeStrings.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AnalyzeStringsActionPerformed(evt);
+            }
+        });
+
+        SelectRegex.setModel(new javax.swing.DefaultComboBoxModel<>());
+        SelectRegex.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelectRegexActionPerformed(evt);
+            }
+        });
+
+        SelectRegexLabel.setText("Expresiones regulares reconocidas");
+
+        ShowAttrLabel.setText("Ver");
+
+        SelectShowAttr.setModel(new javax.swing.DefaultComboBoxModel<>());
+        SelectShowAttr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelectShowAttrActionPerformed(evt);
+            }
+        });
 
         FileOptions.setText("File");
 
@@ -133,24 +182,47 @@ public class MainMenu extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2))
-                .addContainerGap(40, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2)
+                    .addComponent(AnalyzeStrings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(49, 49, 49)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(SelectRegexLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(SelectRegex, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ShowAttrLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(SelectShowAttr, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 323, Short.MAX_VALUE))
+                    .addComponent(DisplayAttr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(SelectRegexLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(SelectRegex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(ShowAttrLabel)
+                        .addGap(5, 5, 5)
+                        .addComponent(SelectShowAttr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(DisplayAttr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(AnalyzeStrings)
+                .addGap(27, 27, 27)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void OpenFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpenFileActionPerformed
-        // TODO add your handling code here:
         String desktopPath = System.getProperty("user.home") + "/Desktop/";
         JFileChooser fileChooser = new JFileChooser(desktopPath);
         fileChooser.setFileFilter(new FileNameExtensionFilter("OLC files (*.olc)", "olc"));
@@ -250,8 +322,124 @@ public class MainMenu extends javax.swing.JFrame {
     }
     
     private void generateDFA(){
+        if (this.currentFile == null) {
+            JOptionPane.showMessageDialog(this, "No hay un archivo abierto", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String lines = this.TextEditor.getText();
+        if (lines.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El archivo está vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        ExreganLexer lexer = new ExreganLexer(new StringReader(lines));
+        parser p = new parser(lexer);
+        try {
+        p.parse();
+        if (p.Errors.size() > 0 || lexer.errors.size() > 0) {
+                JOptionPane.showMessageDialog(this, "El archivo contiene errores", "Error", JOptionPane.ERROR_MESSAGE);
+                this.errors.addAll(p.Errors);
+                this.errors.addAll(lexer.errors);
+                ReportHTML report = new ReportHTML();
+                String name = this.currentFile.getName().contains(".") ? this.currentFile.getName().substring(0, this.currentFile.getName().lastIndexOf(".")) : this.currentFile.getName();
+                report.generateHTMLReport(this.errors, name);
+                return;
+        }
+
+        setRegexIntoComboBox(p.Trees);
+
+    } catch (Exception e) {
+        this.Console.setText(e.getMessage());
+    }
         
     }
+
+    private void setRegexIntoComboBox(ArrayList<Tree> trees) throws IOException {
+        if (trees.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay expresiones regulares", "Error", JOptionPane.ERROR_MESSAGE);
+            this.SelectRegex.setEnabled(false);
+            return;
+        }
+        ReportGraphviz reportGraphviz = new ReportGraphviz();
+        for (Tree t : trees) {
+            this.SelectRegex.addItem(t.NameRegex);
+            ManageFile.generateGraphvizFile(this.reportARBOLES + t.NameRegex, reportGraphviz.generateTreeGraph(t.Root, t.NameRegex));
+            ManageFile.generateGraphvizFile(this.reportAFND + t.NameRegex, reportGraphviz.generateAFND(t.afnd));
+            ManageFile.generateGraphvizFile(this.reportAFD + t.NameRegex, reportGraphviz.generateAFD(t.afd));
+            ManageFile.generateGraphvizFile(this.reportSIGUIENTES + t.NameRegex, reportGraphviz.generateFollowTable(t.followTable, t.NameRegex));
+            ManageFile.generateGraphvizFile(this.reportTRANSICIONES + t.NameRegex, reportGraphviz.generateTransitionTable(t.transitionTable));
+        }
+        this.SelectRegex.setEnabled(true);
+        this.SelectShowAttr.setEnabled(true);
+        this.displayCurrentTree(this.SelectShowAttr.getSelectedItem().toString());
+    }
+
+    private void setAttrFromTree(){
+        this.SelectShowAttr.addItem("Árbol");
+        this.SelectShowAttr.addItem("Tabla de siguientes");
+        this.SelectShowAttr.addItem("Tabla de transiciones");
+        this.SelectShowAttr.addItem("AFD");
+        this.SelectShowAttr.addItem("AFND");
+    }
+
+    private void displayCurrentTree(String attr){
+        switch (attr) {
+            case "Árbol" -> this.displayTree();
+            case "Tabla de siguientes" -> this.displayFollowTable();
+            case "Tabla de transiciones" -> this.displayTransitionTable();
+            case "AFD" -> this.displayAFD();
+            case "AFND" -> this.displayAFND();
+            default -> {
+            }
+        }
+    }
+
+    private void displayTree(){
+        String regex = this.SelectRegex.getSelectedItem().toString();
+        String path = this.reportARBOLES + regex + ".png";
+        this.ShowAttrLabel.setIcon(new ImageIcon(path));
+    }
+
+    private void displayFollowTable(){
+        String regex = this.SelectRegex.getSelectedItem().toString();
+        String path = this.reportSIGUIENTES + regex + ".png";
+        this.ShowAttrLabel.setIcon(new ImageIcon(path));
+    }
+
+    private void displayTransitionTable(){
+        String regex = this.SelectRegex.getSelectedItem().toString();
+        String path = this.reportTRANSICIONES + regex + ".png";
+        this.ShowAttrLabel.setIcon(new ImageIcon(path));
+    }
+
+    private void displayAFD(){
+        String regex = this.SelectRegex.getSelectedItem().toString();
+        String path = this.reportAFD + regex + ".png";
+        this.ShowAttrLabel.setIcon(new ImageIcon(path));
+    }
+
+    private void displayAFND(){
+        String regex = this.SelectRegex.getSelectedItem().toString();
+        String path = this.reportAFND + regex + ".png";
+        this.ShowAttrLabel.setIcon(new ImageIcon(path));
+    }
+
+    private void SelectRegexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectRegexActionPerformed
+        // TODO add your handling code here:
+        if (this.SelectRegex.getSelectedItem() == null) {
+            return;
+        }
+        this.displayCurrentTree(this.SelectShowAttr.getSelectedItem().toString());
+    }//GEN-LAST:event_SelectRegexActionPerformed
+
+    private void SelectShowAttrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectShowAttrActionPerformed
+        // TODO add your handling code here:
+        if (this.SelectRegex.getSelectedItem() == null) {
+            return;
+        }
+        this.displayCurrentTree(this.SelectShowAttr.getSelectedItem().toString());
+    }//GEN-LAST:event_SelectShowAttrActionPerformed
+
+
     
     private void NewFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewFileActionPerformed
         // TODO add your handling code here:
@@ -285,6 +473,14 @@ public class MainMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         generateDFA();
     }//GEN-LAST:event_GenerateDFAActionPerformed
+
+    private void AnalyzeStringsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnalyzeStringsActionPerformed
+        try{
+            System.out.println("Analizando cadenas");
+    } catch (Exception e) {
+        // manejar la excepción aquí
+    }
+    }//GEN-LAST:event_AnalyzeStringsActionPerformed
 
    
     /**
@@ -323,7 +519,9 @@ public class MainMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AnalyzeStrings;
     private javax.swing.JTextArea Console;
+    private javax.swing.JLabel DisplayAttr;
     private javax.swing.JMenu FileOptions;
     private javax.swing.JMenuItem GenerateDFA;
     private javax.swing.JMenuBar MainMenuBar;
@@ -331,6 +529,10 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem OpenFile;
     private javax.swing.JMenuItem Save;
     private javax.swing.JMenuItem SaveAs;
+    private javax.swing.JComboBox<String> SelectRegex;
+    private javax.swing.JLabel SelectRegexLabel;
+    private javax.swing.JComboBox<String> SelectShowAttr;
+    private javax.swing.JLabel ShowAttrLabel;
     private javax.swing.JTextArea TextEditor;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

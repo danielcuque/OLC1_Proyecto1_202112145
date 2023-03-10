@@ -1,31 +1,31 @@
 package com.daniel.model;
 
-import java.awt.*;
 import java.io.*;
 
 
 public class ManageFile {
 
-    public static String ReadFiles(String path) {
+    public static void generateGraphvizFile(String path, String content){
+        File dot;
 
-        String line;
-        String text = "";
         try {
-            BufferedReader br = new BufferedReader(new FileReader(path));
-            while ((line = br.readLine()) != null) {
-                text += line + "\n";
-            }
-
-            br.close();
-        } catch (IOException e) {
+            dot = new File(path + ".dot");
+            FileWriter fw = new FileWriter(dot);
+            fw.write(content);
+            fw.close();
+            String[] command = {"dot", "-Tpng", dot.getAbsolutePath(), "-o", path + ".png"};
+            Process process = Runtime.getRuntime().exec(command);
+            process.waitFor();
+            process.waitFor();
+        }catch(IOException e){
             System.out.println("Error: " + e.getMessage());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-        return text;
 
     }
 
     public static void WriteFiles(String path, String content) {
-
         File f;
         FileWriter w;
         BufferedWriter bw;
