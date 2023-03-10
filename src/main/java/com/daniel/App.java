@@ -24,22 +24,28 @@ public class App {
 
         Set<DFA> dfa = new HashSet<>();
         Set<AFND> afnd = new HashSet<>();
-        String path = "src/examples/facil.olc";
+        String path = "src/examples/test1.olc";
         try {
             //ReportHTML report = new ReportHTML();
             String lines = ManageFile.ReadFiles(path);
             ExreganLexer lexer = new ExreganLexer(new StringReader(lines));
             parser p = new parser(lexer);
             p.parse();
-
+            ReportGraphviz reportGraphviz = new ReportGraphviz();
             for (Tree tree : p.Trees){
                 dfa.add(new DFA(tree.transitionTable));
-                afnd.add(new AFND(tree.Root, tree.NameRegex));
+                afnd.add(new AFND(tree.body, tree.NameRegex));
+
             }
 
-            ReportGraphviz reportGraphviz = new ReportGraphviz();
+            /*
+            for(DFA d : dfa){
+                System.out.println(reportGraphviz.generateAFD(d));
+            }*/
+
+
             for(AFND a : afnd){
-                System.out.println(a.toString());
+                System.out.println(reportGraphviz.generateAFND(a));
             }
 
             //Evaluar cadenas del p.CheckStrings

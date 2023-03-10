@@ -9,15 +9,18 @@ import java.util.HashSet;
 public class Tree {
 
     public Node Root;
+    public Node body;
     public String NameRegex;
     public FollowTable followTable = new FollowTable();
     public TransitionTable transitionTable;
 
 
+
     public Tree(Node body, String nameRegex, int operatorNodeCounter, int nodeCounter) {
         NameRegex = nameRegex;
+        this.body = body;
         this.Root = new Node(".", NodeType.AND, 0);
-        this.Root.left = body;
+        this.Root.left = this.body;
         this.Root.right = new Node("#", NodeType.ACCEPT, nodeCounter + 1);
 
         calculateTreeAttr(this.Root);

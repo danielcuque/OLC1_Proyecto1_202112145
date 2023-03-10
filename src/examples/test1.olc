@@ -7,8 +7,9 @@ CONJ: grupo1 -> %,&,$,,,<,;;
 CONJ: ascii-> -~-;
 
 // EXPreg -> . |{letra} "2" * {nums};
-EXPreg2 -> .. |{letra} "2" * {nums} . | * |{separados} {mayus} "x" {separados};
+//EXPreg2 -> .. |{letra} "2" * {nums} . | * |{separados} {mayus} "x" {separados};
 // EXPreg3 -> .{letra}+{letra};
+EXPReg -> .{nums}+{nums};
 
 // Para L(L|D)* | DD+ | D('.'D)?
 
