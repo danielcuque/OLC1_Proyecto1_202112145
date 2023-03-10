@@ -27,7 +27,7 @@ public class App {
 
         Set<DFA> dfa = new HashSet<>();
         Set<AFND> afnd = new HashSet<>();
-        String path = "src/examples/test1.olc";
+        String path = "src/examples/medio.olc";
         try {
             //ReportHTML report = new ReportHTML();
             String lines = ManageFile.ReadFiles(path);

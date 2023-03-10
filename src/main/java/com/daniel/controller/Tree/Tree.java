@@ -149,7 +149,10 @@ public class Tree {
                 mainAFND.concat(leftAFND, rightAFND);
                 return mainAFND;
             }
-            case OR -> mainAFND.union(leftAFND, rightAFND);
+            case OR -> {
+                mainAFND.union(leftAFND, rightAFND);
+                return mainAFND;
+            }
             case STAR -> {
                 mainAFND.kleene(leftAFND);
                 return mainAFND;
