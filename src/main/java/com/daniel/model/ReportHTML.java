@@ -107,71 +107,71 @@ public class ReportHTML {
     }
 
     private String htmlHeader() {
-        String header = "<!DOCTYPE html>\n" +
-                "<html lang=\"en\">\n" +
-                "  <head>\n" +
-                "    <meta charset=\"UTF-8\" />\n" +
-                "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n" +
-                "\n" +
-                "    <title>Tabla de errores</title>\n" +
-                "  </head>\n";
+        String header = """
+                <!DOCTYPE html>
+                <html lang="en">
+                  <head>
+                    <meta charset="UTF-8" />
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+                    <title>Tabla de errores</title>
+                  </head>
+                """;
         return header;
     }
 
     private String htmlBody(ArrayList<ExceptionReport> exceptions) {
-        String body = "";
-        body += "<div class=\"flex flex-col my-10 mx-2\">\n" +
-                "<h1 class=\"text-4xl mb-5 text-center font-medium\">Tabla de reportes</h1>\n" +
-                "<div class=\"relative overflow-x-auto\">\n" +
-                "    <table class=\"w-full text-sm text-left text-gray-400 bg-black rounded-xl\">\n" +
-                "        <thead class=\"text-xs uppercase text-gray-400\">\n" +
-                "            <tr>\n" +
-                "                <th scope=\"col\" class=\"px-6 py-3\">\n" +
-                "                    Tipo de error\n" +
-                "                </th>\n" +
-                "                <th scope=\"col\" class=\"px-6 py-3\">\n" +
-                "                    Descripción\n" +
-                "                </th>\n" +
-                "                <th scope=\"col\" class=\"px-6 py-3\">\n" +
-                "                    Línea\n" +
-                "                </th>\n" +
-                "                <th scope=\"col\" class=\"px-6 py-3\">\n" +
-                "                    Columna\n" +
-                "                </th>\n" +
-                "            </tr>\n" +
-                "        </thead>\n" +
-                "        <tbody>\n";
+        StringBuilder body = new StringBuilder();
+        body.append("""
+                <div class="flex flex-col my-10 mx-2">
+                <h1 class="text-4xl mb-5 text-center font-medium">Tabla de reportes</h1>
+                <div class="relative overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-400 bg-black rounded-xl">
+                        <thead class="text-xs uppercase text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    #
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Tipo de error
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Descripción
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Línea
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Columna
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                """);
+        int count = 0;
         for (ExceptionReport exception : exceptions) {
-            body += "<tr>\n"+
-                    "<th scope=\"row\" class=\"px-6 py-4 font-medium whitespace-nowrap text-white\">\n" +
-                    "                    "+ exception.type +"\n" +
-                    "                </th>\n" +
-                    "                <td class=\"px-6 py-4\">\n" +
-                    "                    "+ exception.description+"\n" +
-                    "                </td>\n" +
-                    "                <td class=\"px-6 py-4\">\n" +
-                    "                    "+ exception.line+"\n" +
-                    "                </td>\n" +
-                    "                <td class=\"px-6 py-4\">\n" +
-                    "                    "+exception.col+"\n" +
-                    "                </td>\n"+
-                    "</tr>\n";
+            body.append("""
+                    <tr>
+                                    <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-white">
+                                       \s""").append(count).append("\n").append("                </th>\n").append("<th scope=\"row\" class=\"px-6 py-4 font-medium whitespace-nowrap text-white\">\n").append("                    ").append(exception.type).append("\n").append("                </th>\n").append("                <td class=\"px-6 py-4\">\n").append("                    ").append(exception.description).append("\n").append("                </td>\n").append("                <td class=\"px-6 py-4\">\n").append("                    ").append(exception.line).append("\n").append("                </td>\n").append("                <td class=\"px-6 py-4\">\n").append("                    ").append(exception.col).append("\n").append("                </td>\n").append("</tr>\n");
+            count++;
         }
 
-        body +="\n" +
-                "        </tbody>\n" +
-                "    </table>\n" +
-                "</div>\n" +
-                "</div>\n" +
-                "</body>\n" +
-                "</html>\n";
-        return body;
+        body.append("""
+
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+                </body>
+                </html>
+                """);
+        return body.toString();
 
     }
 
     public void htmlReport(ArrayList<ExceptionReport> exceptions, String path) {
-        ManageFile manageFile = new ManageFile();
         String content = htmlHeader() + cssStyles() + htmlBody(exceptions);
-        manageFile.WriteFiles(path, content);
+        ManageFile.WriteFiles(path, content);
     }
 }

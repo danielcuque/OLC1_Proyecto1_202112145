@@ -37,6 +37,31 @@ public class DFA {
         return this.transitionTable.name;
     }
 
+    public Set<String> getLexemes (){
+        return this.transitionTable.getLexemes();
+    }
+
+    public Set<State> getStates(){
+        return this.transitionTable.states;
+    }
+
+    public Set<State> getFinalStates(){
+        return this.finalStates;
+    }
+
+    public State getState(int number){
+        for (State state: states){
+            if (state.getNumber() == number){
+                return state;
+            }
+        }
+        return null;
+    }
+
+    public Set<Transition> getTransitions(){
+        return this.transitionTable.transitions;
+    }
+
     public boolean accept(String input) {
             State currentState = initialState;
 

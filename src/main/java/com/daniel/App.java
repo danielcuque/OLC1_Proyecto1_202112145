@@ -1,5 +1,6 @@
 package com.daniel;
 
+import com.daniel.controller.AFND.AFND;
 import com.daniel.controller.CheckStrings.CheckString;
 import com.daniel.controller.Conjuntos.Conjunto;
 import com.daniel.controller.DFA.DFA;
@@ -22,6 +23,7 @@ public class App {
         //mainMenu.setVisible(true);
 
         Set<DFA> dfa = new HashSet<>();
+        Set<AFND> afnd = new HashSet<>();
         String path = "src/examples/facil.olc";
         try {
             //ReportHTML report = new ReportHTML();
@@ -32,12 +34,18 @@ public class App {
 
             for (Tree tree : p.Trees){
                 dfa.add(new DFA(tree.transitionTable));
+                afnd.add(new AFND(tree.Root, tree.NameRegex));
+            }
+
+            ReportGraphviz reportGraphviz = new ReportGraphviz();
+            for(AFND a : afnd){
+                System.out.println(a.toString());
             }
 
             //Evaluar cadenas del p.CheckStrings
-            ReportJSON reportJSON = new ReportJSON();
-            String json =  reportJSON.generateStringsEvaluation(dfa, p.CheckStrings);
-            System.out.println(json);
+            //ReportJSON reportJSON = new ReportJSON();
+            //String json =  reportJSON.generateStringsEvaluation(dfa, p.CheckStrings);
+            //System.out.println(json);
 
         }catch (java.lang.Exception e) {
             System.out.println("Error: " + e.getMessage());

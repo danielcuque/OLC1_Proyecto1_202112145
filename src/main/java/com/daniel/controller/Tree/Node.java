@@ -1,5 +1,7 @@
 package com.daniel.controller.Tree;
 
+import com.daniel.controller.TransitionTable.State;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,6 +18,9 @@ public class Node {
 
     public Node left;
     public Node right;
+
+    public State startState;
+    public State finalState;
 
     public Node(Object lexeme, NodeType type, int number) {
         this.lexeme = lexeme;

@@ -1,5 +1,6 @@
 package com.daniel.model;
 
+import com.daniel.controller.AFND.AFND;
 import com.daniel.controller.FollowTable.FollowTable;
 import com.daniel.controller.TransitionTable.State;
 import com.daniel.controller.TransitionTable.Transition;
@@ -144,6 +145,31 @@ public class ReportGraphviz {
 
         for (State state: transitionTable.states){
             Set<Transition> transitions = transitionTable.getTransitionsFromState(state);
+            for (Transition transition: transitions){
+                sb.append("\t").append(state.toString()).append(" -> ").append(transition.getNextState().toString()).append(" [label=\"").append(transition.getCharacter()).append("\"];\n");
+            }
+        }
+        sb.append("}");
+        return sb.toString();
+    }
+
+    public String generateAFND(AFND afnd){
+        StringBuilder sb = new StringBuilder();
+        sb.append("digraph ").append(afnd.getNameRegex()).append(" {\n");
+        sb.append("\tnode [fontname=\"Helvetica,Arial,sans-serif\"]\n" +
+                "\tedge [fontname=\"Helvetica,Arial,sans-serif\"]\n" +
+                "\trankdir=LR;\n");
+        sb.append("\tnode [shape = doublecircle]; ");
+        for (State state: afnd.states){
+            if (state.isAccepting){
+                sb.append(state.toString()).append(" ");
+            }
+        }
+        sb.append(";\n");
+        sb.append("\tnode [shape = circle];\n");
+
+        for (State state: afnd.states){
+            Set<Transition> transitions = afnd.getTransitionsFromState(state);
             for (Transition transition: transitions){
                 sb.append("\t").append(state.toString()).append(" -> ").append(transition.getNextState().toString()).append(" [label=\"").append(transition.getCharacter()).append("\"];\n");
             }

@@ -1,7 +1,5 @@
 package com.daniel.controller.TransitionTable;
 
-import com.daniel.controller.Tree.Node;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,9 +9,17 @@ public class State {
     public Set<Integer> follows;
     public boolean isAccepting = false;
 
+    public String lexeme;
+
     public State(int number) {
         this.number = number;
         this.follows = new HashSet<>();
+    }
+
+    public State(int number, boolean isAccepting, String lexeme) {
+        this.number = number;
+        this.isAccepting = isAccepting;
+        this.lexeme = lexeme;
     }
 
     @Override
@@ -25,4 +31,15 @@ public class State {
     public int getNumber() {
         return number;
     }
+
+    public void setAccepting(boolean accepting) {
+        isAccepting = accepting;
+    }
+
+    public void setLexeme(String lexeme) {
+        this.lexeme = lexeme;
+    }
+
+
+
 }
