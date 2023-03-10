@@ -61,7 +61,7 @@ MultiLineComment   = "<!" [^*] ~"!>" | "<!" "!"+ ">"
 // Comment can be the last line of the file, without line terminator.
 EndOfLineComment     = "//" {InputCharacter}* {LineTerminator}?
 
-Identifier = [a-zA-Z_]+[a-zA-Z0-9_]*
+Identifier = [a-zA-Z]+[a-zA-Z0-9_]*
 Lowercase = [a-z]{1}
 Uppercase = [A-Z]{1}
 Digit = [0-9]+

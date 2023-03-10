@@ -1,6 +1,7 @@
 package com.daniel.controller.Tree;
 
 import com.daniel.controller.AFND.AFND;
+import com.daniel.controller.DFA.DFA;
 import com.daniel.controller.FollowTable.FollowTable;
 import com.daniel.controller.TransitionTable.State;
 import com.daniel.controller.TransitionTable.TransitionTable;
@@ -15,6 +16,7 @@ public class Tree {
     public FollowTable followTable = new FollowTable();
     public TransitionTable transitionTable;
     public AFND afnd;
+    public DFA afd;
 
 
 
@@ -28,6 +30,7 @@ public class Tree {
         calculateTreeAttr(this.Root);
         calculateFollow(this.Root);
         initializeTransitionTable();
+        calculateDFA();
         this.afnd = makeThompson(this.body);
         this.afnd.name = this.NameRegex;
     }
@@ -126,6 +129,10 @@ public class Tree {
                 root.last.add(root.number);
             }
         }
+    }
+
+    public void calculateDFA(){
+        this.afd = new DFA(this.transitionTable);
     }
 
     private AFND makeThompson(Node node){

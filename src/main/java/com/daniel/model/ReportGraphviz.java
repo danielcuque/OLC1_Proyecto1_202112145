@@ -114,7 +114,7 @@ public class ReportGraphviz {
             for (String character: transitionTable.getLexemes()) {
                 sb.append("                <TD>");
                 for (Transition transition: transitions){
-                    if (transition.getCharacter().equals(character)){
+                    if (transition.getCharacter().toString().equals(character.toString())){
                         sb.append(transition.getNextState().toString()).append(" ");
                     }
                 }

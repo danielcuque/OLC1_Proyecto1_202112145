@@ -46,13 +46,13 @@ public class parser extends java_cup.runtime.lr_parser {
     "\006\000\002\004\004\000\002\004\003\000\002\005\011" +
     "\000\002\006\003\000\002\006\003\000\002\007\005\000" +
     "\002\007\005\000\002\007\005\000\002\007\005\000\002" +
+    "\010\004\000\002\010\003\000\002\011\005\000\002\011" +
+    "\004\000\002\012\003\000\002\012\003\000\002\012\003" +
+    "\000\002\012\003\000\002\020\003\000\002\020\003\000" +
+    "\002\020\003\000\002\020\003\000\002\020\003\000\002" +
     "\020\003\000\002\020\003\000\002\020\003\000\002\020" +
     "\003\000\002\020\003\000\002\020\003\000\002\020\003" +
-    "\000\002\020\003\000\002\020\003\000\002\020\003\000" +
-    "\002\020\003\000\002\020\003\000\002\020\003\000\002" +
-    "\020\003\000\002\010\004\000\002\010\003\000\002\011" +
-    "\005\000\002\011\004\000\002\012\003\000\002\012\003" +
-    "\000\002\012\003\000\002\012\003\000\002\015\004\000" +
+    "\000\002\020\003\000\002\020\003\000\002\015\004\000" +
     "\002\015\003\000\002\016\007\000\002\017\005\000\002" +
     "\017\005\000\002\017\004\000\002\017\004\000\002\017" +
     "\004\000\002\017\005\000\002\017\003\000\002\017\003" +
@@ -105,34 +105,34 @@ public class parser extends java_cup.runtime.lr_parser {
     "\uffd7\017\uffd7\022\uffd7\023\uffd7\030\uffd7\001\002\000\004" +
     "\012\uffdf\001\002\000\004\026\ufffe\001\002\000\004\026" +
     "\056\001\002\000\004\010\057\001\002\000\004\011\060" +
-    "\001\002\000\044\005\073\006\066\007\074\010\076\011" +
+    "\001\002\000\044\005\074\006\066\007\073\010\076\011" +
     "\061\012\064\013\101\014\072\015\065\016\105\017\062" +
     "\021\077\022\063\024\075\025\102\027\071\031\104\001" +
-    "\002\000\010\020\uffe9\021\uffe9\022\uffe9\001\002\000\010" +
-    "\020\uffeb\021\uffeb\022\uffeb\001\002\000\010\020\uffec\021" +
-    "\uffec\022\uffec\001\002\000\010\020\uffe8\021\uffe8\022\uffe8" +
-    "\001\002\000\010\020\ufff2\021\ufff2\022\ufff2\001\002\000" +
-    "\010\020\uffef\021\uffef\022\uffef\001\002\000\004\022\127" +
+    "\002\000\010\020\uffe1\021\uffe1\022\uffe1\001\002\000\010" +
+    "\020\uffe3\021\uffe3\022\uffe3\001\002\000\010\020\uffe4\021" +
+    "\uffe4\022\uffe4\001\002\000\010\020\uffe0\021\uffe0\022\uffe0" +
+    "\001\002\000\010\020\uffea\021\uffea\022\uffea\001\002\000" +
+    "\010\020\uffe7\021\uffe7\022\uffe7\001\002\000\004\022\127" +
     "\001\002\000\004\022\ufffa\001\002\000\010\020\125\021" +
-    "\uffe1\022\uffe1\001\002\000\010\020\ufff3\021\ufff3\022\ufff3" +
-    "\001\002\000\010\020\ufff0\021\ufff0\022\ufff0\001\002\000" +
-    "\010\020\uffee\021\uffee\022\uffee\001\002\000\010\020\123" +
-    "\021\uffe3\022\uffe3\001\002\000\010\020\uffea\021\uffea\022" +
-    "\uffea\001\002\000\010\020\uffed\021\uffed\022\uffed\001\002" +
-    "\000\010\020\121\021\uffe0\022\uffe0\001\002\000\010\020" +
-    "\ufff4\021\ufff4\022\ufff4\001\002\000\010\020\117\021\uffe2" +
-    "\022\uffe2\001\002\000\006\021\107\022\uffe6\001\002\000" +
-    "\010\020\ufff5\021\ufff5\022\ufff5\001\002\000\010\020\ufff1" +
-    "\021\ufff1\022\ufff1\001\002\000\004\022\ufffb\001\002\000" +
-    "\044\005\073\006\066\007\074\010\076\011\061\012\064" +
+    "\uffef\022\uffef\001\002\000\010\020\uffeb\021\uffeb\022\uffeb" +
+    "\001\002\000\010\020\uffe6\021\uffe6\022\uffe6\001\002\000" +
+    "\010\020\uffe8\021\uffe8\022\uffe8\001\002\000\010\020\123" +
+    "\021\ufff1\022\ufff1\001\002\000\010\020\uffe2\021\uffe2\022" +
+    "\uffe2\001\002\000\010\020\uffe5\021\uffe5\022\uffe5\001\002" +
+    "\000\010\020\121\021\uffee\022\uffee\001\002\000\010\020" +
+    "\uffec\021\uffec\022\uffec\001\002\000\010\020\117\021\ufff0" +
+    "\022\ufff0\001\002\000\006\021\107\022\ufff4\001\002\000" +
+    "\010\020\uffed\021\uffed\022\uffed\001\002\000\010\020\uffe9" +
+    "\021\uffe9\022\uffe9\001\002\000\004\022\ufffb\001\002\000" +
+    "\044\005\074\006\066\007\073\010\076\011\061\012\064" +
     "\013\101\014\072\015\065\016\105\017\062\021\077\022" +
     "\063\024\112\025\114\027\111\031\104\001\002\000\004" +
-    "\022\uffe7\001\002\000\006\021\uffe1\022\uffe1\001\002\000" +
-    "\006\021\uffe3\022\uffe3\001\002\000\006\021\uffe0\022\uffe0" +
-    "\001\002\000\006\021\uffe2\022\uffe2\001\002\000\006\021" +
-    "\107\022\uffe4\001\002\000\004\022\uffe5\001\002\000\004" +
+    "\022\ufff5\001\002\000\006\021\uffef\022\uffef\001\002\000" +
+    "\006\021\ufff1\022\ufff1\001\002\000\006\021\uffee\022\uffee" +
+    "\001\002\000\006\021\ufff0\022\ufff0\001\002\000\006\021" +
+    "\107\022\ufff2\001\002\000\004\022\ufff3\001\002\000\004" +
     "\025\120\001\002\000\004\022\ufff8\001\002\000\036\005" +
-    "\073\006\066\007\074\010\076\011\061\012\064\013\101" +
+    "\074\006\066\007\073\010\076\011\061\012\064\013\101" +
     "\014\072\015\065\016\105\017\062\021\077\022\063\031" +
     "\104\001\002\000\004\022\ufff6\001\002\000\004\024\124" +
     "\001\002\000\004\022\ufff9\001\002\000\004\027\126\001" +
@@ -448,203 +448,7 @@ RESULT = a1 + "~" + a2;
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 12: // AsciiGroup ::= ASCII 
-            {
-              String RESULT =null;
-		int aleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
-		int aright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
-		String a = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
-RESULT = a;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("AsciiGroup",14, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 13: // AsciiGroup ::= DOT 
-            {
-              String RESULT =null;
-		int dotleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
-		int dotright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
-		String dot = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
-RESULT = dot;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("AsciiGroup",14, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 14: // AsciiGroup ::= STAR 
-            {
-              String RESULT =null;
-		int starleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
-		int starright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
-		String star = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
-RESULT = star;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("AsciiGroup",14, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 15: // AsciiGroup ::= PLUS 
-            {
-              String RESULT =null;
-		int plusleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
-		int plusright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
-		String plus = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
-RESULT = plus;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("AsciiGroup",14, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 16: // AsciiGroup ::= QUERY 
-            {
-              String RESULT =null;
-		int queryleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
-		int queryright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
-		String query = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
-RESULT = query;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("AsciiGroup",14, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 17: // AsciiGroup ::= LBRACE 
-            {
-              String RESULT =null;
-		int lbraceleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
-		int lbraceright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
-		String lbrace = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
-RESULT = lbrace;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("AsciiGroup",14, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 18: // AsciiGroup ::= RBRACE 
-            {
-              String RESULT =null;
-		int rbraceleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
-		int rbraceright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
-		String rbrace = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
-RESULT = rbrace;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("AsciiGroup",14, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 19: // AsciiGroup ::= COLON 
-            {
-              String RESULT =null;
-		int colonleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
-		int colonright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
-		String colon = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
-RESULT = colon;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("AsciiGroup",14, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 20: // AsciiGroup ::= COMMA 
-            {
-              String RESULT =null;
-		int commaleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
-		int commaright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
-		String comma = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
-RESULT = comma;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("AsciiGroup",14, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 21: // AsciiGroup ::= SEMICOLON 
-            {
-              String RESULT =null;
-		int semileft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
-		int semiright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
-		String semi = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
-RESULT = semi;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("AsciiGroup",14, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 22: // AsciiGroup ::= PIPE 
-            {
-              String RESULT =null;
-		int pipeleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
-		int piperight = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
-		String pipe = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
-RESULT = pipe;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("AsciiGroup",14, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 23: // AsciiGroup ::= BODY_ARROW 
-            {
-              String RESULT =null;
-		int bodyleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
-		int bodyright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
-		String body = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
-RESULT = body;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("AsciiGroup",14, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 24: // AsciiGroup ::= HEAD_ARROW 
-            {
-              String RESULT =null;
-		int headleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
-		int headright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
-		String head = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
-RESULT = head;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("AsciiGroup",14, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 25: // AsciiGroup ::= PERCENT 
-            {
-              String RESULT =null;
-		int percentleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
-		int percentright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
-		String percent = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
-RESULT = percent;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("AsciiGroup",14, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 26: // IndExp ::= UnitSymbol MoreIndExp 
+          case 12: // IndExp ::= UnitSymbol MoreIndExp 
             {
               String RESULT =null;
 		int uleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
@@ -661,7 +465,7 @@ RESULT = u + m;
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 27: // IndExp ::= UnitSymbol 
+          case 13: // IndExp ::= UnitSymbol 
             {
               String RESULT =null;
 		int uleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
@@ -675,7 +479,7 @@ RESULT = u;
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 28: // MoreIndExp ::= COMMA UnitSymbol MoreIndExp 
+          case 14: // MoreIndExp ::= COMMA UnitSymbol MoreIndExp 
             {
               String RESULT =null;
 		int cleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -695,7 +499,7 @@ RESULT = c + u + m;
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 29: // MoreIndExp ::= COMMA UnitSymbol 
+          case 15: // MoreIndExp ::= COMMA UnitSymbol 
             {
               String RESULT =null;
 		int cleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
@@ -712,7 +516,7 @@ RESULT = c + u;
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 30: // UnitSymbol ::= LOWERCASE 
+          case 16: // UnitSymbol ::= LOWERCASE 
             {
               String RESULT =null;
 		int lleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
@@ -726,7 +530,7 @@ RESULT = l;
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 31: // UnitSymbol ::= UPPERCASE 
+          case 17: // UnitSymbol ::= UPPERCASE 
             {
               String RESULT =null;
 		int uleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
@@ -740,7 +544,7 @@ elementos.add(u);
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 32: // UnitSymbol ::= DIGIT 
+          case 18: // UnitSymbol ::= DIGIT 
             {
               String RESULT =null;
 		int dleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
@@ -754,7 +558,7 @@ elementos.add(d);
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 33: // UnitSymbol ::= AsciiGroup 
+          case 19: // UnitSymbol ::= AsciiGroup 
             {
               String RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
@@ -764,6 +568,202 @@ elementos.add(d);
 elementos.add(a);
 RESULT = a; 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("UnitSymbol",8, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 20: // AsciiGroup ::= ASCII 
+            {
+              String RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+RESULT = a;
+
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("AsciiGroup",14, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 21: // AsciiGroup ::= DOT 
+            {
+              String RESULT =null;
+		int dotleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int dotright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		String dot = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+RESULT = dot;
+
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("AsciiGroup",14, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 22: // AsciiGroup ::= STAR 
+            {
+              String RESULT =null;
+		int starleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int starright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		String star = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+RESULT = star;
+
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("AsciiGroup",14, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 23: // AsciiGroup ::= PLUS 
+            {
+              String RESULT =null;
+		int plusleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int plusright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		String plus = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+RESULT = plus;
+
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("AsciiGroup",14, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 24: // AsciiGroup ::= QUERY 
+            {
+              String RESULT =null;
+		int queryleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int queryright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		String query = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+RESULT = query;
+
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("AsciiGroup",14, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 25: // AsciiGroup ::= LBRACE 
+            {
+              String RESULT =null;
+		int lbraceleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int lbraceright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		String lbrace = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+RESULT = lbrace;
+
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("AsciiGroup",14, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 26: // AsciiGroup ::= RBRACE 
+            {
+              String RESULT =null;
+		int rbraceleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int rbraceright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		String rbrace = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+RESULT = rbrace;
+
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("AsciiGroup",14, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 27: // AsciiGroup ::= COLON 
+            {
+              String RESULT =null;
+		int colonleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int colonright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		String colon = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+RESULT = colon;
+
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("AsciiGroup",14, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 28: // AsciiGroup ::= COMMA 
+            {
+              String RESULT =null;
+		int commaleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int commaright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		String comma = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+RESULT = comma;
+
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("AsciiGroup",14, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 29: // AsciiGroup ::= SEMICOLON 
+            {
+              String RESULT =null;
+		int semileft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int semiright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		String semi = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+RESULT = semi;
+
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("AsciiGroup",14, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 30: // AsciiGroup ::= PIPE 
+            {
+              String RESULT =null;
+		int pipeleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int piperight = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		String pipe = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+RESULT = pipe;
+
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("AsciiGroup",14, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 31: // AsciiGroup ::= BODY_ARROW 
+            {
+              String RESULT =null;
+		int bodyleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int bodyright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		String body = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+RESULT = body;
+
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("AsciiGroup",14, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 32: // AsciiGroup ::= HEAD_ARROW 
+            {
+              String RESULT =null;
+		int headleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int headright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		String head = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+RESULT = head;
+
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("AsciiGroup",14, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 33: // AsciiGroup ::= PERCENT 
+            {
+              String RESULT =null;
+		int percentleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int percentright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		String percent = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+RESULT = percent;
+
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("AsciiGroup",14, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 

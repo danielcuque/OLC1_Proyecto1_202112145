@@ -1,16 +1,11 @@
 package com.daniel;
 
 import com.daniel.controller.AFND.AFND;
-import com.daniel.controller.CheckStrings.CheckString;
-import com.daniel.controller.Conjuntos.Conjunto;
 import com.daniel.controller.DFA.DFA;
-import com.daniel.controller.Errors.ExceptionReport;
-import com.daniel.controller.Tree.Node;
 import com.daniel.controller.Tree.Tree;
 import com.daniel.model.ManageFile;
 import com.daniel.model.ReportGraphviz;
-import com.daniel.model.ReportJSON;
-import com.daniel.view.MainMenu;
+import java_cup.runtime.Symbol;
 
 import java.io.StringReader;
 import java.util.HashSet;
@@ -25,9 +20,7 @@ public class App {
         //MainMenu mainMenu = new MainMenu();
         //mainMenu.setVisible(true);
 
-        Set<DFA> dfa = new HashSet<>();
-        Set<AFND> afnd = new HashSet<>();
-        String path = "src/examples/medio.olc";
+        String path = "src/examples/dificil.olc";
         try {
             //ReportHTML report = new ReportHTML();
             String lines = ManageFile.ReadFiles(path);
@@ -36,9 +29,11 @@ public class App {
             p.parse();
             ReportGraphviz reportGraphviz = new ReportGraphviz();
             for (Tree tree : p.Trees){
-                dfa.add(new DFA(tree.transitionTable));
-                afnd.add(tree.afnd);
-
+                //System.out.println(reportGraphviz.generateTreeGraph(tree.Root, tree.NameRegex));
+                //System.out.println(reportGraphviz.generateFollowTable(tree.followTable, tree.NameRegex));
+                //System.out.println(reportGraphviz.generateTransitionTable(tree.transitionTable));
+                //System.out.println(reportGraphviz.generateAFND(tree.afnd));
+                System.out.println(reportGraphviz.generateTransitionTable(tree.transitionTable));
             }
 
 
@@ -46,10 +41,10 @@ public class App {
             for(DFA d : dfa){
                 System.out.println(reportGraphviz.generateAFD(d));
             }*/
-
+/*
             for(AFND a : afnd){
                 System.out.println(reportGraphviz.generateAFND(a));
-            }
+            }*/
 
             //Evaluar cadenas del p.CheckStrings
             //ReportJSON reportJSON = new ReportJSON();

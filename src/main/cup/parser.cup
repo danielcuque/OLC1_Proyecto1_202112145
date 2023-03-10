@@ -110,6 +110,32 @@ RESULT = a1 + "~" + a2;
 :}
 ;
 
+IndExp ::=  UnitSymbol:u MoreIndExp:m {:
+RESULT = u + m;
+:} | UnitSymbol:u {:
+RESULT = u;
+:};
+
+MoreIndExp ::= COMMA:c UnitSymbol:u MoreIndExp:m {:
+RESULT = c + u + m;
+:} | COMMA:c UnitSymbol:u {:
+RESULT = c + u;
+:};
+
+UnitSymbol ::=
+LOWERCASE:l {:
+elementos.add(l);
+RESULT = l; :}
+| UPPERCASE:u {:
+elementos.add(u);
+ RESULT = u; :}
+| DIGIT:d {:
+elementos.add(d);
+ RESULT = d; :}
+| AsciiGroup:a {:
+elementos.add(a);
+RESULT = a; :};
+
 AsciiGroup ::= ASCII:a {:
 RESULT = a;
 :}
@@ -153,33 +179,6 @@ RESULT = head;
 RESULT = percent;
 :}
 ;
-
-
-IndExp ::=  UnitSymbol:u MoreIndExp:m {:
-RESULT = u + m;
-:} | UnitSymbol:u {:
-RESULT = u;
-:};
-
-MoreIndExp ::= COMMA:c UnitSymbol:u MoreIndExp:m {:
-RESULT = c + u + m;
-:} | COMMA:c UnitSymbol:u {:
-RESULT = c + u;
-:};
-
-UnitSymbol ::=
-LOWERCASE:l {:
-elementos.add(l);
-RESULT = l; :}
-| UPPERCASE:u {:
-elementos.add(u);
- RESULT = u; :}
-| DIGIT:d {:
-elementos.add(d);
- RESULT = d; :}
-| AsciiGroup:a {:
-elementos.add(a);
-RESULT = a; :};
 
 // Definimos la sección para la asignación de expresiones regulares a conjuntos
 ExpBody ::= ExpLine ExpBody | ExpLine ;
