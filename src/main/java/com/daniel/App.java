@@ -5,6 +5,7 @@ import com.daniel.controller.CheckStrings.CheckString;
 import com.daniel.controller.Conjuntos.Conjunto;
 import com.daniel.controller.DFA.DFA;
 import com.daniel.controller.Errors.ExceptionReport;
+import com.daniel.controller.Tree.Node;
 import com.daniel.controller.Tree.Tree;
 import com.daniel.model.ManageFile;
 import com.daniel.model.ReportGraphviz;
@@ -17,6 +18,8 @@ import java.util.Set;
 
 
 public class App {
+
+
     public static void main(String[] args) {
         
         //MainMenu mainMenu = new MainMenu();
@@ -34,15 +37,15 @@ public class App {
             ReportGraphviz reportGraphviz = new ReportGraphviz();
             for (Tree tree : p.Trees){
                 dfa.add(new DFA(tree.transitionTable));
-                afnd.add(new AFND(tree.body, tree.NameRegex));
+                afnd.add(tree.afnd);
 
             }
+
 
             /*
             for(DFA d : dfa){
                 System.out.println(reportGraphviz.generateAFD(d));
             }*/
-
 
             for(AFND a : afnd){
                 System.out.println(reportGraphviz.generateAFND(a));

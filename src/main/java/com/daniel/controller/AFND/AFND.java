@@ -2,7 +2,7 @@ package com.daniel.controller.AFND;
 
 import com.daniel.controller.TransitionTable.State;
 import com.daniel.controller.TransitionTable.Transition;
-import com.daniel.controller.Tree.*;
+import com.daniel.controller.Tree.Node;
 
 import java.util.*;
 
@@ -14,13 +14,10 @@ public class AFND {
     private int stateCount = 0;
     public State finalState;
     public State initialState;
+    private final String EPSILON = "ε";
+    public String name;
 
-    private final String name;
-    
-    private String EPSILON = "ε";
-
-    public AFND(Node root, String name){
-        this.name = name;
+    public AFND(){
         this.states = new ArrayList<>();
         this.transitions = new ArrayList<>();
     }
@@ -57,10 +54,8 @@ public class AFND {
     }
 
     public void concat(AFND left, AFND right){
-
         this.initialState = left.initialState; // LEFT INIT is new INIT
         this.finalState = right.finalState; // RIGHT FINAL is new FINAL
-
         this.addAllStates(left.states); // ADD LEFT STATES
 
         // Exclude right initial state
@@ -76,7 +71,7 @@ public class AFND {
         // Concat left final to right initial and the rest of right transitions
         for(Transition t : right.transitions){
             if(t.getCurrentState().equals(right.initialState)) {
-                this.insertTransition(t.getCurrentState(), t.getCharacterString(), left.finalState);
+                this.insertTransition(left.finalState, t.getCharacterString(), t.getNextState());
             }else{
                 this.insertTransition(t.getCurrentState(), t.getCharacterString(), t.getNextState());
             }
@@ -88,8 +83,8 @@ public class AFND {
         this.initialState = this.addState(); // NEW INIT
         this.finalState = this.addState(); // NEW FINAL
 
-        this.insertTransition(this.initialState,this.EPSILON, left.initialState); // INIT -> LEFT INIT
-        this.insertTransition(this.initialState,this.EPSILON, right.initialState); // INIT -> RIGHT INIT
+        this.insertTransition(this.initialState, this.EPSILON, left.initialState); // INIT -> LEFT INIT
+        this.insertTransition(this.initialState, this.EPSILON, right.initialState); // INIT -> RIGHT INIT
 
         this.insertTransition(left.finalState,this.EPSILON, this.finalState); // LEFT FINAL -> FINAL
         this.insertTransition(right.finalState,EPSILON, this.finalState); // RIGHT FINAL -> FINAL
@@ -102,6 +97,12 @@ public class AFND {
 
         // Add right transitions
         this.transitions.addAll(right.transitions);
+    }
+
+    public void nodei(Node token){
+        State initJoin = this.addInitialState();
+        State finalJoin = this.addFinalState();
+        this.insertTransition(initJoin, token.lexeme.toString(), finalJoin);
     }
 
     public void plus(AFND ndfa){

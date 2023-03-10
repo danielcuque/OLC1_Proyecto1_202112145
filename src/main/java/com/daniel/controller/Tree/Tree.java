@@ -1,5 +1,6 @@
 package com.daniel.controller.Tree;
 
+import com.daniel.controller.AFND.AFND;
 import com.daniel.controller.FollowTable.FollowTable;
 import com.daniel.controller.TransitionTable.State;
 import com.daniel.controller.TransitionTable.TransitionTable;
@@ -13,6 +14,7 @@ public class Tree {
     public String NameRegex;
     public FollowTable followTable = new FollowTable();
     public TransitionTable transitionTable;
+    public AFND afnd;
 
 
 
@@ -26,6 +28,8 @@ public class Tree {
         calculateTreeAttr(this.Root);
         calculateFollow(this.Root);
         initializeTransitionTable();
+        this.afnd = makeThompson(this.body);
+        this.afnd.name = this.NameRegex;
     }
 
     public void initializeTransitionTable() {
@@ -122,6 +126,44 @@ public class Tree {
                 root.last.add(root.number);
             }
         }
+    }
+
+    private AFND makeThompson(Node node){
+        AFND mainAFND = new AFND();
+        AFND leftAFND = null;
+        AFND rightAFND = null;
+
+        if(node.left != null){
+            leftAFND = makeThompson(node.left);
+        }
+        if(node.right != null){
+            rightAFND = makeThompson(node.right);
+        }
+
+        switch (node.type) {
+            case LEAVE -> {
+                mainAFND.nodei(findNode(node, node.number));
+                return mainAFND;
+            }
+            case AND -> {
+                mainAFND.concat(leftAFND, rightAFND);
+                return mainAFND;
+            }
+            case OR -> mainAFND.union(leftAFND, rightAFND);
+            case STAR -> {
+                mainAFND.kleene(leftAFND);
+                return mainAFND;
+            }
+            case PLUS -> {
+                mainAFND.plus(leftAFND);
+                return mainAFND;
+            }
+            case QUERY -> {
+                mainAFND.optional(leftAFND);
+                return mainAFND;
+            }
+        }
+        return null;
     }
 
     private Node findNode(Node root, int number) {

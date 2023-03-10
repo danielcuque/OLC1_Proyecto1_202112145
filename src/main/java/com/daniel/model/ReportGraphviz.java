@@ -162,19 +162,15 @@ public class ReportGraphviz {
                 "\tedge [fontname=\"Helvetica,Arial,sans-serif\"]\n" +
                 "\trankdir=LR;\n");
         sb.append("\tnode [shape = doublecircle]; ");
-        sb.append(afnd.finalStateNFA.toString());
+        sb.append(afnd.finalState.toString());
         sb.append(";\n");
         sb.append("\tnode [shape = circle];\n");
 
-        String finalState = "";
         for (State state: afnd.states){
             for (Transition transition: afnd.getTransitionsFromState(state)){
                 sb.append("\t").append(state.toString()).append(" -> ").append(transition.getNextState().toString()).append(" [label=\"").append(transition.getCharacter()).append("\"];\n");
-                finalState = transition.getNextState().toString();
             }
         }
-        // Agregar al final el estado de aceptación
-        sb.append("\t").append(finalState).append(" -> ").append(afnd.finalStateNFA.toString()).append("[label=\"").append("ε").append("\"];\n");
 
         sb.append("}");
         return sb.toString();
