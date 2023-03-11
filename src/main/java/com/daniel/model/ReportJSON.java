@@ -4,12 +4,10 @@ import com.daniel.controller.CheckStrings.CheckString;
 import com.daniel.controller.DFA.DFA;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 public class ReportJSON {
 
-    public String generateStringsEvaluation(Set<DFA> dfas, ArrayList<CheckString> checkStrings){
-
+    public String generateStringsEvaluation(ArrayList<DFA> dfas, ArrayList<CheckString> checkStrings){
         StringBuilder json = new StringBuilder("[");
         for (CheckString checkString : checkStrings){
             for (DFA dfa : dfas){

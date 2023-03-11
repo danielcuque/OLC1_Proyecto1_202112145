@@ -7,8 +7,8 @@ digraph decimales {
 	q0 -> q2 [label="ε"];
 	q1 -> q4 [label="."];
 	q2 -> q3 [label="digito"];
-	q3 -> q1 [label="ε"];
 	q3 -> q2 [label="ε"];
+	q3 -> q1 [label="ε"];
 	q4 -> q6 [label="ε"];
 	q6 -> q7 [label="digito"];
 	q7 -> q6 [label="ε"];
