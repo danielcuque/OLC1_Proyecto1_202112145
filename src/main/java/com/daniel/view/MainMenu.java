@@ -8,10 +8,7 @@ import com.daniel.controller.CheckStrings.CheckString;
 import com.daniel.controller.DFA.DFA;
 import com.daniel.controller.Errors.ExceptionReport;
 import com.daniel.controller.Tree.Tree;
-import com.daniel.model.ManageFile;
-import com.daniel.model.ReportGraphviz;
-import com.daniel.model.ReportHTML;
-import com.daniel.model.ReportJSON;
+import com.daniel.model.*;
 import com.daniel.parser;
 
 import java.awt.*;
@@ -23,6 +20,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -39,9 +38,8 @@ public class MainMenu extends javax.swing.JFrame {
     private File currentFile;
     private boolean isSaved = false;
     private ArrayList<ExceptionReport> errors = new ArrayList<>();
-    private ArrayList<DFA> dfas = new ArrayList<>();
-    private ArrayList<CheckString> checkStrings = new ArrayList<>();
-    //private Tree currentTree = null;
+    private Set<DFA> dfas;
+    private ArrayList<CheckString> checkStrings;
 
     // Rutas de los reportes
     private final String reportAFD = "src/reports/AFD_202112145/";
@@ -56,6 +54,7 @@ public class MainMenu extends javax.swing.JFrame {
         this.SelectRegex.setEnabled(false);
         this.ShowDFAAttr.setEnabled(false);
         this.AnalyzeStrings.setEnabled(false);
+        this.dfas = new HashSet<>();
         this.setAttrFromTree();
     }
 
@@ -245,19 +244,19 @@ public class MainMenu extends javax.swing.JFrame {
             this.currentFile = file;
             
             this.setTitle("Archivo "+ file.getName());
+            // Limpiamos la consola
+            this.TextEditor.setText("");
             try {
                 FileReader fr = new FileReader(file);
                 BufferedReader br = new BufferedReader(fr);
-                
-    String line;
-    while ((line = br.readLine()) != null) {
-        this.TextEditor.append(line + "\n");
-        
-    }
-    br.close();
-} catch (IOException e) {
-    // Maneja cualquier error de lectura del archivo
-}
+                String line;
+                while ((line = br.readLine()) != null) {
+                    this.TextEditor.append(line + "\n");
+                }
+                br.close();
+            } catch (IOException e) {
+                // Maneja cualquier error de lectura del archivo
+                }
         }
     }//GEN-LAST:event_OpenFileActionPerformed
 
@@ -348,6 +347,7 @@ public class MainMenu extends javax.swing.JFrame {
         parser p = new parser(lexer);
         try {
         p.parse();
+
         if (p.Errors.size() > 0 || lexer.errors.size() > 0) {
                 JOptionPane.showMessageDialog(this, "El archivo contiene errores", "Error", JOptionPane.ERROR_MESSAGE);
                 this.errors.addAll(p.Errors);
@@ -357,6 +357,7 @@ public class MainMenu extends javax.swing.JFrame {
                 report.generateHTMLReport(this.errors, name);
                 return;
         }
+        this.Console.setText("Archivo analizado correctamente");
         if (!p.CheckStrings.isEmpty()){
             this.checkStrings = p.CheckStrings;
             this.AnalyzeStrings.setEnabled(true);
@@ -415,29 +416,7 @@ public class MainMenu extends javax.swing.JFrame {
     private void setScaleImage(String path){
         ImageIcon imageIcon = new ImageIcon(path);
         Image image = imageIcon.getImage();
-/*
-// Obtener las dimensiones originales de la imagen
-        int originalWidth = image.getWidth(null);
-        int originalHeight = image.getHeight(null);
 
-// Obtener la relación de aspecto de la imagen
-        double aspectRatio = (double) originalWidth / originalHeight;
-
-// Establecer el tamaño máximo de la imagen
-        int maxWidth = 200;
-        int maxHeight = 200;
-
-// Escalar la imagen en función de la relación de aspecto
-        int newWidth = (int) (maxHeight * aspectRatio);
-        int newHeight = maxHeight;
-
-        if (newWidth > maxWidth) {
-            newWidth = maxWidth;
-            newHeight = (int) (maxWidth / aspectRatio);
-        }
-
-
-        Image scaled = image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);*/
         DisplayAttr.setIcon(new ImageIcon(image));
 
         // Permitir scroll si es necesario
@@ -492,12 +471,17 @@ public class MainMenu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No hay cadenas para analizar", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if (this.dfas.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay expresiones regulares", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         ReportJSON reportJSON = new ReportJSON();
         String name = this.currentFile.getName().contains(".") ? this.currentFile.getName().substring(0, this.currentFile.getName().lastIndexOf(".")) : this.currentFile.getName();
         String content = reportJSON.generateStringsEvaluation(this.dfas, this.checkStrings);
         String reportSALIDAS = "src/reports/SALIDAS_202112145/";
         ManageFile.WriteFiles(reportSALIDAS + name + ".json", content);
-
+        // Mostrar en el panel de consola
+        this.Console.setText(content);
     }
 
     private void SelectRegexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectRegexActionPerformed

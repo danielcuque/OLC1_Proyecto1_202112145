@@ -54,11 +54,10 @@ public class AFND {
     }
 
     public void concat(AFND left, AFND right){
-        this.initialState = left.initialState; // LEFT INIT is new INIT
-        this.finalState = right.finalState; // RIGHT FINAL is new FINAL
-        this.addAllStates(left.states); // ADD LEFT STATES
+        this.initialState = left.initialState;
+        this.finalState = right.finalState;
+        this.addAllStates(left.states);
 
-        // Exclude right initial state
         for(State s : right.states){
             if(!s.equals(right.initialState)){
                 this.addState(s);
@@ -166,77 +165,6 @@ public class AFND {
         // new init to new final
         this.insertTransition(this.initialState, EPSILON, this.finalState);
     }
-/*
-    public State[] buildNFA(Node node) {
-        if (node == null) {
-            return null;
-        }
-        String EPSILON = "ε";
-
-        switch (node.type){
-            case LEAVE -> {
-                State initialState = insertState(states.size());
-                State finalState = insertState(states.size());
-                insertTransition(initialState, node.lexeme.toString(), finalState);
-                this.alphabet.add(node.lexeme.toString());
-                return new State[]{initialState, finalState};
-            }
-            case AND -> {
-                State[] stateLeft = buildNFA(node.left);
-                State[] stateRight = buildNFA(node.right);
-                State initialState = stateLeft[1];
-                State finalState = stateRight[0];
-                insertTransition(initialState, EPSILON, finalState);
-                return new State[]{initialState, finalState};
-            }
-            case STAR ->  {
-                State initialState = insertState(states.size());
-                State finalState = insertState(states.size());
-                State[] stateLeft =  buildNFA(node.left);
-
-                insertTransition(initialState, EPSILON, stateLeft[0]);
-                insertTransition(initialState, EPSILON, finalState);
-                insertTransition(stateLeft[1], EPSILON, stateLeft[0]);
-                insertTransition(stateLeft[1], EPSILON, finalState);
-                return new State[]{initialState, finalState};
-            }
-            // Si el nodo es un signo de suma, entonces crea un NFA para el hijo izquierdo. Crea dos nuevos estados, uno inicial y uno final, y añádelos al conjunto de estados. Añade las transiciones ε necesarias para conectar el estado inicial con el estado inicial del NFA y con el nuevo estado final. Añade las transiciones ε necesarias para conectar el estado final del NFA con el estado inicial del NFA
-            case PLUS -> {
-                State initialState = insertState(states.size());
-                State finalState = insertState(states.size());
-                State[] stateLeft = buildNFA(node.left);
-                /*
-                insertTransition(initialState, EPSILON, stateLeft[0]);
-                insertTransition(initialState, EPSILON, finalState);
-                insertTransition(stateLeft[1], EPSILON, stateLeft[0]);
-                return new State[]{initialState, finalState};
-            }
-            case QUERY -> {
-                State initialState = insertState(states.size());
-                State finalState = insertState(states.size());
-                State[] stateLeft = buildNFA(node.left);
-
-                insertTransition(initialState, EPSILON, stateLeft[0]);
-                insertTransition(initialState, EPSILON, finalState);
-                insertTransition(stateLeft[1], EPSILON, finalState);
-                return new State[]{initialState, finalState};
-            }
-
-            case OR -> {
-                State initialState = insertState(states.size());
-                State finalState = insertState(states.size());
-                State[] stateLeft = buildNFA(node.left);
-                State[] stateRight = buildNFA(node.right);
-                insertTransition(initialState, EPSILON, stateLeft[0]);
-                insertTransition(initialState, EPSILON, stateRight[0]);
-                insertTransition(stateLeft[1], EPSILON, finalState);
-                insertTransition(stateRight[1], EPSILON, finalState);
-                return new State[]{initialState, finalState};
-            }
-        }
-        return null;
-    }
-*/
     
     public void insertTransition(State currentState, String symbol, State nextState){
         Transition transition = new Transition(currentState, symbol, nextState);
