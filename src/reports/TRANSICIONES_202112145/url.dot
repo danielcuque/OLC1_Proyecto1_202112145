@@ -1,0 +1,152 @@
+digraph url {
+    node [shape=plaintext]
+    rankdir=TB
+    label = "url";
+    A [label=<
+        <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+            <TR>
+                <TD>Estado</TD>
+                <TD>p</TD>
+                <TD>minuscula</TD>
+                <TD>s</TD>
+                <TD>t</TD>
+                <TD>h</TD>
+                <TD>:</TD>
+                <TD>.</TD>
+                <TD>/</TD>
+            </TR>
+            <TR>
+                <TD>q0[1]</TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD>q1 </TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+            </TR>
+            <TR>
+                <TD>q1[2]</TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD>q2 </TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+            </TR>
+            <TR>
+                <TD>q2[3]</TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD>q3 </TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+            </TR>
+            <TR>
+                <TD>q3[4]</TD>
+                <TD>q4 </TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+            </TR>
+            <TR>
+                <TD>q4[5, 6]</TD>
+                <TD></TD>
+                <TD></TD>
+                <TD>q5 </TD>
+                <TD></TD>
+                <TD></TD>
+                <TD>q6 </TD>
+                <TD></TD>
+                <TD></TD>
+            </TR>
+            <TR>
+                <TD>q5[6]</TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD>q6 </TD>
+                <TD></TD>
+                <TD></TD>
+            </TR>
+            <TR>
+                <TD>q6[7]</TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD>q7 </TD>
+            </TR>
+            <TR>
+                <TD>q7[8]</TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD>q8 </TD>
+            </TR>
+            <TR>
+                <TD>q8[9]</TD>
+                <TD></TD>
+                <TD>q9 </TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+            </TR>
+            <TR>
+                <TD>q9[9, 10]</TD>
+                <TD></TD>
+                <TD>q9 </TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD>q10 </TD>
+                <TD></TD>
+            </TR>
+            <TR>
+                <TD>q10[11]</TD>
+                <TD></TD>
+                <TD>q11 </TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+            </TR>
+            <TR>
+                <TD>q11[11, 12]</TD>
+                <TD></TD>
+                <TD>q11 </TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+                <TD></TD>
+            </TR>
+        </TABLE>
+    >]
+}

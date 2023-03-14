@@ -1,0 +1,26 @@
+digraph correoElectronico {
+	node [fontname="Helvetica,Arial,sans-serif"]
+	edge [fontname="Helvetica,Arial,sans-serif"]
+	rankdir=LR;
+	node [shape = doublecircle]; q8 ;
+	node [shape = circle];
+	q0 -> q1 [label="mayuscula"];
+	q0 -> q1 [label="minuscula"];
+	q1 -> q2 [label="minuscula"];
+	q1 -> q2 [label="simbolos"];
+	q1 -> q2 [label="mayuscula"];
+	q1 -> q2 [label="numero"];
+	q2 -> q3 [label="@"];
+	q2 -> q2 [label="mayuscula"];
+	q2 -> q2 [label="numero"];
+	q2 -> q2 [label="simbolos"];
+	q2 -> q2 [label="minuscula"];
+	q3 -> q4 [label="minuscula"];
+	q3 -> q4 [label="mayuscula"];
+	q4 -> q4 [label="mayuscula"];
+	q4 -> q4 [label="minuscula"];
+	q4 -> q5 [label="."];
+	q5 -> q6 [label="c"];
+	q6 -> q7 [label="o"];
+	q7 -> q8 [label="m"];
+}

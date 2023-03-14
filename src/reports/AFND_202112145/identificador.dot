@@ -1,0 +1,23 @@
+digraph identificador {
+	node [fontname="Helvetica,Arial,sans-serif"]
+	edge [fontname="Helvetica,Arial,sans-serif"]
+	rankdir=LR;
+	node [shape = doublecircle]; q2;
+	node [shape = circle];
+	q0 -> q1 [label="abecedarioMinus"];
+	q1 -> q2 [label="ε"];
+	q1 -> q3 [label="ε"];
+	q3 -> q7 [label="ε"];
+	q3 -> q5 [label="ε"];
+	q4 -> q2 [label="ε"];
+	q4 -> q3 [label="ε"];
+	q5 -> q6 [label="_"];
+	q6 -> q4 [label="ε"];
+	q7 -> q9 [label="ε"];
+	q7 -> q11 [label="ε"];
+	q8 -> q4 [label="ε"];
+	q9 -> q10 [label="abecedarioMinus"];
+	q10 -> q8 [label="ε"];
+	q11 -> q12 [label="digito"];
+	q12 -> q8 [label="ε"];
+}

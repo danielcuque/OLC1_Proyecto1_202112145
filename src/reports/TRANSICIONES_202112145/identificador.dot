@@ -1,0 +1,27 @@
+digraph identificador {
+    node [shape=plaintext]
+    rankdir=TB
+    label = "identificador";
+    A [label=<
+        <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+            <TR>
+                <TD>Estado</TD>
+                <TD>digito</TD>
+                <TD>abecedarioMinus</TD>
+                <TD>_</TD>
+            </TR>
+            <TR>
+                <TD>q0[1]</TD>
+                <TD></TD>
+                <TD>q1 </TD>
+                <TD></TD>
+            </TR>
+            <TR>
+                <TD>q1[2, 3, 4, 5]</TD>
+                <TD>q1 </TD>
+                <TD>q1 </TD>
+                <TD>q1 </TD>
+            </TR>
+        </TABLE>
+    >]
+}
