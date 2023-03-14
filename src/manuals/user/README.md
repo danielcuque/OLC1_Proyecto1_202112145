@@ -10,6 +10,8 @@ Además permite la creación de *alias* para expresiones regulares, de forma que
 
 1. [Definición de conjuntos](#definicion-de-conjuntos)
 2. [Declaración de expresiones regulares](#declaracion-de-expresiones-regulares)
+3. [Definción de cadenas para analizar](#definición-de-cadenas-para-analizar)
+4. [Interfaz de usuario](#interfaz-de-usuario)
 
 ## Definicion de conjuntos
 Con la palabra reservada `CONJ` se puede definir un conjunto de caracteres. Por ejemplo, el conjunto de caracteres que contiene los dígitos del 0 al 9 se define de la siguiente forma:
